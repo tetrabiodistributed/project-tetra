@@ -7,3 +7,4 @@ please 3d print them!
 Create a new file for any design's.
 
 To contribute create a pull request.
+Use branches to see testing and designs
