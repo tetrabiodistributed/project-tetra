@@ -10,3 +10,4 @@ pull request to this area detailing testing of this device.
 If you have ventilator acsess please fill out this form https://forms.gle/2gB1P56XPEUn8NL5A
 and join the ventilator access project
 
+MAIN FOCUS: TESTING THE SAK FOLDER AND THE NO SUPPORT FOLDER AS THESE SEEM MOST VIABLE
