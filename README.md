@@ -13,5 +13,5 @@ and join the ventilator access project
 To contribute create a pull request.
 MAIN FOCUS: TESTING THE SAK FOLDER AND THE NO SUPPORT FOLDER AS THESE SEEM MOST VIABLE UPDATE AT 6:30 GMT
 
-Thread specs: ALL IN NPT PLEASE
+Thread specs: ALL IN 3/8" NPT PLEASE
 
