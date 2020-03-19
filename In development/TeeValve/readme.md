@@ -32,7 +32,9 @@ Assemble, per drawing
 
 ## Designed With
 
-* Autodesk Inventor 2020
+* Autodesk Inventor 2020 
+
+by Patrick Campbell
 
 ## License
 
