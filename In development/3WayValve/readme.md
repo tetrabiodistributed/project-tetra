@@ -19,11 +19,11 @@ Print 1 each of the following parts
 Purchase or find the following hardware
 
 * M3 x 6 screw
-** https://www.mcmaster.com/92000a116
-** https://www.homedepot.com/p/Everbilt-M3-0-5-x-6-mm-Phillips-Pan-Head-Zinc-Plated-Machine-Screw-3-Pack-802698/204282657
+     * https://www.mcmaster.com/92000a116
+     * https://www.homedepot.com/p/Everbilt-M3-0-5-x-6-mm-Phillips-Pan-Head-Zinc-Plated-Machine-Screw-3-Pack-802698/204282657
 * M3 washer with a minimum 8mm OD (outer diameter) 
-** https://www.mcmaster.com/91116a120
-** https://www.homedepot.com/p/Everbilt-M3-Zinc-Plated-Steel-Flat-Washers-5-Pack-803518/204284512
+     * https://www.mcmaster.com/91116a120
+     * https://www.homedepot.com/p/Everbilt-M3-Zinc-Plated-Steel-Flat-Washers-5-Pack-803518/204284512
 
 Blind tap the screw hole at the bottom of the 3WayValveCock
 
