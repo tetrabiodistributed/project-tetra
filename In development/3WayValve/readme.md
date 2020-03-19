@@ -29,6 +29,12 @@ Blind tap the screw hole at the bottom of the 3WayValveCock
 
 Assemble, per drawing
 
+## Revisions
+19MAR2020 - Updated 3WayValveBody to V002
+* Made grip head taller
+* Increased height & depth of scallops
+* Reduced # of scallops to 12 (was 15)
+
 ## Designed With
 
 * Autodesk Inventor 2020
