@@ -10,4 +10,18 @@ pull request to this area detailing testing of this device.
 If you have ventilator acsess please fill out this form https://forms.gle/2gB1P56XPEUn8NL5A
 and join the ventilator access project
 
-MAIN FOCUS: TESTING THE SAK FOLDER AND THE NO SUPPORT FOLDER AS THESE SEEM MOST VIABLE
+MAIN FOCUS: TESTING THE THREADED AND THE 3WAY VALVE
+
+TEST RESULTS NEEDED
+dimensions of tubing, if they fit
+
+strength
+
+flow
+
+test with different lung sizes and compliances
+
+flow rates to diff patients
+
+
+On git with files please create a text/pdf documentationNew Focus

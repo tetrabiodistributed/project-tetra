@@ -11,5 +11,35 @@ If you have ventilator acsess please fill out this form https://forms.gle/2gB1P5
 and join the ventilator access project
 
 To contribute create a pull request.
-MAIN FOCUS: TESTING THE SAK FOLDER AND THE NO SUPPORT FOLDER AS THESE SEEM MOST VIABLE
+
+MAIN FOCUS:
+
+TEST RESULTS NEEDED
+
+dimensions of tubing, if they fit
+
+strength
+
+flow
+
+test with different lung sizes and compliances
+
+flow rates to diff patients
+
+TO DESIGN ensure fittings are ISO
+
+device at the mouth to measure tidal flow, pressure,tidal volume
+
+antiviral & antibacterial filter - integrated into design but not essential for operation
+
+regulator of max pressure into lungs
+
+PEEP valve connector
+
+3 way splitter
+
+
+On git with files please create a text/pdf documentation
+
+Thread specs: ALL IN 3/8" NPT PLEASE
 
