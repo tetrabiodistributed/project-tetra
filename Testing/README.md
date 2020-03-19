@@ -14,9 +14,13 @@ MAIN FOCUS: TESTING THE THREADED AND THE 3WAY VALVE
 
 TEST RESULTS NEEDED
 dimensions of tubing, if they fit
+
 strength
+
 flow
+
 test with different lung sizes and compliances
+
 flow rates to diff patients
 
 
