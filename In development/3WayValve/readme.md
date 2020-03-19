@@ -14,7 +14,7 @@ Valve design created that supports airflow in any 2 of the 3 ports. Utilizes 2 3
 Print 1 each of the following parts
 
 * 3WayValveBody_v001.stl
-* 3WayValveCock_v001.stl
+* 3WayValveCock_v003.stl
 
 Purchase or find the following hardware
 
@@ -30,7 +30,13 @@ Blind tap the screw hole at the bottom of the 3WayValveCock
 Assemble, per drawing
 
 ## Revisions
-19MAR2020 - Updated 3WayValveBody to V002
+19MAR2020 - Updated 3WayValveCock to V003
+* Made grip head larger diameter
+* Added fillets to prevent glove tear
+* Reduced # of scallops to 9
+
+
+19MAR2020 - Updated 3WayValveCock to V002
 * Made grip head taller
 * Increased height & depth of scallops
 * Reduced # of scallops to 12 (was 15)
