@@ -1,11 +1,10 @@
-READ ME
+GitHub for Helpful engineering project Please look around of you are new. Designs is for any designs. Testing is for design's on the testing stage, please 3d print them! Create a new file for any design's.
 
-File for designs of the part in all stages, 
-draft, final, in testing, 
+If you have ventilator acsess please fill out this form https://forms.gle/2gB1P56XPEUn8NL5A
 
-PLEASE LABEL THE DESIGNS WITH THE STATUS AND VERSION.
+and join the ventilator access project
 
-PLEASE CREATE A PULL REQUEST FOR EACH DESIGN OF SPLITTER
+To contribute create a pull request.
 
 MAIN FOCUS:
 
@@ -31,9 +30,8 @@ regulator of max pressure into lungs
 
 PEEP valve connector
 
-3 way valve formpatiemt isolation
+3 way splitter
 
 On git with files please create a text/pdf documentation
 
 Thread specs: ALL IN 3/8" NPT PLEASE
-
