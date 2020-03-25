@@ -20,12 +20,14 @@ Purchase or find the following hardware
 
 * M3 x 6 screw
      * https://www.mcmaster.com/92000a116
+     or
      * https://www.homedepot.com/p/Everbilt-M3-0-5-x-6-mm-Phillips-Pan-Head-Zinc-Plated-Machine-Screw-3-Pack-802698/204282657
 * M3 washer with a minimum 8mm OD (outer diameter) 
      * https://www.mcmaster.com/91116a120
+     or
      * https://www.homedepot.com/p/Everbilt-M3-Zinc-Plated-Steel-Flat-Washers-5-Pack-803518/204284512
 
-Blind tap the screw hole at the bottom of the 3WayValveCock
+Blind tap the screw hole at the bottom of the 3WayValveCock. If you don't have access to a tap, you can force the m3 screw into the hole. If it's not easy going, pre-heat the screw to make it easier.
 
 Assemble, per drawing
 
