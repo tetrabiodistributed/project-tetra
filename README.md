@@ -1,3 +1,5 @@
+Onboarding Checklist https://docs.google.com/document/d/164DD9j-OUmsBKB3FELcanB-5L1GkFy0qX10EiUfEtjM/edit
+
 GitHub for Helpful engineering project Please look around of you are new. Designs is for any designs. Testing is for design's on the testing stage, please 3d print them! Create a new file for any design's.
 
 If you have ventilator acsess please fill out this form https://forms.gle/2gB1P56XPEUn8NL5A
