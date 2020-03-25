@@ -1,16 +1,16 @@
-#Helpful Engineers Project Repository for Ventilator Splitter
+# Helpful Engineers Project Repository for Ventilator Splitter
 GitHub for Helpful engineering project. Please look around of you are new. 
 
 * Components in Development
-** 3WayOring 
-*** Rev 8 is latest. 4 parts, 3 from rigid plastic, one from TPE.
-** Splitter (likey to require 2, one for expiratory flow, one for inspiratory flow)
-*** 4WayVent_3DP_v05.stl is latest 4 way
-*** 2WayVent_3DP_v05.stl is latest 2 way
-** One Way Valve
-*** 2OWV.STL is the latest, requires a flexible seal (silicone molded, printed TPU or cut material/rubber glove)
+   * 3WayOring 
+       * Rev 8 is latest. 4 parts, 3 from rigid plastic, one from TPE.
+   * Splitter (likey to require 2, one for expiratory flow, one for inspiratory flow)
+       * 4WayVent_3DP_v05.stl is latest 4 way
+       * 2WayVent_3DP_v05.stl is latest 2 way
+   * One Way Valve
+       * 2OWV.STL is the latest, requires a flexible seal (silicone molded, printed TPU or cut material/rubber glove)
 
-##Documents
+## Documents
 Project Proposal https://docs.google.com/document/d/1WbaJ5lhCMrui6hDj-EqaMEB5Ymmw-CQgvQznhYMCw9w/edit?usp=sharing
 Onboarding Checklist https://docs.google.com/document/d/164DD9j-OUmsBKB3FELcanB-5L1GkFy0qX10EiUfEtjM/edit
 
