@@ -1,12 +1,22 @@
-Onboarding Checklist https://docs.google.com/document/d/164DD9j-OUmsBKB3FELcanB-5L1GkFy0qX10EiUfEtjM/edit
+# Helpful Engineers Project Repository for Ventilator Splitter
+GitHub for Helpful engineering project. Please look around of you are new. 
 
-GitHub for Helpful engineering project Please look around of you are new. Designs is for any designs. Testing is for design's on the testing stage, please 3d print them! Create a new file for any design's.
+* Components in Development
+   * 3WayOring 
+       * Rev 8 is latest. 4 parts, 3 from rigid plastic, one from TPE.
+   * Splitter (likey to require 2, one for expiratory flow, one for inspiratory flow)
+       * 4WayVent_3DP_v05.stl is latest 4 way
+       * 2WayVent_3DP_v05.stl is latest 2 way
+   * One Way Valve
+       * 2OWV.STL is the latest, requires a flexible seal (silicone molded, printed TPU or cut material/rubber glove)
 
-If you have ventilator acsess please fill out this form https://forms.gle/2gB1P56XPEUn8NL5A
+## Documents
+* Project Proposal https://docs.google.com/document/d/1WbaJ5lhCMrui6hDj-EqaMEB5Ymmw-CQgvQznhYMCw9w/edit?usp=sharing
+* Onboarding Checklist https://docs.google.com/document/d/164DD9j-OUmsBKB3FELcanB-5L1GkFy0qX10EiUfEtjM/edit
 
-and join the ventilator access project
+If you have ventilator acsess please fill out this form https://forms.gle/2gB1P56XPEUn8NL5A and join the ventilator access project
 
-To contribute create a pull request.
+To contribute, clone this repository, then create a pull request
 
 MAIN FOCUS:
 
