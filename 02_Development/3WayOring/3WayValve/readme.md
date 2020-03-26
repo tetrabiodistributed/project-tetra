@@ -8,7 +8,7 @@
 
 Based on request here: https://helpfulengineering.slack.com/archives/C0103QJMA84/p1584585757410000?thread_ts=1584527911.256500&cid=C0103QJMA84
 
-Valve design created that supports airflow in any 2 of the 3 ports. Utilizes 2 3D printed parts, a M3x6 screw and M3x8 washer.
+Valve design created that supports airflow in any 2 of the 3 ports. Utilizes 2 3D printed parts, a M3x6 screw and M3x8 washer. Substitue with #4-40 screw and #4 washer. 
 
 Latest version is now 4 parts.
 
@@ -24,7 +24,7 @@ Print 1 each of the following parts
 
 Purchase or find the following hardware
 
-* M3 x 6 screw
+* M3 x 6 screw 
      * https://www.mcmaster.com/92000a116
        * or
      * https://www.homedepot.com/p/Everbilt-M3-0-5-x-6-mm-Phillips-Pan-Head-Zinc-Plated-Machine-Screw-3-Pack-802698/204282657
