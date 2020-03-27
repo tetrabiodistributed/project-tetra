@@ -20,7 +20,7 @@ Print 1 each of the following parts
 * 3WayConicalValveBodyV2.stl
 * 3WayConicalValveCockV2.stl
 * 3WayConicalValveCapV2.stl
-* 3WayConicalValveHandleV2.stl
+* 3WayConicalValveHandleV3.stl (UPDATED: new design to indicate port flow)
 
 Purchase or find the following hardware
 
