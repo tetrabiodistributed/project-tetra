@@ -1,16 +1,14 @@
-One_way_valve V1
+One_way_valve V3
 
+*** Parts list
 
-Parts list
+* "one-way valve body V3"
+* "one-way valve umbrella seal V3"
+*** ASSEMBLY INSTRUCTION
+* The umbrella seal is a felxible silicone component with a small diameter "stem" feature and a wide flat "umbrella" feature. 
+* Insert the umbrella seal, stem first, from the downstream end (against the arrow) and push the stem such that it pushes all the way through the center hole, trapping the seal. 
+* The underside of the umbrella feature should lie flat against the flat internal surface.
 
--Part A
--Part B
--Silicon Disc
+*** TESTING:
 
-The silicon disk can have a thickness varying between 1 and 2 mm and an ideal diameter between 15 and 13.5. ( I use a peace of cake cooking molde made of silicon ) 
-
-Simply place the disc centered inside part B and spot it with part A.
-The assembly of part A must only be done by applying force without glue.
-
-TESTING:
-Test ability as a one way valve and also do cycle testing to ensure it can withstand the 1000cycles/hour
+* Test ability as a one way valve and also do cycle testing to ensure it can withstand the 1000cycles/hour
