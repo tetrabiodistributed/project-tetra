@@ -13,7 +13,8 @@ GitHub for Helpful engineering project. Please look around of you are new.
 ## Documents
 * Project Proposal https://docs.google.com/document/d/1WbaJ5lhCMrui6hDj-EqaMEB5Ymmw-CQgvQznhYMCw9w/edit?usp=sharing
 * Testing Questions https://docs.google.com/document/d/164DD9j-OUmsBKB3FELcanB-5L1GkFy0qX10EiUfEtjM/edit
-* Printing Cue https://docs.google.com/spreadsheets/d/1FWTYRxglWDqIK_xI6HlBGKUegICQRsXe5NHCJTlTlHs/edit?usp=sharing
+* Printing Queue https://docs.google.com/spreadsheets/d/1FWTYRxglWDqIK_xI6HlBGKUegICQRsXe5NHCJTlTlHs/edit?usp=sharing
+* System Concept Diagram https://docs.google.com/presentation/d/1UeSRyUB0dAOZZecX4TGh40GkVtGADlXzBOwVFjPqIFE/edit#slide=id.g7f621674bc_0_63
 
 If you have ventilator acsess please fill out this form https://forms.gle/2gB1P56XPEUn8NL5A and join the ventilator access project
 
