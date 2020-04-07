@@ -1,0 +1,24 @@
+Patrick Campbell's notes on 4 April 2020 test
+
+Quick update, spent a few hours today at local hospital with ventilator and 2 dummies. My flow sensor was pretty close. Just running the ventilator at 400 mL tidal volume, a single device was showing about 389 mL. As we split the flow to both dummies, 2 flow meters and 3d printed splitters (leaky) the readings were not as close, but not too far off. Key takeaways for you to consider
+Meters are the patient is not desirable. Extra meter power wire (USB) running to meter and meter resting/rubbing on patient's face is not good
+Meter at the ventilator is desirable. They need to look at tidal flow values as they adjust ventilator controls, standing at the ventilator
+Meter at ventilator will only see flow in 1 direction
+If meter is on the inspiratory flow, it won't see contaminated air
+Doctor wants to see a single device instead of individual units. Can be individual displays for each flow
+Operating the ventilator in volume control mode didn't really work. The control loop got a bit confused with the split breathing circuit
+Operating the ventilator in pressure control mode worked very well
+They can adjust the Peak Inspiratory Pressure (PIP) and control the tidal volume for everyone
+They need a simple flow restriction adjustment to control the tidal volume on the individual. This can be manual. We tested with 3 way valve with some success
+They don't really care about PIP & PEEP, as the readout on the ventilator will apply to everyone....
+...Unless we give them the ability to adjust PEEP on the individual circuit, then PEEP would be needed
+The other individual adjustment they would like to have is FIO2, which is %oxygen to each individual. Not sure how to deliver extra O2, so measuring it is not needed if you can't control it. Likely, everyone would be on same O2 %.
+Humidity, not required, as ventilator will set that and display it for everyone.
+
+
+A few more comments on the 4/2 test:
+We need to pay attention to 22mm male and female connections. Everything I brought had male 22mm (22M) and we needed a handful of female to female couplers (22F-22F). They did not have a supply of these and had to open up "kits" just to get one coupler. This is very wasteful as now the kit is unusable. Once unsealed, it's not able to be re-sterilized and reused. And useless since the coupler was missing.
+FDM 3D printed ISO ports/connectors should be only done vertically. Printing them horizontal will probably leak. The 3 way valve needs to be redesigned so ports are printed vertical.
+The conical 3 way valve leaked and started to vibrate (very noisy) as the flow was restricted down.
+Using the conical 3 way valve to restrict flow was extremely non-linear. It worked over a very small range. I was able to go from 350 mL down to about 250 mL, which seemed to be a good range, but the mechanical range to do that was very small and sensitive. I think we should come up with a method to adjust flow restriction that is not a shut off valve. This should live in the inspiratory splitter/manifold, as Mark's diagram shows.
+Our mannequins were side by side and we had access above them. Usually, they will be in beds, up against the wall. The ventilator attaches to the wall to get supply of fresh air and O2. ICU room layout will never be as good as we had it. Splitting 2 ways is easy, just put the ventilator between the 2 beds along the wall. Going beyond that will require some thought about breathing tube routing
