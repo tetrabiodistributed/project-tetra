@@ -1,4 +1,4 @@
-# Helpful Engineering Project Repository for Ventilator Splitter
+# Helpful Engineering Ventilator Splitter - Project Repository
 GitHub for Helpful engineering project. Please look around of you are new. 
 
 * Components in Development
