@@ -19,5 +19,3 @@ GitHub for Helpful engineering project. Please look around of you are new.
 If you have ventilator acsess please fill out this form https://forms.gle/2gB1P56XPEUn8NL5A and join the ventilator access project
 
 To contribute, clone this repository, then create a pull request
-
-Thread specs: ALL IN 3/8" NPT PLEASE
