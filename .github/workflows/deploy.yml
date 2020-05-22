@@ -16,6 +16,9 @@ jobs:
       - name: Update submodules
         run: git submodule update --init --recursive
 
+      - name: Install node modules
+        run: npm i
+
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
         with:
