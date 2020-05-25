@@ -1,4 +1,5 @@
-baseURL = "/"
+canonifyURLs = true
+baseURL = "https://capsulecorplab.github.io/project-tetra"
 title = "Goldydocs"
 
 enableRobotsTXT = true
