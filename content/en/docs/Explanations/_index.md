@@ -1,6 +1,6 @@
 ---
-title: "Overview"
-linkTitle: "Overview"
+title: "Explanations"
+linkTitle: "Explanations"
 weight: 1
 description: >
   Here's where your user finds out if your project is for them.
@@ -11,7 +11,7 @@ This is a placeholder page that shows you how to use this template site.
 {{% /pageinfo %}}
 
 
-The Overview is where your users find out about your project. Depending on the size of your docset, you can have a separate overview page (like this one) or put your overview contents in the Documentation landing page (like in the Docsy User Guide). 
+The Explanations is where your users find out about your project. Depending on the size of your docset, you can have a separate overview page (like this one) or put your overview contents in the Documentation landing page (like in the Docsy User Guide). 
 
 Try answering these questions for your user in this page:
 
@@ -31,7 +31,7 @@ Help your user know if your project will help them. Useful information can inclu
 
 ## Where should I go next?
 
-Give your users next steps from the Overview. For example:
+Give your users next steps from the Explanations. For example:
 
 * [Getting Started](/getting-started/): Get started with $project
 * [Examples](/examples/): Check out some example code!
