@@ -5,7 +5,7 @@ linkTitle: "How-To Guides"
 weight: 6
 date: 2017-01-05
 description: >
-  What can your user do with your project?
+  How to use or contribute to the project.
 ---
 
 {{% pageinfo %}}

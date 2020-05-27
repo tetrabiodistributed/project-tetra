@@ -3,7 +3,7 @@ title: "Explanations"
 linkTitle: "Explanations"
 weight: 1
 description: >
-  Here's where your user finds out if your project is for them.
+  Broad overview, discussions, and key topics of interest.
 ---
 
 {{% pageinfo %}}
