@@ -6,16 +6,14 @@ description: >
   Broad overview, discussions, and key topics of interest.
 ---
 
-{{% pageinfo %}}
-This is a placeholder page that shows you how to use this template site.
-{{% /pageinfo %}}
+## Executive Summary
 
+Current medical standard operating procedure requires that patients who become severely ill with COVID-19 be treated using external ventilation.
+As the virus spreads, projections suggest that there are not enough ventilators to meet the expected numbers of patients throughout the world.
+Project Tetra seeks to create a ventilator splitter so that hospitals inundated with covid-19 patients can effectively increase the number of already available ventilators by up to a factor of 4.
+The project aims to produce two versions of the device: one that has been approved by the FDA under the Emergency Use Authorization guidance, and an open source model intended to be made with locally sourced materials.
 
-The Explanations is where your users find out about your project. Depending on the size of your docset, you can have a separate overview page (like this one) or put your overview contents in the Documentation landing page (like in the Docsy User Guide). 
-
-Try answering these questions for your user in this page:
-
-## What is it?
+## Introduction
 
 Introduce your project, including what it does or lets you do, why you would use it, and its primary goal (and how it achieves it). This should be similar to your README description, though you can go into a little more detail here if you want.
 
