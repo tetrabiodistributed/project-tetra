@@ -1,8 +1,8 @@
 # Project Tetra - Project Repository
 This repository contains the content and source code for generating the Project Tetra site.
-For more information about Project Tetra, please visit https://capsulecorplab.github.io/project-tetra/docs/
+For more information about Project Tetra, please visit https://helpfulengineering.github.io/project-tetra/docs/
 
-This Project is hosted at https://capsulecorplab.github.io/project-tetra (soon to be migrated to https://helpfulengineering.github.io/project-tetra)
+This Project is hosted at https://helpfulengineering.github.io/project-tetra (soon to be migrated to https://helpfulengineering.github.io/project-tetra)
 
 ## Prerequisites
 
@@ -19,7 +19,7 @@ This will allow you to edit and preview changes to the project site
 (don't forget to use `--recurse-submodules` or you won't pull down some of the code you need to generate a working site).
 
 ```bash
-git clone --recurse-submodules --depth 1 https://github.com/capsulecorplab/project-tetra.git
+git clone --recurse-submodules --depth 1 https://github.com/helpfulengineering/project-tetra.git
 cd project-tetra
 ```
 
