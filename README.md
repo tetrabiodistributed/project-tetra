@@ -2,7 +2,7 @@
 This repository contains the content and source code for generating the Project Tetra site.
 For more information about Project Tetra, please visit https://helpfulengineering.github.io/project-tetra/docs/
 
-This Project is hosted at https://helpfulengineering.github.io/project-tetra (soon to be migrated to https://helpfulengineering.github.io/project-tetra)
+This Project is hosted at https://helpfulengineering.github.io/project-tetra
 
 ## Prerequisites
 
