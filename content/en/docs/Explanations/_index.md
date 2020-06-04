@@ -31,7 +31,7 @@ Help your user know if your project will help them. Useful information can inclu
 
 Give your users next steps from the Explanations. For example:
 
-* [Project Overview](/project-tetra/docs/explanations/overview): A high level project overview
+* [Project Overview](/project-tetra/docs/explanations/overview/_index.md): A high level project overview
 
 ## Components in Development
 * 3WayOring
