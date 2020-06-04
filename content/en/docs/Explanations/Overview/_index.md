@@ -83,37 +83,37 @@ There are three different designs for the flow meter. One is based off of a Sens
 **The Display**
 The flow sensor prints its results to a screen display built on a Raspberry Pi system. The curve detected from the flow meter has some basic processing done to provide the PIP/PEEP curve, as well as curves representing tidal volume, etc.
 
-## Refrences
+## References
 1. https://www.worldometers.info/coronavirus/
 
-2.https://twitter.com/drchoueiri/status/1243861887420432384
+2. https://twitter.com/drchoueiri/status/1243861887420432384
 
-3.https://www.cbsnews.com/news/coronavirus-doctors-hospitals-life-or-death-decisions-pandemic/
+3. https://www.cbsnews.com/news/coronavirus-doctors-hospitals-life-or-death-decisions-pandemic/
 
-4.https://www.bbc.com/news/world-us-canada-52137160
+4. https://www.bbc.com/news/world-us-canada-52137160
 
-5.https://www.nytimes.com/2020/04/27/nyregion/new-york-city-doctor-suicide-coronavirus.html
+5. https://www.nytimes.com/2020/04/27/nyregion/new-york-city-doctor-suicide-coronavirus.html
 
-6.https://www.nasa.gov/press-release/nasa-developed-ventilator-authorized-by-fda-for-emergency-use/
+6. https://www.nasa.gov/press-release/nasa-developed-ventilator-authorized-by-fda-for-emergency-use/
 
-7.https://www.reuters.com/article/uk-health-coronavirus-czech-ventilators/czech-team-use-easily-available-parts-to-build-prototype-ventilator-idUKKBN21L1Z6
+7. https://www.reuters.com/article/uk-health-coronavirus-czech-ventilators/czech-team-use-easily-available-parts-to-build-prototype-ventilator-idUKKBN21L1Z6
 
-8.https://armeevent.com/
+8. https://armeevent.com/
 
-9.https://en.wikipedia.org/wiki/Peak_inspiratory_pressure
+9. https://en.wikipedia.org/wiki/Peak_inspiratory_pressure
 
-10.https://en.wikipedia.org/wiki/Fraction_of_inspired_oxygen
+10. https://en.wikipedia.org/wiki/Fraction_of_inspired_oxygen
 
-11.https://en.wikipedia.org/wiki/Positive_end-expiratory_pressure
+11. https://en.wikipedia.org/wiki/Positive_end-expiratory_pressure
 
-12.https://hub.jhu.edu/2020/04/02/3d-printed-ventilator-splitters-for-covid-19/
+12. https://hub.jhu.edu/2020/04/02/3d-printed-ventilator-splitters-for-covid-19/
 
-13.https://www.prismahealth.org/vesper/
+13. https://www.prismahealth.org/vesper/
 
-14.https://www.asahq.org/about-asa/newsroom/news-releases/2020/03/joint-statement-on-multiple-patients-per-ventilator
+14. https://www.asahq.org/about-asa/newsroom/news-releases/2020/03/joint-statement-on-multiple-patients-per-ventilator
 
-15.https://www.thingiverse.com/thing:4250354
+15. https://www.thingiverse.com/thing:4250354
 
-16.https://www.sensirion.com/en/flow-sensors/mass-flow-meters-for-high-precise-measurement-of-gases/proximal-flow-sensors-sfm3300-autoclavable-washable-or-single-use/
+16. https://www.sensirion.com/en/flow-sensors/mass-flow-meters-for-high-precise-measurement-of-gases/proximal-flow-sensors-sfm3300-autoclavable-washable-or-single-use/
 
-17.https://www.sciencedirect.com/topics/engineering/venturi-tube
+17. https://www.sciencedirect.com/topics/engineering/venturi-tube
