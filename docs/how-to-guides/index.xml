@@ -1,4 +1,4 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Project Tetra – How-To Guides</title><link>https://helpfulengineering.github.io/project-tetra/docs/howto_guides/</link><description>Recent content in How-To Guides on Project Tetra</description><generator>Hugo -- gohugo.io</generator><lastBuildDate>Thu, 05 Jan 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://helpfulengineering.github.io/project-tetra/docs/howto_guides/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: Bed and Chair Metrics</title><link>https://helpfulengineering.github.io/project-tetra/docs/howto_guides/beds/</link><pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate><guid>https://helpfulengineering.github.io/project-tetra/docs/howto_guides/beds/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Project Tetra – How-To Guides</title><link>https://helpfulengineering.github.io/project-tetra/docs/how-to-guides/</link><description>Recent content in How-To Guides on Project Tetra</description><generator>Hugo -- gohugo.io</generator><lastBuildDate>Thu, 05 Jan 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://helpfulengineering.github.io/project-tetra/docs/how-to-guides/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: Bed and Chair Metrics</title><link>https://helpfulengineering.github.io/project-tetra/docs/how-to-guides/beds/</link><pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate><guid>https://helpfulengineering.github.io/project-tetra/docs/how-to-guides/beds/</guid><description>
 &lt;div class="pageinfo pageinfo-primary">
 &lt;p>This is a placeholder page. Replace it with your own content.&lt;/p>
 &lt;/div>
@@ -261,11 +261,11 @@ This is a warning with a title.
 &lt;h3 id="external-links">External Links&lt;/h3>
 &lt;p>Stumptown PBR&amp;amp;B keytar plaid street art, forage XOXO pitchfork selvage affogato green juice listicle pickled everyday carry hashtag. Organic sustainable letterpress sartorial scenester intelligentsia swag bushwick. Put a bird on it stumptown neutra locavore. IPhone typewriter messenger bag narwhal. Ennui cold-pressed seitan flannel keytar, single-origin coffee adaptogen occupy yuccie williamsburg chillwave shoreditch forage waistcoat.&lt;/p>
 &lt;pre>&lt;code>This is the final element on the page and there should be no margin below this.
-&lt;/code>&lt;/pre></description></item><item><title>Docs: Examples</title><link>https://helpfulengineering.github.io/project-tetra/docs/howto_guides/examples/</link><pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate><guid>https://helpfulengineering.github.io/project-tetra/docs/howto_guides/examples/</guid><description>
+&lt;/code>&lt;/pre></description></item><item><title>Docs: Examples</title><link>https://helpfulengineering.github.io/project-tetra/docs/how-to-guides/examples/</link><pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate><guid>https://helpfulengineering.github.io/project-tetra/docs/how-to-guides/examples/</guid><description>
 &lt;div class="pageinfo pageinfo-primary">
 &lt;p>This is a placeholder page that shows you how to use this template site.&lt;/p>
 &lt;/div>
-&lt;p>Do you have any example &lt;strong>applications&lt;/strong> or &lt;strong>code&lt;/strong> for your users in your repo or elsewhere? Link to your examples here.&lt;/p></description></item><item><title>Docs: Contribution Guidelines</title><link>https://helpfulengineering.github.io/project-tetra/docs/howto_guides/contribution-guidelines/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://helpfulengineering.github.io/project-tetra/docs/howto_guides/contribution-guidelines/</guid><description>
+&lt;p>Do you have any example &lt;strong>applications&lt;/strong> or &lt;strong>code&lt;/strong> for your users in your repo or elsewhere? Link to your examples here.&lt;/p></description></item><item><title>Docs: Contribution Guidelines</title><link>https://helpfulengineering.github.io/project-tetra/docs/how-to-guides/contribution-guidelines/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://helpfulengineering.github.io/project-tetra/docs/how-to-guides/contribution-guidelines/</guid><description>
 &lt;div class="pageinfo pageinfo-primary">
 &lt;p>These guidelines assume that you&amp;rsquo;re familiar with the GitHub workflow.&lt;/p>
 &lt;/div>
@@ -335,7 +335,7 @@ make sure you download the &lt;code>_extended&lt;/code> version which supports S
 &lt;li>[Docsy user guide](wherever it goes): All about Docsy, including how it manages navigation, look and feel, and multi-language support.&lt;/li>
 &lt;li>&lt;a href="https://gohugo.io/documentation/">Hugo documentation&lt;/a>: Comprehensive reference for Hugo.&lt;/li>
 &lt;li>&lt;a href="https://guides.github.com/activities/hello-world/">Github Hello World!&lt;/a>: A basic introduction to GitHub concepts and workflow.&lt;/li>
-&lt;/ul></description></item><item><title>Docs: Working with Ponycopters</title><link>https://helpfulengineering.github.io/project-tetra/docs/howto_guides/ponycopters/</link><pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate><guid>https://helpfulengineering.github.io/project-tetra/docs/howto_guides/ponycopters/</guid><description>
+&lt;/ul></description></item><item><title>Docs: Working with Ponycopters</title><link>https://helpfulengineering.github.io/project-tetra/docs/how-to-guides/ponycopters/</link><pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate><guid>https://helpfulengineering.github.io/project-tetra/docs/how-to-guides/ponycopters/</guid><description>
 &lt;div class="pageinfo pageinfo-primary">
 &lt;p>This is a placeholder page. Replace it with your own content.&lt;/p>
 &lt;/div>
