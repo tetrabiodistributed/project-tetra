@@ -17,7 +17,7 @@ As of May 19, 2020, 5 million cases of coronavirus have been reported worldwide,
 
 *Figure 1: A breakdown of how individuals react to a COVID-19 infection sourced from March, 2020.  At that point in time, 85% of the infected population appeared to recover without medical intervention, while 5% of the infected population would require invasive ventilation to recover, and up to half of those patients were not surviving.  If that 5% of infected individuals do not receive ventilation, then the entire group is at serious risk of death.[2]*
 
-Patients who require ventilation will die without it.  If the hospital cannot provide ventilation due to a lack of ventilators, then health care providers will be required to make “god decisions” about which patients live and which patients die [3, 4]. The added stress of these decisions negatively impacts mental health of clinicians treating patients, weakening the support these patients can receive[5]. 
+Patients who require ventilation will die without it.  If the hospital cannot provide ventilation due to a lack of ventilators, then health care providers will be required to make “god decisions” about which patients live and which patients die [3, 4]. The added stress of these decisions negatively impacts mental health of clinicians treating patients, weakening the support these patients can receive[5].
 
 Several projects already exist that aim to increase the supply of ventilators [6, 7, 8].  Ventilators are complicated devices, however, that require four touchpoints of control for a respiratory therapist or clinician:
 
@@ -48,13 +48,15 @@ Air travels in the following pathway for a given patient on inspiration:
   3.  Through a flow control valve that allows for linear control of the amount of air going to each patient independently of other patients
   4.  Through a shutoff valve
   5.  Through to the patient for an inspired breath
-  
+
 Expiration follows this pathway:
   1.  From the patient
   2.  Through a shutoff valve
   3.  Through a flow meter to capture the expired breath size of the patient
   4.  Through a one-way valve
   5.  Back to the ventilator
+
+A PEEP valve is not required in the expiratory circuit; patient PEEP should be maintained by the ventilator. Note that using the ventilator to maintain PEEP will require that some level of patient matching be done before placing patients on the ventilator.
 
 ### Components
 
@@ -64,12 +66,12 @@ The Tetra flow control valve and PEEP valves all have an internal layout describ
 ![Figure 3](./Figure_3.png)
 *Figure 3: Tetra Valve components.  Air flows through the left portion of the base, and the valve exerts control through the cap sealing flow with the strength of the spring holding the cap in place.  As the cap is screwed down, the spring creates force to hold the cap down, preventing some amount of flow through the valve.*
 
-The Tetra Valve has several design considerations: 
+The Tetra Valve has several design considerations:
   1.  O-rings on the base of the device for quick attachment and detachment of a replacement valve, should the spring lose compliance
   2.  A post to keep the spring/valve complex in place during valve operation, to prevent slipping of the valves inside the cap, as well as ensure one-way air flow
   3.  Finer threading between the cap and the base to increase control in clinical use.
   4.  A fully specified stainless steel spring to ensure lower inter-part performance variability
-  
+
 The use of a spring provides a linear response in the valve, so that a clinician can adjust the valve and expect that the change will be proportional to the physical change on the device. The Tetra valve goes from fully open to fully closed in a single turn of the cap. The flow rate at each cap position is printed on the valve, so that the clinical user does not have to guess about valve position.
 
 **Shutoff Valve**
