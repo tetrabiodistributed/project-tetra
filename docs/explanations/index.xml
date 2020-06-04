@@ -57,26 +57,60 @@ The shutoff valves are in the system to allow for easy patient attachment/detach
 There are three different designs for the flow meter. One is based off of a Sensirion 3300 part[16], which is generally not available as the crisis continues. Another uses calibrated mass air flow (MAF) sensors used as an automotive part, and another uses a custom-built part using a Venturi tube [17]. Each of these three components provide the clinician with knowledge of the size of the expired breath for each patient, which is displayed on a central screen.&lt;/p>
 &lt;p>&lt;strong>The Display&lt;/strong>
 The flow sensor prints its results to a screen display built on a Raspberry Pi system. The curve detected from the flow meter has some basic processing done to provide the PIP/PEEP curve, as well as curves representing tidal volume, etc.&lt;/p>
-&lt;h2 id="refrences">Refrences&lt;/h2>
+&lt;h2 id="references">References&lt;/h2>
 &lt;ol>
-&lt;li>&lt;a href="https://www.worldometers.info/coronavirus/">https://www.worldometers.info/coronavirus/&lt;/a>&lt;/li>
-&lt;/ol>
-&lt;p>2.https://twitter.com/drchoueiri/status/1243861887420432384&lt;/p>
-&lt;p>3.https://www.cbsnews.com/news/coronavirus-doctors-hospitals-life-or-death-decisions-pandemic/&lt;/p>
-&lt;p>4.https://www.bbc.com/news/world-us-canada-52137160&lt;/p>
-&lt;p>5.https://www.nytimes.com/2020/04/27/nyregion/new-york-city-doctor-suicide-coronavirus.html&lt;/p>
-&lt;p>6.https://www.nasa.gov/press-release/nasa-developed-ventilator-authorized-by-fda-for-emergency-use/&lt;/p>
-&lt;p>7.https://www.reuters.com/article/uk-health-coronavirus-czech-ventilators/czech-team-use-easily-available-parts-to-build-prototype-ventilator-idUKKBN21L1Z6&lt;/p>
-&lt;p>8.https://armeevent.com/&lt;/p>
-&lt;p>9.https://en.wikipedia.org/wiki/Peak_inspiratory_pressure&lt;/p>
-&lt;p>10.https://en.wikipedia.org/wiki/Fraction_of_inspired_oxygen&lt;/p>
-&lt;p>11.https://en.wikipedia.org/wiki/Positive_end-expiratory_pressure&lt;/p>
-&lt;p>12.https://hub.jhu.edu/2020/04/02/3d-printed-ventilator-splitters-for-covid-19/&lt;/p>
-&lt;p>13.https://www.prismahealth.org/vesper/&lt;/p>
-&lt;p>14.https://www.asahq.org/about-asa/newsroom/news-releases/2020/03/joint-statement-on-multiple-patients-per-ventilator&lt;/p>
-&lt;p>15.https://www.thingiverse.com/thing:4250354&lt;/p>
-&lt;p>16.https://www.sensirion.com/en/flow-sensors/mass-flow-meters-for-high-precise-measurement-of-gases/proximal-flow-sensors-sfm3300-autoclavable-washable-or-single-use/&lt;/p>
-&lt;p>17.https://www.sciencedirect.com/topics/engineering/venturi-tube&lt;/p></description></item><item><title>Docs: Concepts</title><link>https://helpfulengineering.github.io/project-tetra/docs/explanations/concepts/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://helpfulengineering.github.io/project-tetra/docs/explanations/concepts/</guid><description>
+&lt;li>
+&lt;p>&lt;a href="https://www.worldometers.info/coronavirus/">https://www.worldometers.info/coronavirus/&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="https://twitter.com/drchoueiri/status/1243861887420432384">https://twitter.com/drchoueiri/status/1243861887420432384&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="https://www.cbsnews.com/news/coronavirus-doctors-hospitals-life-or-death-decisions-pandemic/">https://www.cbsnews.com/news/coronavirus-doctors-hospitals-life-or-death-decisions-pandemic/&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="https://www.bbc.com/news/world-us-canada-52137160">https://www.bbc.com/news/world-us-canada-52137160&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="https://www.nytimes.com/2020/04/27/nyregion/new-york-city-doctor-suicide-coronavirus.html">https://www.nytimes.com/2020/04/27/nyregion/new-york-city-doctor-suicide-coronavirus.html&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="https://www.nasa.gov/press-release/nasa-developed-ventilator-authorized-by-fda-for-emergency-use/">https://www.nasa.gov/press-release/nasa-developed-ventilator-authorized-by-fda-for-emergency-use/&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="https://www.reuters.com/article/uk-health-coronavirus-czech-ventilators/czech-team-use-easily-available-parts-to-build-prototype-ventilator-idUKKBN21L1Z6">https://www.reuters.com/article/uk-health-coronavirus-czech-ventilators/czech-team-use-easily-available-parts-to-build-prototype-ventilator-idUKKBN21L1Z6&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="https://armeevent.com/">https://armeevent.com/&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="https://en.wikipedia.org/wiki/Peak_inspiratory_pressure">https://en.wikipedia.org/wiki/Peak_inspiratory_pressure&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="https://en.wikipedia.org/wiki/Fraction_of_inspired_oxygen">https://en.wikipedia.org/wiki/Fraction_of_inspired_oxygen&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="https://en.wikipedia.org/wiki/Positive_end-expiratory_pressure">https://en.wikipedia.org/wiki/Positive_end-expiratory_pressure&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="https://hub.jhu.edu/2020/04/02/3d-printed-ventilator-splitters-for-covid-19/">https://hub.jhu.edu/2020/04/02/3d-printed-ventilator-splitters-for-covid-19/&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="https://www.prismahealth.org/vesper/">https://www.prismahealth.org/vesper/&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="https://www.asahq.org/about-asa/newsroom/news-releases/2020/03/joint-statement-on-multiple-patients-per-ventilator">https://www.asahq.org/about-asa/newsroom/news-releases/2020/03/joint-statement-on-multiple-patients-per-ventilator&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="https://www.thingiverse.com/thing:4250354">https://www.thingiverse.com/thing:4250354&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="https://www.sensirion.com/en/flow-sensors/mass-flow-meters-for-high-precise-measurement-of-gases/proximal-flow-sensors-sfm3300-autoclavable-washable-or-single-use/">https://www.sensirion.com/en/flow-sensors/mass-flow-meters-for-high-precise-measurement-of-gases/proximal-flow-sensors-sfm3300-autoclavable-washable-or-single-use/&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="https://www.sciencedirect.com/topics/engineering/venturi-tube">https://www.sciencedirect.com/topics/engineering/venturi-tube&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ol></description></item><item><title>Docs: Concepts</title><link>https://helpfulengineering.github.io/project-tetra/docs/explanations/concepts/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://helpfulengineering.github.io/project-tetra/docs/explanations/concepts/</guid><description>
 &lt;div class="pageinfo pageinfo-primary">
 &lt;p>This is a placeholder page that shows you how to use this template site.&lt;/p>
 &lt;/div>
