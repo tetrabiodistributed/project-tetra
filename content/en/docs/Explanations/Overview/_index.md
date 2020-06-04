@@ -13,7 +13,7 @@ Current medical standard operating procedure requires that patients who become s
 ## Introduction
 
 As of May 19, 2020, 5 million cases of coronavirus have been reported worldwide, with over 320,000 deaths attributed to the virus [1].  Initial clinical reports of those infected with the virus indicated that the fatality rate nears 2-3%, but closer inspection of the number of cases shows that up to 5% of patients require ventilation (see Figure 1, the bottom bar):
-![Figure 1](/static/Figure_1.png)
+![Figure 1](../../Figure_1.png)
 
 *Figure 1: A breakdown of how individuals react to a COVID-19 infection sourced from March, 2020.  At that point in time, 85% of the infected population appeared to recover without medical intervention, while 5% of the infected population would require invasive ventilation to recover, and up to half of those patients were not surviving.  If that 5% of infected individuals do not receive ventilation, then the entire group is at serious risk of death.[2]*
 
@@ -38,7 +38,7 @@ The most serious concern is the death of both patients.  Two patients on the sam
 Project Tetra, at its heart, is a set of two splitters with a series of valves and a set of monitoring electronics.  One splitter is termed the ‘inspiratory arm’, as this arm takes the air to be inspired by the patients from the ventilator to the patients.  The other splitter is termed the ‘expiratory arm’, as this complex takes the air expired by patients back to the ventilator.  Between the two complexes is a ‘bias circuit’, a branch with a one-way valve to prevent backflow, that joins the two complexes directly.  This bias circuit is crucial for the operation of the system.
 
 Figure 2 lays out the core components of the device.
-![Figure 2](/static/Figure_2.png)
+![Figure 2](../../Figure_2.png)
 
 *Figure 2: High-level schematics of the Tetra system.  Air flows from the ventilator to the inspiratory arm, with separate patients isolated by one-way valves, through flow-control valves and shutoff valves, to the patient.  The expired air travels back through a flow meter, a PEEP valve to ensure the patient still has air pressure in their lungs at the end of the breath, and through another one-way valve back to the ventilator.*
 
@@ -61,7 +61,7 @@ Expiration follows this pathway:
 **Tetra Valve***
 The Tetra flow control valve and PEEP valves all have an internal layout described in Figure 3.
 
-![Figure 3](/static/Figure_3.png)
+![Figure 3](../../Figure_3.png)
 *Figure 3: Tetra Valve components.  Air flows through the left portion of the base, and the valve exerts control through the cap sealing flow with the strength of the spring holding the cap in place.  As the cap is screwed down, the spring creates force to hold the cap down, preventing some amount of flow through the valve.*
 
 The Tetra Valve has several design considerations: 
