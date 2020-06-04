@@ -1,21 +1,35 @@
 # Project Tetra - Project Repository
-GitHub for Helpful engineering project. Please look around of you are new. 
+This repository contains the content and source code for generating the Project Tetra site.
+For more information about Project Tetra, please visit https://helpfulengineering.github.io/project-tetra/docs/
 
-* Components in Development
-   * 3WayOring 
-       * Rev 8 is latest. 4 parts, 3 from rigid plastic, one from TPE.
-   * Splitter (likey to require 2, one for expiratory flow, one for inspiratory flow)
-       * 4WayVent_3DP_v05.stl is latest 4 way
-       * 2WayVent_3DP_v05.stl is latest 2 way
-   * One Way Valve
-       * 2OWV.STL is the latest, requires a flexible seal (silicone molded, printed TPU or cut material/rubber glove)
+This Project is hosted at https://helpfulengineering.github.io/project-tetra
 
-## Documents
-* Project Proposal https://docs.google.com/document/d/1WbaJ5lhCMrui6hDj-EqaMEB5Ymmw-CQgvQznhYMCw9w/edit?usp=sharing
-* Testing Questions https://docs.google.com/document/d/164DD9j-OUmsBKB3FELcanB-5L1GkFy0qX10EiUfEtjM/edit
-* Printing Queue https://docs.google.com/spreadsheets/d/1FWTYRxglWDqIK_xI6HlBGKUegICQRsXe5NHCJTlTlHs/edit?usp=sharing
-* System Concept Diagram https://docs.google.com/presentation/d/1UeSRyUB0dAOZZecX4TGh40GkVtGADlXzBOwVFjPqIFE/edit#slide=id.g7f621674bc_0_63
+## Prerequisites
 
-If you have ventilator acsess please fill out this form https://forms.gle/2gB1P56XPEUn8NL5A and join the ventilator access project
+The following are basic prerequisites for previewing the Project Tetra site on your local machine:
 
-To contribute, clone this repository, then create a pull request
+- [Install Hugo](https://gohugo.io/getting-started/installing/) for your specific platform.
+  If you install from the [release page](https://github.com/gohugoio/hugo/releases),
+  make sure you download the `_extended` version which supports SCSS.
+
+## Cloning the Project Tetra Project
+
+The following will clone the project repository onto your local machine.
+This will allow you to edit and preview changes to the project site
+(don't forget to use `--recurse-submodules` or you won't pull down some of the code you need to generate a working site).
+
+```bash
+git clone --recurse-submodules --depth 1 https://github.com/helpfulengineering/project-tetra.git
+cd project-tetra
+```
+
+## Running the website locally
+
+Once you've cloned the project repo, from the `project-tetra` root directory, run:
+
+```bash
+hugo server
+```
+
+The `hugo server` command builds and serves the site.
+If you just want to build the site, run `hugo` instead.
