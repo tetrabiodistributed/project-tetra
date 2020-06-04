@@ -31,8 +31,7 @@ Help your user know if your project will help them. Useful information can inclu
 
 Give your users next steps from the Explanations. For example:
 
-* [Getting Started](/getting-started/): Get started with $project
-* [Examples](/examples/): Check out some example code!
+* [Project Overview](/project-tetra/docs/explanations/overview): A high level project overview
 
 ## Components in Development
 * 3WayOring
