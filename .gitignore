@@ -5,6 +5,10 @@
 *.ipj
 *.lck
 
+# python
+__pycache__
+venv
+
 # hugo
 public/
 resources/
