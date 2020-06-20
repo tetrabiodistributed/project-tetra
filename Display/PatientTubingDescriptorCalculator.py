@@ -85,3 +85,4 @@ class PatientTubingDescriptorCalculator():
                 "PIP": self.PIP,
                 "Mean Airway Pressure": self.mean_airway_pressure,
                 "Flow Rate": self.flow_rate}
+                
