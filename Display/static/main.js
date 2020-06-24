@@ -1,6 +1,8 @@
+// Placeholder
+
 let socket = new WebSocket("ws://" + location.host + "/ws");
 
-socket.onopen = function (e) {
+socket.onopen = function (event) {
     console.log("websocket opened");
     document.getElementById("conn_status").innerHTML = "connected";
     socket.send(JSON.stringify({"subscribe": ""}))

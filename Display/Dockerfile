@@ -17,9 +17,9 @@ RUN go build
 COPY requirements.txt /src/zmq_proxy
 RUN pip3 install -r /src/zmq_proxy/requirements.txt
 COPY __init__.py /src/zmq_proxy
-COPY DiscreteTransferFunction.py /src/zmq_proxy
-COPY CausalVelocityFilter.py /src/zmq_proxy
-COPY PatientTubingDescriptorCalculator.py /src/zmq_proxy
+COPY discretetransferfunction.py /src/zmq_proxy
+COPY causalvelocityfilter.py /src/zmq_proxy
+COPY patienttubingdescriptorcalculator.py /src/zmq_proxy
 COPY server.py /src/zmq_proxy
 COPY services.conf /etc/supervisor/conf.d/services.conf
 CMD ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisor/supervisord.conf"]

@@ -3,7 +3,7 @@ import numpy as np
 import unittest
 import matplotlib.pyplot as plt
 
-from CausalVelocityFilter import CausalVelocityFilter
+from causalvelocityfilter import CausalVelocityFilter
 
 
 class TestCausalVelocityFilter(unittest.TestCase):
