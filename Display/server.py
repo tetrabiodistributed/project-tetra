@@ -7,14 +7,49 @@ import zmq
 
 from patienttubingdescriptorcalculator \
     import PatientTubingDescriptorCalculator
+import constants
 
-def poll_sensors(number_of_patients):
-    """Pulls data from the pressure and flow sensors"""
 
-    # placeholder
-    while True:    
-        yield tuple((random.uniform(0, 1), random.uniform(0, 1))
-                    for _ in range(number_of_patients))
+class Sensors():
+    """Dummy class while I work on the real thing"""
+
+    def __init__(self, number_of_patients):
+        self._number_of_patients = number_of_patients
+
+    def connected_sensors(self, not_enough_sensors=False):
+        if not_enough_sensors:
+            # SPL06-007 = pressure sensor
+            return tuple([("SPL06-007")]
+                         .extend([("SPL06-007", "SFM3300")
+                                  for _ in range(self._number_of_patients-1)]))
+        else:
+            return tuple(("SPL06-007", "SFM3300")
+                         for _ in range(self._number_of_patients))
+
+    def calibration_pressure_sensor_connected(self, fail=False):
+        if fail:
+            return False
+        else:
+            return True
+
+    def tubes_with_enough_sensors(self,
+                                  not_enough_sensors=False):
+        _tubes_with_enough_sensors = []
+        _connected_sensors = \
+            self.connected_sensors(not_enough_sensors=not_enough_sensors)
+        for i in range(len(_connected_sensors)):
+            if ("SPL06-007" in _connected_sensors[i]
+                and "SFM3300" in _connected_sensors[i]):
+                _tubes_with_enough_sensors.append(i)
+        return _tubes_with_enough_sensors
+
+    def poll_sensors(self):
+        """Pulls data from the pressure and flow sensors"""
+
+        # placeholder
+        while True:    
+            yield tuple((random.uniform(0, 1), random.uniform(0, 1))
+                        for _ in range(self._number_of_patients))
 
 
 class Calculator():
@@ -51,15 +86,14 @@ class Communicator():
         self._socket.bind(f"tcp://*:{port}")
 
     def publish_message(self, message):
-        
+
         self._socket.send_multipart([b"",
                                      json.dumps(message).encode("ascii")])
 
 def main():
 
-    NUMBER_OF_PATIENTS = 4
-    sensor_data = poll_sensors(NUMBER_OF_PATIENTS)
-    calculator = Calculator(NUMBER_OF_PATIENTS)
+    sensor_data = poll_sensors(constants.NUMBER_OF_PATIENTS)
+    calculator = Calculator(constants.NUMBER_OF_PATIENTS)
     communicator = Communicator()
     running = True
     while running:

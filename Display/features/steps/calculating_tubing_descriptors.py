@@ -1,20 +1,32 @@
 from behave import *
 
 import server
+import constants
 
-@given("we can use sensor data")
+
+@given("there are sensors connected")
 def step_impl(context):
+    pass
 
-    sensor_data = next(server.poll_sensors(4))
-    assert len(sensor_data) == 4 and all(len(datum) == 2
-                                         for datum in sensor_data)
 
-@then("we can calculate these descriptors")
+@given("there is a calculator to parse sensor data")
 def step_impl(context):
+    a = server.Calculator(constants.NUMBER_OF_PATIENTS)
+    assert context.failed is False
 
-    NUMBER_OF_PATIENTS = 4
-    sensor_data = server.poll_sensors(NUMBER_OF_PATIENTS)
-    calculator = server.Calculator(NUMBER_OF_PATIENTS)
+
+@when("data is requested from the sensors")
+def step_impl(context):
+    sensors = server.Sensors(constants.NUMBER_OF_PATIENTS)
+    sensor_data = sensors.poll_sensors()
+
+
+@then("the sensors yield all of these descriptors")
+def step_impl(context):
+    sensors = server.Sensors(constants.NUMBER_OF_PATIENTS)
+    sensor_data = sensors.poll_sensors()
+    calculator = server.Calculator(constants.NUMBER_OF_PATIENTS)
     calculator.add_datum(sensor_data)
     assert all(calculator.get_datum()[patient][row["descriptor"]] is not None
-               for row in context.table for patient in range(4))
+               for row in context.table
+               for patient in range(constants.NUMBER_OF_PATIENTS))
