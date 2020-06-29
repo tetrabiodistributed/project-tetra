@@ -1,3 +1,0 @@
-matplotlib
-numpy
-numpy_ringbuffer
