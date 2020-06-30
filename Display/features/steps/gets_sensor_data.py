@@ -1,58 +1,76 @@
-from behave import *
+from behave import given, when, then
 
 import server
+from sensors import Sensors, NotEnoughSensors
 import constants
 
-@given("there are these objects that represent these sensors")
+
+@given("there is an object that represent the total sensing package")
 def step_impl(context):
-    sensors = server.Sensors(constants.NUMBER_OF_PATIENTS)
-    pass
+    context.sensors = server.Sensors(1, 1, 1, 1)
+
 
 @when("these sensors are initialized")
 def step_impl(context):
     pass
 
+
 @then("the software will calibrate the sensors")
 def step_impl(context):
-    pass
+    context.sensors.calibrate()
+
 
 @then("the software will determine which tubes have both pressure and "
       "airflow sensing")
 def step_impl(context):
-    sensors = server.Sensors(constants.NUMBER_OF_PATIENTS)
-    assert (len(sensors
-               .tubes_with_enough_sensors()) == 
-            constants.NUMBER_OF_PATIENTS)
+    number_of_good_tubes = len(context.sensors.tubes_with_enough_sensors())
+    assert (number_of_good_tubes == constants.NUMBER_OF_PATIENTS), \
+           ("Incorrect number of tubes.  "
+            f"{constants.NUMBER_OF_PATIENTS} expected, "
+            f"{number_of_good_tubes} received")
+
 
 @then("the software will return the state of the sensor to the user.")
 def step_impl(context):
-    sensors = server.Sensors(constants.NUMBER_OF_PATIENTS)
-    datum = next(sensors.poll_sensors())
-    assert len(datum) == constants.NUMBER_OF_PATIENTS
+    datum = context.sensors.poll_sensors()
+    assert len(datum) == constants.NUMBER_OF_PATIENTS, \
+           ("Not the correct number of data.  "
+            f"{constants.NUMBER_OF_PATIENTS} expected, "
+            f"{len(datum)} received.")
 
-@given("a set of functioning sensors")
+
+
+@given("any tube doesn't have a complete set of working sensors")
 def step_impl(context):
     pass
 
-@given("a set of malfunctioning or missing sensors")
-def step_impl(context):
-    pass
 
 @when("the software diagnostic is run")
 def step_impl(context):
-    pass
+    try:
+        context.sensors.connected_sensors(not_enough_sensors=True)
+    except Exception as exception:
+        context.exception = exception
 
-@then("an error {error} will be raised")
-def step_impl(context, error):
-    pass
+
+@then("an exception {exception} will be raised")
+def step_impl(context, exception):
+    assert isinstance(context.exception,
+                      eval(exception)), \
+           f"Invalid exception; {context.exception} received and \n" \
+           f"{exception} expected"
+
+
 
 @given("{sensor} sensor on a tube")
 def step_impl(context, sensor):
     pass
 
+
 @when("data is read")
 def step_impl(context):
     pass
+
 
 @then("the data from {sensor} will be used")
 def step_impl(context, sensor):

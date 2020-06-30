@@ -22,19 +22,16 @@ class ProcessSampleData():
 
 
     def __init__(self, path_to_data):
-
         self._flow_data_file = open(path_to_data, "r")
         self._parseData()
+        self._flow_data_file.close()
 
     def __del__(self):
-
-        self._flow_data_file.close()
         del(self._timestamps)
         del(self._flow_rates)
         del(self._tidal_volumes)
 
     def __len__(self):
-
         return len(self.timestamps)
 
     @property
@@ -58,31 +55,27 @@ class ProcessSampleData():
     @property
     def flow_rates(self):
         """Gives the list of flow rates in mL/s"""
-
         return self._flow_rates
     
     @property
     def tidal_volumes(self):
         """Gives the list of tidal volumes in mL"""
-
         return self._tidal_volumes
 
     @property
     def pressures(self):
         """Gives the list of pressures in cmH2O"""
-
         return self._pressures
     
 
     def _parseData(self):
-
         self._timestamps = []
         self._flow_rates = []
         self._tidal_volumes = []
         self._pressures = []
-        FLOW_RATE_MARKER = "SLMx10:"
-        TIDAL_VOLUME_MARKER = "TidalVol:"
-        PRESSURE_MARKER = "Pressurex10:"
+        flow_rate_marker = "SLMx10:"
+        tidal_volume_marker = "TidalVol:"
+        pressure_marker = "Pressurex10:"
 
         for datum in self._flow_data_file:
             splitDatum = datum.replace(" -> ", "\t").split("\t")
@@ -101,15 +94,16 @@ class ProcessSampleData():
                              .timestamp() * 1000.0)
 
             self._flow_rates.append(float(splitDatum[1]
-                                          .replace(FLOW_RATE_MARKER,
+                                          .replace(flow_rate_marker,
                                                    "")
                                           .strip("\n")) / 10)
             self._tidal_volumes.append(float(splitDatum[2]
-                                             .replace(TIDAL_VOLUME_MARKER,     "")
+                                             .replace(tidal_volume_marker,     "")
                                              .strip("\n")))
 
-            if (PRESSURE_MARKER in datum):
+            if (pressure_marker in datum):
                 self._pressures.append(float(splitDatum[3]
-                                             .replace(PRESSURE_MARKER,
+                                             .replace(pressure_marker,
                                                       "")
                                              .strip("\n")) / 10)
+
