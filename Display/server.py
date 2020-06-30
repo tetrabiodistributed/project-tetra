@@ -54,7 +54,7 @@ def main():
     running = True
     while running:
         try:
-            calculator.add_datum(next(sensor_data))
+            calculator.add_datum(sensor_data)
 
             communicator.publish_message(calculator.get_datum())
             time.sleep(1.0)
