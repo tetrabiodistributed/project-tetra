@@ -1,0 +1,73 @@
+@startuml
+left to right direction
+skinparam nodesep 100
+skinparam ranksep 100
+frame "ibd [System] Electronic Sensing System [Power and Data Flow]" {
+  [Raspberry Pi B+] <<Microcontroller>> as [Pi]
+  () "Wall Outlet" as WO
+  
+  rectangle "Power System" {
+    [LM259SX-5] <<Voltage Regulator>> as [VR]
+    [Power Jack] as PJ
+    WO ..> PJ
+    PJ ..> VR
+    VR ..> Pi: 5V
+  }
+
+  together {
+    rectangle "Pressure Sensing System" as PresSens{
+      [SPL06 - 007 (x5)] <<Pressure Sensors>> as Pres
+      [TCA9548A] <<I2C Pressure Multiplexer>> as [MUX1]
+      Pres .. MUX1: <<I2C>>
+    }
+
+    rectangle "Open-Source Flow Sensing System"  as Open{
+      [Automotive Airflow Sensors (x4)] <<Generic Sensors>> as AAS
+      [TCA9548A] <<Analog Digital Converter>> as [ADC]
+      () "Automotive Airflow Connectors (x4)" as ACon
+      AAS -- ACon
+      ACon .. ADC: <<SPI>>
+    }
+
+    rectangle "FDA-Approved Flow Sensing System"  as FDA{
+      [Sensirion Airflow Sensors (x4)] <<Sensirion Sensors>> as Sens
+      [TCA9548A] <<I2C Flow Multiplexer>> as [MUX2]
+      () "Sensirion Airflow Connectors (x4)" as SCon
+      Sens -- SCon
+      SCon .. MUX2: <<I2C>>
+    }
+  }
+
+  'Used for aligning boxes'
+  /'
+  PresSens -[hidden]-> FDA
+  FDA --> Open
+  '/
+
+  "Clinician" <<Human>> as Doc
+  "Patient" <<Human>> as Pat
+
+  Pat ..> Sens
+  Pat ..> Pres
+  Pat ..> AAS
+
+
+  MUX2 ..> Pi
+  ADC  ..> Pi
+  MUX1 ..> Pi
+
+  rectangle "Clinical Feedback" {
+      () "Raspberry Pi B+ Display" <<Display>> as Display
+      () "Indicator LEDs (x8)" as LED
+      () "Audio Alarm"  as Aud
+  }
+
+  Pi ..> LED
+  Pi ..> Aud
+  Pi ..> Display
+
+  LED ..> Doc
+  Aud ..> Doc
+  Display ..> Doc
+}
+@enduml
