@@ -1,11 +1,10 @@
 import unittest
 import math
 
-from discretetransferfunction import DiscreteTransferFunction
+from discrete_transfer_function import DiscreteTransferFunction
 
 
 class TestDiscreteTransferFunction(unittest.TestCase):
-
 
     def testInit_nominal(self):
 
@@ -69,7 +68,7 @@ class TestDiscreteTransferFunction(unittest.TestCase):
                                    "in the numerator")
 
     def testGetDatum_secondOrderTerm(self):
-        
+
         tf = DiscreteTransferFunction([1, 1, 1], [1])
         tf.append(1)
         tf.append(1)
@@ -100,13 +99,13 @@ class TestDiscreteTransferFunction(unittest.TestCase):
         desiredList = [1, 1, 2, 3, 5, 8]
         self.assertTrue(all(math.isclose(actual, desired)
                             for (actual, desired) in
-                            zip(fibonacciNumbers, 
+                            zip(fibonacciNumbers,
                                 desiredList)),
-                         "Fails to generate a sequence of numbers "
-                         "with the numerator having non-constant "
-                         "terms\n"
-                         "   " + str(desiredList) + "\n"
-                         "!= " + str(fibonacciNumbers))
+                        "Fails to generate a sequence of numbers "
+                        "with the numerator having non-constant "
+                        "terms\n"
+                        "   " + str(desiredList) + "\n"
+                        "!= " + str(fibonacciNumbers))
 
     def testGetDatum_inverseFibonacci(self):
         """invereFibonacci(n) =
@@ -125,7 +124,7 @@ class TestDiscreteTransferFunction(unittest.TestCase):
         desiredList = [1, 1, 1/2, 2/3, 6/7, 21/32]
         self.assertTrue(all(math.isclose(actual, desired)
                             for (actual, desired) in
-                            zip(inverseFibonacciNumbers, 
+                            zip(inverseFibonacciNumbers,
                                 desiredList)),
                         "Fails to generate a sequence of numbers with "
                         "the denominator having non-constant terms\n"
@@ -146,7 +145,7 @@ class TestDiscreteTransferFunction(unittest.TestCase):
         desiredList = [1, 1, 1, 1, 1, 1]
         self.assertTrue(all(math.isclose(actual, desired)
                             for (actual, desired) in
-                            zip(regularAndInverseFibonacciNumbers, 
+                            zip(regularAndInverseFibonacciNumbers,
                                 desiredList)),
                         "Fails to generate a sequence of numbers with "
                         "the numerator and denominator having "

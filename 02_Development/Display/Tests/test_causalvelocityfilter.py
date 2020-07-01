@@ -3,11 +3,10 @@ import numpy as np
 import unittest
 import matplotlib.pyplot as plt
 
-from causalvelocityfilter import CausalVelocityFilter
+from causal_velocity_filter import CausalVelocityFilter
 
 
 class TestCausalVelocityFilter(unittest.TestCase):
-
 
     def testInit_nominal(self):
 
@@ -26,8 +25,10 @@ class TestCausalVelocityFilter(unittest.TestCase):
         error = np.array([])
         for i in range(len(to_filter_data)):
             velocity_filter.append(to_filter_data[i], dt)
-            filtered_data = np.append(filtered_data, velocity_filter.get_datum())
-            error = np.append(error, desired_filtered_data[i] - filtered_data[i])
+            filtered_data = np.append(
+                filtered_data, velocity_filter.get_datum())
+            error = np.append(
+                error, desired_filtered_data[i] - filtered_data[i])
         rms_error = np.sqrt(np.mean(error**2))
         self.assertLess(rms_error, 0.1,
                         "Fails to differentiate a data series "
@@ -44,8 +45,10 @@ class TestCausalVelocityFilter(unittest.TestCase):
         error = np.array([])
         for i in range(len(to_filter_data)):
             velocity_filter.append(to_filter_data[i], dt)
-            filtered_data = np.append(filtered_data, velocity_filter.get_datum())
-            error = np.append(error, desired_filtered_data[i] - filtered_data[i])
+            filtered_data = np.append(
+                filtered_data, velocity_filter.get_datum())
+            error = np.append(
+                error, desired_filtered_data[i] - filtered_data[i])
         rms_error = np.sqrt(np.mean([err**2 for err in error]))
         self.assertLess(rms_error, 0.05,
                         "Fails to differentiate a data series while "

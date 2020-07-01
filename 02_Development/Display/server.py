@@ -13,7 +13,6 @@ import constants
 
 class Calculator():
 
-
     def __init__(self):
 
         self._calculators = \
@@ -48,7 +47,7 @@ def main():
                       constants.PRESSURE_OVERSAMPLING,
                       constants.TEMPERATURE_SAMPLING_RATE,
                       constants.TEMPERATURE_OVERSAMPLING)
-    sensor_data = sensors.poll_sensors()
+    sensor_data = sensors.poll()
     calculator = Calculator()
     communicator = Communicator()
     running = True

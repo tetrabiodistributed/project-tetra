@@ -16,15 +16,12 @@ def step_impl(context):
 
 @when("data is requested from the sensors")
 def step_impl(context):
-    context.sensor_data = context.sensors.poll_sensors()
+    context.sensor_data = context.sensors.poll()
 
 
 @then("the sensors yield all of these descriptors")
 def step_impl(context):
-    sensors = server.Sensors(1, 1, 1, 1)
-    sensor_datum = sensors.poll_sensors()
-    calculator = server.Calculator()
-    calculator.add_datum(sensor_datum)
-    assert all(row["descriptor"] in calculator.get_datum()[patient]
+    context.calculator.add_datum(context.sensor_data)
+    assert all(row["descriptor"] in context.calculator.get_datum()[patient]
                for row in context.table
                for patient in range(constants.NUMBER_OF_PATIENTS))
