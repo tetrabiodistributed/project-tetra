@@ -2,10 +2,14 @@ import unittest
 import math
 import warnings
 
+<<<<<<< HEAD
 from spl06_007 import (PressureSensor,
                        Communicator,
                        Calibrator,
                        SensorConstants)
+=======
+from spl06_007 import PressureSensor, Communicator, Calibrator
+>>>>>>> changed the sensors module so it will read data from a file when it's not run on a raspberry pi and added the start of a behave test to verify that the Docker image works.
 from i2c_interface import I2CInterface
 from rpi_check import is_on_raspberry_pi
 
@@ -86,9 +90,13 @@ class TestPressureSensor(unittest.TestCase):
         self._sensor.set_op_mode(PressureSensor.OpMode.command)
         self._sensor.set_sampling(temperature_sampling_rate=8)
         measured_temperature = self._sensor.temperature()
+<<<<<<< HEAD
         standard_temperature = 20  # degC
         self.assertTrue(math.isclose(measured_temperature,
                                      standard_temperature,
+=======
+        self.assertTrue(math.isclose(measured_temperature, 20,
+>>>>>>> changed the sensors module so it will read data from a file when it's not run on a raspberry pi and added the start of a behave test to verify that the Docker image works.
                                      rel_tol=0.50),
                         f"{measured_temperature} != "
                         "20 +/- 50% degC :\n"
@@ -105,8 +113,12 @@ class TestPressureSensor(unittest.TestCase):
         self._sensor.set_sampling()
         self._sensor.set_op_mode(PressureSensor.OpMode.command)
         measured_pressure = self._sensor.pressure()
+<<<<<<< HEAD
         standard_pressure = 101325  # Pa
         self.assertTrue(math.isclose(measured_pressure, standard_pressure,
+=======
+        self.assertTrue(math.isclose(measured_pressure, 101325,
+>>>>>>> changed the sensors module so it will read data from a file when it's not run on a raspberry pi and added the start of a behave test to verify that the Docker image works.
                                      rel_tol=0.10),
                         f"{measured_pressure} != "
                         "101.25 +/- 10% Pa :\n"
@@ -119,12 +131,15 @@ class TestPressureSensor(unittest.TestCase):
 
 class TestCalibrator(unittest.TestCase):
 
+<<<<<<< HEAD
     def setUp(self):
         # an example of calibration coefficients gotten from the hardware
         self._hardware_calibration_coefficients = (
             199, -249,
             12179, 14472, -2172, 1284, -7681, -33, -823)
 
+=======
+>>>>>>> changed the sensors module so it will read data from a file when it's not run on a raspberry pi and added the start of a behave test to verify that the Docker image works.
     def test_zero_coefficients_and_data(self):
         calibrator = Calibrator((0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
                                 1,
@@ -182,6 +197,7 @@ class TestCalibrator(unittest.TestCase):
 
     def test_returns_standard_pressure_given_actual_data(self):
         # calibration coefficients pulled from a sensor
+<<<<<<< HEAD
         calibrator = Calibrator(self._hardware_calibration_coefficients,
                                 253952,
                                 524288)
@@ -189,13 +205,27 @@ class TestCalibrator(unittest.TestCase):
         # equation for raw pressure and temperature given the hardware
         # calibration coefficients.
         # This is true for this and the following few tests.
+=======
+        calibrator = Calibrator((199, -249,
+                                 12179, 14472, -2172, 1284, -7681, -33, -823),
+                                253952,
+                                524288)
+        # raw pressure and temperature found by solving the compensating
+        # equation for raw pressure and temperature given the above
+        # coefficients
+>>>>>>> changed the sensors module so it will read data from a file when it's not run on a raspberry pi and added the start of a behave test to verify that the Docker image works.
         self.assertAlmostEqual(calibrator.pressure(-2968390, 167393), 101000,
                                places=-1,
                                msg="Fails to return sea level pressure given "
                                "data that matches that.")
 
     def test_returns_1_5_atm_pressure_given_actual_data(self):
+<<<<<<< HEAD
         calibrator = Calibrator(self._hardware_calibration_coefficients,
+=======
+        calibrator = Calibrator((199, -249,
+                                 12179, 14472, -2172, 1284, -7681, -33, -823),
+>>>>>>> changed the sensors module so it will read data from a file when it's not run on a raspberry pi and added the start of a behave test to verify that the Docker image works.
                                 253952,
                                 524288)
         self.assertAlmostEqual(calibrator.pressure(-3053970, 167393), 151500,
@@ -204,7 +234,12 @@ class TestCalibrator(unittest.TestCase):
                                "data that matches that.")
 
     def test_returns_2_atm_pressure_given_actual_data(self):
+<<<<<<< HEAD
         calibrator = Calibrator(self._hardware_calibration_coefficients,
+=======
+        calibrator = Calibrator((199, -249,
+                                 12179, 14472, -2172, 1284, -7681, -33, -823),
+>>>>>>> changed the sensors module so it will read data from a file when it's not run on a raspberry pi and added the start of a behave test to verify that the Docker image works.
                                 253952,
                                 524288)
         self.assertAlmostEqual(calibrator.pressure(-3132150, 167393), 202000,
@@ -213,7 +248,12 @@ class TestCalibrator(unittest.TestCase):
                                "data that matches that.")
 
     def test_returns_3_atm_pressure_given_actual_data(self):
+<<<<<<< HEAD
         calibrator = Calibrator(self._hardware_calibration_coefficients,
+=======
+        calibrator = Calibrator((199, -249,
+                                 12179, 14472, -2172, 1284, -7681, -33, -823),
+>>>>>>> changed the sensors module so it will read data from a file when it's not run on a raspberry pi and added the start of a behave test to verify that the Docker image works.
                                 253952,
                                 524288)
         self.assertAlmostEqual(calibrator.pressure(-3274260, 209505), 303000,
@@ -222,7 +262,12 @@ class TestCalibrator(unittest.TestCase):
                                "data that matches that.")
 
     def test_return_standard_temperature_given_actual_data(self):
+<<<<<<< HEAD
         calibrator = Calibrator(self._hardware_calibration_coefficients,
+=======
+        calibrator = Calibrator((199, -249,
+                                 12179, 14472, -2172, 1284, -7681, -33, -823),
+>>>>>>> changed the sensors module so it will read data from a file when it's not run on a raspberry pi and added the start of a behave test to verify that the Docker image works.
                                 253952,
                                 524288)
         self.assertAlmostEqual(calibrator.temperature(167393), 20,
@@ -231,7 +276,12 @@ class TestCalibrator(unittest.TestCase):
                                "matches that.")
 
     def test_return_freezing_given_actual_data(self):
+<<<<<<< HEAD
         calibrator = Calibrator(self._hardware_calibration_coefficients,
+=======
+        calibrator = Calibrator((199, -249,
+                                 12179, 14472, -2172, 1284, -7681, -33, -823),
+>>>>>>> changed the sensors module so it will read data from a file when it's not run on a raspberry pi and added the start of a behave test to verify that the Docker image works.
                                 253952,
                                 524288)
         self.assertAlmostEqual(calibrator.temperature(209505), 0,
@@ -249,7 +299,11 @@ class TestCommunicator(unittest.TestCase):
         warnings.filterwarnings("ignore",
                                 message="unclosed file",
                                 category=ResourceWarning)
+<<<<<<< HEAD
         self._mux_select(0)
+=======
+        self._mux_select(4)
+>>>>>>> changed the sensors module so it will read data from a file when it's not run on a raspberry pi and added the start of a behave test to verify that the Docker image works.
         self._communicator = Communicator()
 
     def tearDown(self):
@@ -299,10 +353,16 @@ class TestCommunicator(unittest.TestCase):
                                   "coefficients.")
 
     def test_set_pressure_sampling_sets_scale_factor(self):
+<<<<<<< HEAD
         self._communicator.set_pressure_sampling(oversample=16,
                                                  rate=1)
         self.assertEqual(self._communicator.pressure_scale_factor,
                          SensorConstants.COMPENSATION_SCALE_FACTORS[16],
+=======
+        self._communicator.set_pressure_sampling()
+        self.assertEqual(self._communicator.pressure_scale_factor,
+                         253952,
+>>>>>>> changed the sensors module so it will read data from a file when it's not run on a raspberry pi and added the start of a behave test to verify that the Docker image works.
                          "Fails to get the correct pressure scaling "
                          "factor of 253952 for oversampling=16.")
 
@@ -321,10 +381,16 @@ class TestCommunicator(unittest.TestCase):
             self._communicator.set_pressure_sampling(rate=3)
 
     def test_set_temperature_sampling_sets_scale_factor(self):
+<<<<<<< HEAD
         self._communicator.set_temperature_sampling(oversample=1,
                                                     rate=1)
         self.assertEqual(self._communicator.temperature_scale_factor,
                          SensorConstants.COMPENSATION_SCALE_FACTORS[1],
+=======
+        self._communicator.set_temperature_sampling()
+        self.assertEqual(self._communicator.temperature_scale_factor,
+                         524288,
+>>>>>>> changed the sensors module so it will read data from a file when it's not run on a raspberry pi and added the start of a behave test to verify that the Docker image works.
                          "Fails to get the correct temperature scaling "
                          "factor of 524288 for oversampling=16.")
 

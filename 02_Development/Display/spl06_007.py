@@ -219,19 +219,26 @@ class Communicator():
             self._i2c_address = SensorConstants.DEVICE_ADDRESS_SDO_HIGH
         else:
             self._i2c_address = SensorConstants.DEVICE_ADDRESS_SDO_LOW
+<<<<<<< HEAD
         self._i2c = I2CInterface(self._i2c_address,
                                  dump_communication=dump_communication)
+=======
+        self._i2c = I2CInterface(self._i2c_address)
+>>>>>>> changed the sensors module so it will read data from a file when it's not run on a raspberry pi and added the start of a behave test to verify that the Docker image works.
         self._i2c.find_device()
         self._reset_sensor()
         self.set_op_mode(PressureSensor.OpMode.standby)
         self._calculate_calibration_coefficients()
 
+<<<<<<< HEAD
     def __enter__(self):
         return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):
         self.close()
 
+=======
+>>>>>>> changed the sensors module so it will read data from a file when it's not run on a raspberry pi and added the start of a behave test to verify that the Docker image works.
     def close(self):
         """Deinitializes and unlocks the I2C bus."""
         self._i2c.close()
@@ -354,11 +361,17 @@ class Communicator():
                 SensorConstants.COMMAND_PRESSURE
             )
 
+<<<<<<< HEAD
         def pressure_ready(): return (
             self._i2c.read_register(SensorConstants.SENSOR_OP_MODE)
             & SensorConstants.PRS_RDY == 0)
         self._wait_for_condition_else_timeout(pressure_ready, 4)
 
+=======
+        while (self._i2c.read_register(SensorConstants.SENSOR_OP_MODE)
+               & SensorConstants.PRS_RDY) == 0:
+            time.sleep(self._READY_WAIT_TIME)
+>>>>>>> changed the sensors module so it will read data from a file when it's not run on a raspberry pi and added the start of a behave test to verify that the Docker image works.
         pressure_msb = self._i2c.read_register(
             SensorConstants.PRESSURE_MSB)
         pressure_lsb = self._i2c.read_register(
@@ -433,10 +446,16 @@ class Communicator():
             self._i2c.write_register(SensorConstants.SENSOR_OP_MODE,
                                      SensorConstants.COMMAND_TEMPERATURE)
 
+<<<<<<< HEAD
         def temperature_ready(): return (
             self._i2c.read_register(SensorConstants.SENSOR_OP_MODE)
             & SensorConstants.TMP_RDY == 0)
         self._wait_for_condition_else_timeout(temperature_ready, 4)
+=======
+        while (self._i2c.read_register(SensorConstants.SENSOR_OP_MODE)
+               & SensorConstants.TMP_RDY) == 0:
+            time.sleep(self._READY_WAIT_TIME)
+>>>>>>> changed the sensors module so it will read data from a file when it's not run on a raspberry pi and added the start of a behave test to verify that the Docker image works.
 
         temperature_msb = self._i2c.read_register(
             SensorConstants.TEMPERATURE_MSB)
@@ -469,10 +488,16 @@ class Communicator():
         {c0, c1} 12 bit 2´s complement numbers.
         """
 
+<<<<<<< HEAD
         def coefficients_ready(): return(
             self._i2c.read_register(SensorConstants.SENSOR_OP_MODE)
             & SensorConstants.COEF_RDY == 0)
         self._wait_for_condition_else_timeout(coefficients_ready, 4)
+=======
+        while (self._i2c.read_register(SensorConstants.SENSOR_OP_MODE)
+               & SensorConstants.COEF_RDY) == 0:
+            time.sleep(self._READY_WAIT_TIME)
+>>>>>>> changed the sensors module so it will read data from a file when it's not run on a raspberry pi and added the start of a behave test to verify that the Docker image works.
 
         _c0_11_4 = self._i2c.read_register(SensorConstants.C0_11_4)
         _c0_3_0_c1_11_8 = (
@@ -532,6 +557,7 @@ class Communicator():
         self._i2c.write_register(SensorConstants.RESET_AND_FLUSH,
                                  SensorConstants.SOFT_RESET)
         time.sleep(reset_time)
+<<<<<<< HEAD
 
         def sensor_ready(): return (
             self._i2c.read_register(SensorConstants.SENSOR_OP_MODE)
@@ -546,6 +572,12 @@ class Communicator():
                 return False
             time.sleep(self._READY_WAIT_TIME)
         return True
+=======
+        while (self._i2c.read_register(SensorConstants.SENSOR_OP_MODE)
+               & SensorConstants.SENSOR_RDY == 0):
+            # Wait for the sensor to be ready
+            time.sleep(0.005)
+>>>>>>> changed the sensors module so it will read data from a file when it's not run on a raspberry pi and added the start of a behave test to verify that the Docker image works.
 
     def _twos_complement(self, value, bits):
 

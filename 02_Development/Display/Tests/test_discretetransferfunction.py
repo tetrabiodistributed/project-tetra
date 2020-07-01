@@ -60,6 +60,10 @@ class TestDiscreteTransferFunction(unittest.TestCase):
                                    "in the numerator")
 
     def testGetDatum_secondOrderTerm(self):
+<<<<<<< HEAD
+=======
+
+>>>>>>> changed the sensors module so it will read data from a file when it's not run on a raspberry pi and added the start of a behave test to verify that the Docker image works.
         tf = DiscreteTransferFunction([1, 1, 1], [1])
         tf.append(1)
         tf.append(1)

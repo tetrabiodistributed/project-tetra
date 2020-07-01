@@ -105,11 +105,18 @@ else:
 
         def poll(self):
             """Pulls data from the pressure and flow sensors"""
+<<<<<<< HEAD
             datum = tuple((self._fake_data.pressures[self._data_index],
                            self._fake_data.flow_rates[self._data_index])
                           for _ in range(constants.NUMBER_OF_PATIENTS))
             self._data_index += 1
             return datum
+=======
+            self._data_index += 1
+            return tuple((self._fake_data.pressures[self._data_index-1],
+                          self._fake_data.flow_rates[self._data_index-1])
+                         for _ in range(constants.NUMBER_OF_PATIENTS))
+>>>>>>> changed the sensors module so it will read data from a file when it's not run on a raspberry pi and added the start of a behave test to verify that the Docker image works.
 
         def _tubes_with_enough_sensors(self, tubes_sensors):
             tubes = []
