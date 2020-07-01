@@ -5,6 +5,7 @@ from sfm3300d import FlowSensor, Calibrator, Communicator, CRCError
 from tca9548a import I2CMux
 from rpi_check import is_on_raspberry_pi
 import constants
+from i2c_interface import I2CInterface
 
 
 class TestFlowSensor(unittest.TestCase):
@@ -33,9 +34,10 @@ class TestFlowSensor(unittest.TestCase):
                                      abs_tol=1),
                         f"{measured_flow} != 0 +/- 0.1 slm : "
                         "Fails to say that there is no flow in still "
-                        "air.\nNote that if this test is performed in "
-                        "a breezy environment, then the ambient flow "
-                        "may fall ouside the range of this test.")
+                        "air.\n"
+                        "Note that if this test is performed in a "
+                        "breezy environment, then the ambient flow may "
+                        "fall ouside the range of this test.")
 
 
 class TestCalibrator(unittest.TestCase):
@@ -94,7 +96,7 @@ class TestCommunicator(unittest.TestCase):
         serial_number = self._communicator.serial_number()
         self.assertTrue(0 <= serial_number < 2**32,
                         f"{serial_number:#x} is not an unsigned 32-bit "
-                        "serial number")
+                        "serial number.")
 
     @unittest.skipIf(not is_on_raspberry_pi(),
                      "Signal isn't 2 bytes + CRC8 unless connected "
@@ -103,7 +105,8 @@ class TestCommunicator(unittest.TestCase):
         self._communicator.init_flow()
         raw_flow = self._communicator.raw_flow()
         self.assertTrue(0 <= raw_flow < 2**16,
-                        f"{raw_flow:#x} is not a 16-bit flow number")
+                        f"{raw_flow:#x} is not an unsigned 16-bit flow "
+                        "number.")
 
     @unittest.skipIf(is_on_raspberry_pi(),
                      "The signal cannot be automatically be made to "

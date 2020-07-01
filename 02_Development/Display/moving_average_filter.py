@@ -1,5 +1,4 @@
 import numpy as np
-<<<<<<< HEAD
 from numpy_ringbuffer import RingBuffer
 
 
@@ -45,18 +44,3 @@ class MovingAverageFilter(RingBuffer):
         padding = np.array([self._default_value
                             for _ in range(self.maxlen - len(self))])
         return np.mean(np.append(self, padding))
-=======
-from numpy_ringbuffer import Ringbuffer
-
-
-class MovingAverageFilter(Ringbuffer):
-
-
-	def __init__(self, size):
-
-		super().__init__(size)
-
-	def get_datum(self):
-
-		return np.mean(self)
->>>>>>> changed the sensors module so it will read data from a file when it's not run on a raspberry pi and added the start of a behave test to verify that the Docker image works.

@@ -59,34 +59,6 @@ class SensorsABC(ABC):
             A list of ints in range(constants.NUMBER_OF_PATIENTS)
             representing ports that have enough sensors.
         """
-        pass
-
-    @abstractmethod
-    def calibration_pressure_sensor_connected(self):
-        """Returns whether a fifth pressure sensor is connected for 
-        calibration.
-
-        Returns
-        -------
-        is_connected : bool
-            True if a pressure sensor is connected on I2C port
-            constants.CALIBRATION_PRESSURE_SENSOR_INDEX, else False.
-        """
-        pass
-
-    @abstractmethod
-    def poll(self):
-        """Returns a tuple of tuples of sensor data.  The data is
-        returned in the same shape and order as self.connected_sensors().
-
-        Returns
-        -------
-        sensor_data : tuple
-            A tuple of tuples of floats.  The value in self.poll()[i][j]
-            corresponds to data from the sensor
-            self.connected_sensors()[i][j].
-        """
-        pass
 
 
 if is_on_raspberry_pi():
@@ -247,27 +219,11 @@ else:
 
         def poll(self):
             """Pulls data from the pressure and flow sensors"""
-<<<<<<< HEAD
             datum = tuple((self._fake_data.pressures[self._data_index],
                            self._fake_data.flow_rates[self._data_index])
                           for _ in range(constants.NUMBER_OF_PATIENTS))
             self._data_index += 1
             return datum
-=======
-            self._data_index += 1
-            return tuple((self._fake_data.pressures[self._data_index-1],
-                          self._fake_data.flow_rates[self._data_index-1])
-                         for _ in range(constants.NUMBER_OF_PATIENTS))
->>>>>>> changed the sensors module so it will read data from a file when it's not run on a raspberry pi and added the start of a behave test to verify that the Docker image works.
-
-        def _tubes_with_enough_sensors(self, tubes_sensors):
-            tubes = []
-            for tube in tubes_sensors:
-                if (constants.PRESSURE_SENSOR in tube
-                    and (constants.SENSIRION_SENSOR in tube
-                         or constants.MASS_AIRFLOW_SENSOR in tube)):
-                    tubes.append(tube)
-            return tubes
 
 
 class NotEnoughSensors(Exception):

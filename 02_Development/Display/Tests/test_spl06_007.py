@@ -2,32 +2,14 @@ import unittest
 import math
 import warnings
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 from spl06_007 import (PressureSensor,
                        Communicator,
                        Calibrator,
                        SensorConstants)
-=======
-from spl06_007 import PressureSensor, Communicator, Calibrator
->>>>>>> changed the sensors module so it will read data from a file when it's not run on a raspberry pi and added the start of a behave test to verify that the Docker image works.
 from i2c_interface import I2CInterface
 from tca9548a import I2CMux
 from rpi_check import is_on_raspberry_pi
-<<<<<<< HEAD
-=======
-import board
-import busio
->>>>>>> moved the pressure driver to the new working directory
-=======
-from spl06_007 import PressureSensor, Communicator, Calibrator
-from i2c_interface import I2CInterface
-from rpi_check import is_on_raspberry_pi
->>>>>>> wrote a driver for the flow sensor.  It passes tests outside of hardware, but with hardware hasn't been verified yet.  Also added an off-hardware version of I2CInterface
-=======
-import constants    
->>>>>>> Made most of the tests pass on hardware, working on the last stragglers
+import constants
 
 
 class TestPressureSensor(unittest.TestCase):
@@ -57,7 +39,7 @@ class TestPressureSensor(unittest.TestCase):
         self.assertTrue(not self._sensor_is_present(),
                         "Fails to correctly identify that a sensor is not "
                         "present.")
-        
+
     def test_set_op_mode_standby(self):
         self.assertEqual(
             self._sensor.set_op_mode(PressureSensor.OpMode.standby),
@@ -110,10 +92,6 @@ class TestPressureSensor(unittest.TestCase):
                         "Fails to return NaN for temperature when the "
                         "user has not yet set the sampling parameters.")
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> wrote a driver for the flow sensor.  It passes tests outside of hardware, but with hardware hasn't been verified yet.  Also added an off-hardware version of I2CInterface
     @unittest.skipIf(not is_on_raspberry_pi(),
                      "Cannot determine ambient temperature unless "
                      "connected to hardware.")
@@ -121,17 +99,9 @@ class TestPressureSensor(unittest.TestCase):
         self._sensor.set_op_mode(PressureSensor.OpMode.command)
         self._sensor.set_sampling(temperature_sampling_rate=8)
         measured_temperature = self._sensor.temperature()
-<<<<<<< HEAD
-<<<<<<< HEAD
         standard_temperature = 20  # degC
         self.assertTrue(math.isclose(measured_temperature,
                                      standard_temperature,
-=======
-        self.assertTrue(math.isclose(measured_temperature, 20,
->>>>>>> changed the sensors module so it will read data from a file when it's not run on a raspberry pi and added the start of a behave test to verify that the Docker image works.
-=======
-        self.assertTrue(math.isclose(measured_temperature, 20,
->>>>>>> wrote a driver for the flow sensor.  It passes tests outside of hardware, but with hardware hasn't been verified yet.  Also added an off-hardware version of I2CInterface
                                      rel_tol=0.50),
                         f"{measured_temperature} != "
                         "20 +/- 50% degC :\n"
@@ -140,7 +110,6 @@ class TestPressureSensor(unittest.TestCase):
                         "performed in a very cold or hot "
                         "environment, the\nambient temperature "
                         "may fall outside the range of this test.")
-<<<<<<< HEAD
 
     @unittest.skipIf(not is_on_raspberry_pi(),
                      "Cannot determine ambient pressure unless "
@@ -149,12 +118,8 @@ class TestPressureSensor(unittest.TestCase):
         self._sensor.set_sampling()
         self._sensor.set_op_mode(PressureSensor.OpMode.command)
         measured_pressure = self._sensor.pressure()
-<<<<<<< HEAD
         standard_pressure = 101325  # Pa
         self.assertTrue(math.isclose(measured_pressure, standard_pressure,
-=======
-        self.assertTrue(math.isclose(measured_pressure, 101325,
->>>>>>> changed the sensors module so it will read data from a file when it's not run on a raspberry pi and added the start of a behave test to verify that the Docker image works.
                                      rel_tol=0.10),
                         f"{measured_pressure} != "
                         "101.25 +/- 10% Pa :\n"
@@ -163,56 +128,16 @@ class TestPressureSensor(unittest.TestCase):
                         "very low pressure environment,\nthe ambient "
                         "pressure may fall outside the range of this "
                         "test.")
-=======
-    def test_set_temperature_sampling_invalid_rate(self):
-        with self.assertRaises(ValueError,
-                               msg="Fails to raise a ValueError when "
-                               "temperature sampling rate is not in the "
-                               "set {1, 2, 4, 8, 16, 32, 64, 128}."):
-            self._communicator.set_temperature_sampling(rate=3)
-
-    def test_raw_pressure(self):
-        self._communicator.set_op_mode(PressureSensor.OpMode.background)
-        self._communicator.set_pressure_sampling()
-        raw_pressure = self._communicator.raw_pressure()
-        self.assertIsInstance(raw_pressure, int,
-                             "Fails to return raw pressure as an integer.")
-        self.assertTrue(-2**23 <= raw_pressure < 2**23,
-                        "Fails to return raw pressure as a 24-bit "
-                        "2's complement number.")
->>>>>>> moved the pressure driver to the new working directory
-=======
-
-    @unittest.skipIf(not is_on_raspberry_pi(),
-                     "Cannot determine ambient pressure unless "
-                     "connected to hardware.")
-    def test_ambient_pressure(self):
-        self._sensor.set_sampling()
-        self._sensor.set_op_mode(PressureSensor.OpMode.command)
-        measured_pressure = self._sensor.pressure()
-        self.assertTrue(math.isclose(measured_pressure, 101325,
-                                     rel_tol=0.10),
-                        f"{measured_pressure} != "
-                        "101.25 +/- 10% Pa :\n"
-                        "Fails to return ambient pressure in Pa.\n"
-                        "Note that if this test is performed in a "
-                        "very low pressure environment,\nthe ambient "
-                        "pressure may fall outside the range of this "
-                        "test.")
->>>>>>> wrote a driver for the flow sensor.  It passes tests outside of hardware, but with hardware hasn't been verified yet.  Also added an off-hardware version of I2CInterface
 
 
 class TestCalibrator(unittest.TestCase):
 
-<<<<<<< HEAD
     def setUp(self):
         # an example of calibration coefficients gotten from the hardware
         self._hardware_calibration_coefficients = (
             199, -249,
             12179, 14472, -2172, 1284, -7681, -33, -823)
 
-=======
->>>>>>> changed the sensors module so it will read data from a file when it's not run on a raspberry pi and added the start of a behave test to verify that the Docker image works.
     def test_zero_coefficients_and_data(self):
         calibrator = Calibrator((0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
                                 1,
@@ -269,8 +194,6 @@ class TestCalibrator(unittest.TestCase):
                                     0)
 
     def test_returns_standard_pressure_given_actual_data(self):
-        # calibration coefficients pulled from a sensor
-<<<<<<< HEAD
         calibrator = Calibrator(self._hardware_calibration_coefficients,
                                 253952,
                                 524288)
@@ -278,27 +201,13 @@ class TestCalibrator(unittest.TestCase):
         # equation for raw pressure and temperature given the hardware
         # calibration coefficients.
         # This is true for this and the following few tests.
-=======
-        calibrator = Calibrator((199, -249,
-                                 12179, 14472, -2172, 1284, -7681, -33, -823),
-                                253952,
-                                524288)
-        # raw pressure and temperature found by solving the compensating
-        # equation for raw pressure and temperature given the above
-        # coefficients
->>>>>>> changed the sensors module so it will read data from a file when it's not run on a raspberry pi and added the start of a behave test to verify that the Docker image works.
         self.assertAlmostEqual(calibrator.pressure(-2968390, 167393), 101000,
                                places=-1,
                                msg="Fails to return sea level pressure given "
                                "data that matches that.")
 
     def test_returns_1_5_atm_pressure_given_actual_data(self):
-<<<<<<< HEAD
         calibrator = Calibrator(self._hardware_calibration_coefficients,
-=======
-        calibrator = Calibrator((199, -249,
-                                 12179, 14472, -2172, 1284, -7681, -33, -823),
->>>>>>> changed the sensors module so it will read data from a file when it's not run on a raspberry pi and added the start of a behave test to verify that the Docker image works.
                                 253952,
                                 524288)
         self.assertAlmostEqual(calibrator.pressure(-3053970, 167393), 151500,
@@ -307,12 +216,7 @@ class TestCalibrator(unittest.TestCase):
                                "data that matches that.")
 
     def test_returns_2_atm_pressure_given_actual_data(self):
-<<<<<<< HEAD
         calibrator = Calibrator(self._hardware_calibration_coefficients,
-=======
-        calibrator = Calibrator((199, -249,
-                                 12179, 14472, -2172, 1284, -7681, -33, -823),
->>>>>>> changed the sensors module so it will read data from a file when it's not run on a raspberry pi and added the start of a behave test to verify that the Docker image works.
                                 253952,
                                 524288)
         self.assertAlmostEqual(calibrator.pressure(-3132150, 167393), 202000,
@@ -321,12 +225,7 @@ class TestCalibrator(unittest.TestCase):
                                "data that matches that.")
 
     def test_returns_3_atm_pressure_given_actual_data(self):
-<<<<<<< HEAD
         calibrator = Calibrator(self._hardware_calibration_coefficients,
-=======
-        calibrator = Calibrator((199, -249,
-                                 12179, 14472, -2172, 1284, -7681, -33, -823),
->>>>>>> changed the sensors module so it will read data from a file when it's not run on a raspberry pi and added the start of a behave test to verify that the Docker image works.
                                 253952,
                                 524288)
         self.assertAlmostEqual(calibrator.pressure(-3274260, 209505), 303000,
@@ -335,12 +234,7 @@ class TestCalibrator(unittest.TestCase):
                                "data that matches that.")
 
     def test_return_standard_temperature_given_actual_data(self):
-<<<<<<< HEAD
         calibrator = Calibrator(self._hardware_calibration_coefficients,
-=======
-        calibrator = Calibrator((199, -249,
-                                 12179, 14472, -2172, 1284, -7681, -33, -823),
->>>>>>> changed the sensors module so it will read data from a file when it's not run on a raspberry pi and added the start of a behave test to verify that the Docker image works.
                                 253952,
                                 524288)
         self.assertAlmostEqual(calibrator.temperature(167393), 20,
@@ -349,12 +243,7 @@ class TestCalibrator(unittest.TestCase):
                                "matches that.")
 
     def test_return_freezing_given_actual_data(self):
-<<<<<<< HEAD
         calibrator = Calibrator(self._hardware_calibration_coefficients,
-=======
-        calibrator = Calibrator((199, -249,
-                                 12179, 14472, -2172, 1284, -7681, -33, -823),
->>>>>>> changed the sensors module so it will read data from a file when it's not run on a raspberry pi and added the start of a behave test to verify that the Docker image works.
                                 253952,
                                 524288)
         self.assertAlmostEqual(calibrator.temperature(209505), 0,
@@ -366,36 +255,15 @@ class TestCalibrator(unittest.TestCase):
 class TestCommunicator(unittest.TestCase):
 
     def setUp(self):
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> wrote a driver for the flow sensor.  It passes tests outside of hardware, but with hardware hasn't been verified yet.  Also added an off-hardware version of I2CInterface
         # A bug in adafruit_platformdetect causes resource warnings
         # to come up in unittest, so the warnings must be filtered out
         # https://github.com/adafruit/Adafruit_Python_PlatformDetect/issues/89
         warnings.filterwarnings("ignore",
                                 message="unclosed file",
                                 category=ResourceWarning)
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-        self._mux_select(0)
-=======
-        self._mux_select(4)
->>>>>>> changed the sensors module so it will read data from a file when it's not run on a raspberry pi and added the start of a behave test to verify that the Docker image works.
-=======
         self._mux = I2CMux(constants.PRESSURE_SENSOR_MUX_ADDRESS)
         self._mux.select_channel(0)
->>>>>>> Made most of the tests pass on hardware, working on the last stragglers
         self._communicator = Communicator()
-=======
-        self._mux_select(0)
-        self._sensor = PressureSensor()
->>>>>>> moved the pressure driver to the new working directory
-=======
-        self._mux_select(4)
-        self._communicator = Communicator()
->>>>>>> wrote a driver for the flow sensor.  It passes tests outside of hardware, but with hardware hasn't been verified yet.  Also added an off-hardware version of I2CInterface
 
     def tearDown(self):
         self._communicator.close()
@@ -419,8 +287,6 @@ class TestCommunicator(unittest.TestCase):
         self.assertEqual(
             self._communicator.set_op_mode(PressureSensor.OpMode.command),
             PressureSensor.OpMode.command,
-<<<<<<< HEAD
-<<<<<<< HEAD
             "Fails to successfully set the SPL006-007 into command mode."
         )
 
@@ -439,16 +305,10 @@ class TestCommunicator(unittest.TestCase):
                                   "coefficients.")
 
     def test_set_pressure_sampling_sets_scale_factor(self):
-<<<<<<< HEAD
         self._communicator.set_pressure_sampling(oversample=16,
                                                  rate=1)
         self.assertEqual(self._communicator.pressure_scale_factor,
                          SensorConstants.COMPENSATION_SCALE_FACTORS[16],
-=======
-        self._communicator.set_pressure_sampling()
-        self.assertEqual(self._communicator.pressure_scale_factor,
-                         253952,
->>>>>>> changed the sensors module so it will read data from a file when it's not run on a raspberry pi and added the start of a behave test to verify that the Docker image works.
                          "Fails to get the correct pressure scaling "
                          "factor of 253952 for oversampling=16.")
 
@@ -466,39 +326,19 @@ class TestCommunicator(unittest.TestCase):
                                "{1, 2, 4, 8, 16, 32, 64, 128}."):
             self._communicator.set_pressure_sampling(rate=3)
 
-<<<<<<< HEAD:02_Development/Display/Tests/test_spl06_007.py
     def test_set_temperature_sampling_sets_scale_factor(self):
-<<<<<<< HEAD
         self._communicator.set_temperature_sampling(oversample=1,
                                                     rate=1)
         self.assertEqual(self._communicator.temperature_scale_factor,
                          SensorConstants.COMPENSATION_SCALE_FACTORS[1],
-=======
-        self._communicator.set_temperature_sampling()
-        self.assertEqual(self._communicator.temperature_scale_factor,
-                         524288,
->>>>>>> changed the sensors module so it will read data from a file when it's not run on a raspberry pi and added the start of a behave test to verify that the Docker image works.
                          "Fails to get the correct temperature scaling "
                          "factor of 524288 for oversampling=16.")
-=======
-            "Fails to put the sensor into Command Mode.")
-
-    def test_set_sampling_default(self):
-        self.assertTrue(self._sensor.set_sampling(),
-                        "Fails to successfully set the oversample and "
-                        "sampling rate to default values for temerature "
-                        "and pressure.")
->>>>>>> moved the pressure driver to the new working directory
-=======
-            "Fails to successfully set the SPL006-007 into command mode."
-        )
 
     def test_set_op_mode_undefined(self):
         with self.assertWarns(RuntimeWarning,
                               msg="Fails to raise a warning when an "
                               "undefined op mode is set."):
             self._communicator.set_op_mode("Undefined Op Mode")
->>>>>>> wrote a driver for the flow sensor.  It passes tests outside of hardware, but with hardware hasn't been verified yet.  Also added an off-hardware version of I2CInterface
 
     def test_calibration_coefficients(self):
         self.assertEqual(len(self._communicator.calibration_coefficients), 9,
@@ -529,9 +369,6 @@ class TestCommunicator(unittest.TestCase):
                                "{1, 2, 4, 8, 16, 32, 64, 128}."):
             self._communicator.set_pressure_sampling(rate=3)
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
     def test_set_temperature_sampling_sets_scale_factor(self):
         self._communicator.set_temperature_sampling()
         self.assertEqual(self._communicator.temperature_scale_factor,
@@ -563,7 +400,6 @@ class TestCommunicator(unittest.TestCase):
                         "Fails to return raw pressure as a 24-bit "
                         "2's complement number.")
 
->>>>>>> wrote a driver for the flow sensor.  It passes tests outside of hardware, but with hardware hasn't been verified yet.  Also added an off-hardware version of I2CInterface
     def test_raw_temperature(self):
         self._communicator.set_op_mode(PressureSensor.OpMode.background)
         self._communicator.set_temperature_sampling()
@@ -574,40 +410,3 @@ class TestCommunicator(unittest.TestCase):
         self.assertTrue(-2**23 <= raw_temperature < 2**23,
                         "Fails to return raw temperature as a 24-bit "
                         "2's complement number.")
-<<<<<<< HEAD
-=======
-=======
->>>>>>> moved the pressure driver to the new working directory
-    def test_ambient_temperature(self):
-        self._sensor.set_op_mode(PressureSensor.OpMode.command)
-        self._sensor.set_sampling(temperature_sampling_rate=8)
-        measured_temperature = self._sensor.temperature()
-        self.assertTrue(math.isclose(measured_temperature, 20,
-                                     rel_tol=0.50),
-                        f"{measured_temperature} != "
-                        "20 +/- 50% degC :\n"
-                        "Fails to return ambient temperature in "
-                        "degC.\nNote that if this test is "
-                        "performed in a very cold or hot "
-                        "environment, the\nambient temperature "
-                        "may fall outside the range of this test.")
-        
-    def test_ambient_pressure(self):
-        self._sensor.set_sampling()
-        self._sensor.set_op_mode(PressureSensor.OpMode.command)
-        measured_pressure = self._sensor.pressure()
-        self.assertTrue(math.isclose(measured_pressure, 101325,
-                                     rel_tol=0.10),
-                        f"{measured_pressure} != "
-                        "101.25 +/- 10% Pa :\n"
-                        "Fails to return ambient pressure in Pa.\n"
-                        "Note that if this test is performed in a "
-                        "very low pressure environment,\nthe ambient "
-                        "pressure may fall outside the range of this "
-                        "test.")
-<<<<<<< HEAD
->>>>>>> improved the pressure driver a bit (though it still returns wrong values) and added a script to find all i2c devices and documentation on the sensor:Display/Tests/test_spl06_007.py
-=======
->>>>>>> moved the pressure driver to the new working directory
-=======
->>>>>>> wrote a driver for the flow sensor.  It passes tests outside of hardware, but with hardware hasn't been verified yet.  Also added an off-hardware version of I2CInterface

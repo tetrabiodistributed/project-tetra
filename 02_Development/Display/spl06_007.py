@@ -262,41 +262,20 @@ class Communicator():
         if SDO_high:
             self._i2c_address = SensorConstants.DEVICE_ADDRESS_SDO_HIGH
         else:
-<<<<<<< HEAD
-<<<<<<< HEAD
             self._i2c_address = SensorConstants.DEVICE_ADDRESS_SDO_LOW
-<<<<<<< HEAD
         self._i2c = I2CInterface(self._i2c_address,
                                  dump_communication=dump_communication)
-=======
-        self._i2c = I2CInterface(self._i2c_address)
->>>>>>> changed the sensors module so it will read data from a file when it's not run on a raspberry pi and added the start of a behave test to verify that the Docker image works.
         self._i2c.find_device()
-=======
-            self._i2c_address = self._DEVICE_ADDRESS_SDO_LOW
-        self._i2c = busio.I2C(board.SCL, board.SDA)
-        while not self._i2c.try_lock():
-            pass
-        self._find_sensor()
->>>>>>> moved the pressure driver to the new working directory
-=======
-            self._i2c_address = SensorConstants.DEVICE_ADDRESS_SDO_LOW
-        self._i2c = I2CInterface(self._i2c_address)
-        self._i2c.find_device()
->>>>>>> wrote a driver for the flow sensor.  It passes tests outside of hardware, but with hardware hasn't been verified yet.  Also added an off-hardware version of I2CInterface
         self._reset_sensor()
         self.set_op_mode(PressureSensor.OpMode.standby)
         self._calculate_calibration_coefficients()
 
-<<<<<<< HEAD
     def __enter__(self):
         return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):
         self.close()
 
-=======
->>>>>>> changed the sensors module so it will read data from a file when it's not run on a raspberry pi and added the start of a behave test to verify that the Docker image works.
     def close(self):
         """Deinitializes and unlocks the I2C bus."""
         self._i2c.close()
@@ -420,59 +399,23 @@ class Communicator():
         be scaled and compensated per the data sheet to be useful.
         """
         if self._op_mode == PressureSensor.OpMode.command:
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> wrote a driver for the flow sensor.  It passes tests outside of hardware, but with hardware hasn't been verified yet.  Also added an off-hardware version of I2CInterface
             self._i2c.write_register(
                 SensorConstants.SENSOR_OP_MODE,
                 SensorConstants.COMMAND_PRESSURE
             )
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-        def pressure_ready(): return (
-            self._i2c.read_register(SensorConstants.SENSOR_OP_MODE)
-            & SensorConstants.PRS_RDY == 0)
-=======
         def pressure_ready():
             return (self._i2c.read_register(SensorConstants.SENSOR_OP_MODE)
                     & SensorConstants.PRS_RDY != 0)
->>>>>>> Made most of the tests pass on hardware, working on the last stragglers
         self._wait_for_condition_else_timeout(pressure_ready, 4)
 
-=======
-        while (self._i2c.read_register(SensorConstants.SENSOR_OP_MODE)
-               & SensorConstants.PRS_RDY) == 0:
-            time.sleep(self._READY_WAIT_TIME)
->>>>>>> changed the sensors module so it will read data from a file when it's not run on a raspberry pi and added the start of a behave test to verify that the Docker image works.
         pressure_msb = self._i2c.read_register(
             SensorConstants.PRESSURE_MSB)
         pressure_lsb = self._i2c.read_register(
             SensorConstants.PRESSURE_LSB)
         pressure_xlsb = self._i2c.read_register(
             SensorConstants.PRESSURE_XLSB)
-=======
-            self._write_register(self._SENSOR_OP_MODE, self._COMMAND_PRESSURE)
-            
-        while (self._read_register(self._SENSOR_OP_MODE) & self._PRS_RDY) == 0:
-            time.sleep(self._READY_WAIT_TIME)
-        pressure_msb = self._read_register(self._PRESSURE_MSB)
-        pressure_lsb = self._read_register(self._PRESSURE_LSB)
-        pressure_xlsb = self._read_register(self._PRESSURE_XLSB)
->>>>>>> moved the pressure driver to the new working directory
-=======
-        while (self._i2c.read_register(SensorConstants.SENSOR_OP_MODE)
-               & SensorConstants.PRS_RDY) == 0:
-            time.sleep(self._READY_WAIT_TIME)
-        pressure_msb = self._i2c.read_register(
-            SensorConstants.PRESSURE_MSB)
-        pressure_lsb = self._i2c.read_register(
-            SensorConstants.PRESSURE_LSB)
-        pressure_xlsb = self._i2c.read_register(
-            SensorConstants.PRESSURE_XLSB)
->>>>>>> wrote a driver for the flow sensor.  It passes tests outside of hardware, but with hardware hasn't been verified yet.  Also added an off-hardware version of I2CInterface
+
         pressure = self._twos_complement(((pressure_msb << 16)
                                           + (pressure_lsb << 8)
                                           + pressure_xlsb),
@@ -538,27 +481,13 @@ class Communicator():
         be scaled and compensated per the data sheet to be useful.
         """
         if self._op_mode == PressureSensor.OpMode.command:
-<<<<<<< HEAD
-<<<<<<< HEAD
             self._i2c.write_register(SensorConstants.SENSOR_OP_MODE,
                                      SensorConstants.COMMAND_TEMPERATURE)
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-        def temperature_ready(): return (
-            self._i2c.read_register(SensorConstants.SENSOR_OP_MODE)
-            & SensorConstants.TMP_RDY == 0)
-=======
         def temperature_ready():
             return (self._i2c.read_register(SensorConstants.SENSOR_OP_MODE)
                     & SensorConstants.TMP_RDY != 0)
->>>>>>> Made most of the tests pass on hardware, working on the last stragglers
         self._wait_for_condition_else_timeout(temperature_ready, 4)
-=======
-        while (self._i2c.read_register(SensorConstants.SENSOR_OP_MODE)
-               & SensorConstants.TMP_RDY) == 0:
-            time.sleep(self._READY_WAIT_TIME)
->>>>>>> changed the sensors module so it will read data from a file when it's not run on a raspberry pi and added the start of a behave test to verify that the Docker image works.
 
         temperature_msb = self._i2c.read_register(
             SensorConstants.TEMPERATURE_MSB)
@@ -568,35 +497,6 @@ class Communicator():
             SensorConstants.TEMPERATURE_XLSB)
         temperature = self._twos_complement(((temperature_msb << 16)
                                              + (temperature_lsb << 8)
-=======
-            self._write_register(self._SENSOR_OP_MODE,
-                                 self._COMMAND_TEMPERATURE)
-        
-        while (self._read_register(self._SENSOR_OP_MODE) & self._TMP_RDY) == 0:
-            time.sleep(self._READY_WAIT_TIME)
-        temperature_msb = self._read_register(self._TEMPERATURE_MSB) << 16
-        temperature_lsb = self._read_register(self._TEMPERATURE_LSB) << 8
-        temperature_xlsb = self._read_register(self._TEMPERATURE_XLSB)
-        temperature = self._twos_complement((temperature_msb    
-                                             + temperature_lsb  
->>>>>>> moved the pressure driver to the new working directory
-=======
-            self._i2c.write_register(SensorConstants.SENSOR_OP_MODE,
-                                     SensorConstants.COMMAND_TEMPERATURE)
-
-        while (self._i2c.read_register(SensorConstants.SENSOR_OP_MODE)
-               & SensorConstants.TMP_RDY) == 0:
-            time.sleep(self._READY_WAIT_TIME)
-
-        temperature_msb = self._i2c.read_register(
-            SensorConstants.TEMPERATURE_MSB)
-        temperature_lsb = self._i2c.read_register(
-            SensorConstants.TEMPERATURE_LSB)
-        temperature_xlsb = self._i2c.read_register(
-            SensorConstants.TEMPERATURE_XLSB)
-        temperature = self._twos_complement(((temperature_msb << 16)
-                                             + (temperature_lsb << 8)
->>>>>>> wrote a driver for the flow sensor.  It passes tests outside of hardware, but with hardware hasn't been verified yet.  Also added an off-hardware version of I2CInterface
                                              + temperature_xlsb),
                                             24)
         return temperature
@@ -619,32 +519,10 @@ class Communicator():
         Note: The coefficients read from the coefficient register
         {c0, c1} 12 bit 2´s complement numbers.
         """
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-        def coefficients_ready(): return(
-            self._i2c.read_register(SensorConstants.SENSOR_OP_MODE)
-            & SensorConstants.COEF_RDY == 0)
-=======
         def coefficients_ready():
             return (self._i2c.read_register(SensorConstants.SENSOR_OP_MODE)
                     & SensorConstants.COEF_RDY != 0)
->>>>>>> Made most of the tests pass on hardware, working on the last stragglers
         self._wait_for_condition_else_timeout(coefficients_ready, 4)
-=======
-        while (self._i2c.read_register(SensorConstants.SENSOR_OP_MODE)
-               & SensorConstants.COEF_RDY) == 0:
-=======
-        while (self._read_register(self._SENSOR_OP_MODE) & self._COEF_RDY) == 0:
->>>>>>> moved the pressure driver to the new working directory
-=======
-        while (self._i2c.read_register(SensorConstants.SENSOR_OP_MODE)
-               & SensorConstants.COEF_RDY) == 0:
->>>>>>> wrote a driver for the flow sensor.  It passes tests outside of hardware, but with hardware hasn't been verified yet.  Also added an off-hardware version of I2CInterface
-            time.sleep(self._READY_WAIT_TIME)
->>>>>>> changed the sensors module so it will read data from a file when it's not run on a raspberry pi and added the start of a behave test to verify that the Docker image works.
 
         _c0_11_4 = self._i2c.read_register(SensorConstants.C0_11_4)
         _c0_3_0_c1_11_8 = (
@@ -704,9 +582,6 @@ class Communicator():
         self._i2c.write_register(SensorConstants.RESET_AND_FLUSH,
                                  SensorConstants.SOFT_RESET)
         time.sleep(reset_time)
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 
         def sensor_ready(): return (
             self._i2c.read_register(SensorConstants.SENSOR_OP_MODE)
@@ -721,20 +596,6 @@ class Communicator():
                 return False
             time.sleep(self._READY_WAIT_TIME)
         return True
-=======
-        while (self._i2c.read_register(SensorConstants.SENSOR_OP_MODE)
-               & SensorConstants.SENSOR_RDY == 0):
-=======
-        while (self._read_register(self._SENSOR_OP_MODE)
-               & self._SENSOR_RDY == 0):
->>>>>>> moved the pressure driver to the new working directory
-=======
-        while (self._i2c.read_register(SensorConstants.SENSOR_OP_MODE)
-               & SensorConstants.SENSOR_RDY == 0):
->>>>>>> wrote a driver for the flow sensor.  It passes tests outside of hardware, but with hardware hasn't been verified yet.  Also added an off-hardware version of I2CInterface
-            # Wait for the sensor to be ready
-            time.sleep(0.005)
->>>>>>> changed the sensors module so it will read data from a file when it's not run on a raspberry pi and added the start of a behave test to verify that the Docker image works.
 
     def _twos_complement(self, value, bits):
 

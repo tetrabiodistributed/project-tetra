@@ -72,14 +72,14 @@ class Calibrator():
 
 class Communicator():
     """Performs I2C communication between a Raspberry Pi and a SFM3300-D
-    flow sensor.  The data sheet describing the I2C communication can be
-    found at
-    https://www.sensirion.com/fileadmin/user_upload/customers/sensirion/Dokumente/5_Mass_Flow_Meters/Application_Notes/Sensirion_Mass_Flo_Meters_SFM3xxx_I2C_Functional_Description.pdf
+      flow sensor.  The data sheet describing the I2C communication can be
+      found at
+      https://www.sensirion.com/fileadmin/user_upload/customers/sensirion/Dokumente/5_Mass_Flow_Meters/Application_Notes/Sensirion_Mass_Flo_Meters_SFM3xxx_I2C_Functional_Description.pdf
 
-    And the data sheet the describes the CRC validation used can be found
-    at
-    https://www.mouser.jp/pdfDocs/SFM3000_CRC_Checksum_Calculation.pdf
-    """
+      And the data sheet the describes the CRC validation used can be found
+      at
+      https://www.mouser.jp/pdfDocs/SFM3000_CRC_Checksum_Calculation.pdf
+      """
 
     def __init__(self, dump_communication=False):
         """Initializes self."""
@@ -100,8 +100,7 @@ class Communicator():
     def close(self):
         """Deinitializes I2C and unlocks the I2C bus."""
         if self.is_present():
-            # self._reset()
-            print("present")
+            self._reset()
         self._i2c.close()
 
     def is_present(self):
@@ -117,8 +116,7 @@ class Communicator():
             for i in range(SensorConstants.SERIAL_NUMBER_BYTES):
                 serial_number |= (
                     serial_number_bytes[SensorConstants.SERIAL_NUMBER_BYTES
-                                        - i - 1]
-                    << (8*i))
+                                        - i - 1] << (8*i))
             return serial_number
         else:
             return -1
@@ -128,7 +126,8 @@ class Communicator():
         100ms to initialize.
         """
         if self.is_present() and not self._flow_inited:
-            self._i2c.write_data(SensorConstants.START_CONTINUOUS_MEASUREMENT)
+            self._i2c.write_data(
+                SensorConstants.START_CONTINUOUS_MEASUREMENT)
             self._flow_inited = True
             time.sleep(0.100)  # give the sensor a moment to initialize
             self.raw_flow()  # the first datum is garbage

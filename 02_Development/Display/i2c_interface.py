@@ -115,6 +115,10 @@ try:
         def scan(self):
             return self._i2c.scan()
 
+        def close(self):
+            self._i2c.unlock()
+            self._i2c.deinit()
+
         def find_device(self, timeout=5):
             start_time = time.time()
             while not self._i2c_address in self.scan():
@@ -149,7 +153,6 @@ try:
                 raise ValueError("Cannot read fewer than 1 byte.")
 
             data = bytearray(number_of_bytes)
-            byte_register = bytearray()
             if register is not None:
                 byte_register = self._int_to_bytearray(register)
                 self._i2c.writeto(self._i2c_address, byte_register)
@@ -207,10 +210,15 @@ except NotImplementedError:
             return self._read(number_of_bytes=number_of_bytes)
 
         def write_register(self, register, to_write):
-            pass
+            time.sleep(0.0003)
+            if self._dump_communication:
+                print(f"{1000*time.time():.4f} "
+                      f"TX -> 0x" + bytes([register, to_write]).hex())
 
         def write_data(self, byte):
-            pass
+            if self._dump_communication:
+                print(f"{1000*time.time():.4f} TX -> 0x"
+                      + bytes([byte]).hex())
 
         def _read(self, register=None, number_of_bytes=1):
             if number_of_bytes < 1:
@@ -222,7 +230,6 @@ except NotImplementedError:
             else:
                 data = tuple(random.randrange(0, 255)
                              for _ in range(number_of_bytes))
-
             return data
 
 

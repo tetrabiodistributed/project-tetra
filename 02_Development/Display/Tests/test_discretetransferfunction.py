@@ -13,12 +13,16 @@ class TestDiscreteTransferFunction(unittest.TestCase):
                              "transfer function")
 
     def testInit_divideByZero(self):
-        tf = DiscreteTransferFunction([1], [0])
-        self.assertRaises(ZeroDivisionError)
+        with self.assertRaises(ZeroDivisionError,
+                               msg="Fails to raise an exception when the "
+                               "denominator equals zero."):
+            DiscreteTransferFunction([1], [0])
 
     def testInit_divideByZeroMany(self):
-        tf = DiscreteTransferFunction([1], [0] * 50)
-        self.assertRaises(ZeroDivisionError)
+        with self.assertRaises(ZeroDivisionError,
+                               msg="Fails to raise an exception when the "
+                               "denominator equals zero."):
+            DiscreteTransferFunction([1], [0] * 50)
 
     def testAppend_nominal(self):
         tf = DiscreteTransferFunction([1, 1], [1])
@@ -26,11 +30,6 @@ class TestDiscreteTransferFunction(unittest.TestCase):
         self.assertTrue(tf.is_full,
                         "Fails to append a datum to the transfer "
                         "function's buffer")
-
-    def testAppend_wrongDataType(self):
-        tf = DiscreteTransferFunction([1], [1])
-        tf.append("doesn't quack like a float")
-        self.assertRaises(ValueError)
 
     def testAppend_manyData(self):
         tf = DiscreteTransferFunction([1, 1, 1, 1, 1], [1])
@@ -60,10 +59,6 @@ class TestDiscreteTransferFunction(unittest.TestCase):
                                    "in the numerator")
 
     def testGetDatum_secondOrderTerm(self):
-<<<<<<< HEAD
-=======
-
->>>>>>> changed the sensors module so it will read data from a file when it's not run on a raspberry pi and added the start of a behave test to verify that the Docker image works.
         tf = DiscreteTransferFunction([1, 1, 1], [1])
         tf.append(1)
         tf.append(1)
