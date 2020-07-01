@@ -5,5 +5,8 @@ behave
 zmq
 pytz
 docker
+<<<<<<< HEAD
 adafruit_blinka
 crcmod
+=======
+>>>>>>> changed the sensors module so it will read data from a file when it's not run on a raspberry pi and added the start of a behave test to verify that the Docker image works.
