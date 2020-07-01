@@ -26,11 +26,6 @@ class ProcessSampleData():
         self._parseData()
         self._flow_data_file.close()
 
-    def __del__(self):
-        del(self._timestamps)
-        del(self._flow_rates)
-        del(self._tidal_volumes)
-
     def __len__(self):
         return len(self.timestamps)
 

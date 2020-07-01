@@ -3,3 +3,5 @@ numpy
 numpy_ringbuffer
 behave
 zmq
+pytz
+docker
