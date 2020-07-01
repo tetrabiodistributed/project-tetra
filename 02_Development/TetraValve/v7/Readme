@@ -1,0 +1,10 @@
+Tetra valve v7 (version 7-4-1 at time of upload)
+
+Changes:
+- Remove need for spring (when used as flow control valve)
+- Increased thread pitch for printing compatibility
+- Added rib for overhang self support
+
+Notes:
+> STL are high-res exports
+> Solidworks files contain revision history using Configurations
