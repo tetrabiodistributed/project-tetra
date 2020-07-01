@@ -13,6 +13,7 @@ class TestFlowSensor(unittest.TestCase):
     def setUp(self):
         self._mux = I2CMux(constants.FLOW_SENSOR_MUX_ADDRESS)
         self._mux.select_channel(2)
+
         self._sensor = FlowSensor()
 
     def tearDown(self):
