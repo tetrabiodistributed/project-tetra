@@ -1,0 +1,18 @@
+@startuml
+
+component "<b>Inspiratory Section</b>" <<block>> as vsbIn
+component "<b>Expiratory Section</b>" <<block>> as vsbOut
+interface "<b>Inspiratory Port</b>" as vsbpIn
+interface "<b>Expiratory Port</b>" as vsbpOut
+
+component "<b>Bias Circuit P/N</b>" <<bias circuit>> as bc
+
+component "<b>1-Way Valve P/N</b>" <<1-Way valve>> as vIn1
+component "<b>Flow Control P/N</b>" <<flow control>> as fcIn1
+component "<b>Shutoff valve P/N</b>" <<shutoff valve>> as sIn1
+
+component "<b>1-Way Valve P/N</b>" <<1-Way valve>> as vOut1
+component "<b>Pressure sensor P/N</b>" <<pressure sensor>> as psOut1
+component "<b>Shutoff valve P/N</b>" <<shutoff valve>> as sOut1
+
+@enduml

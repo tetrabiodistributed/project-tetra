@@ -21,29 +21,16 @@ frame "ibd [System] Ventilator Splitter Assembly [Air flow] " {
   pIn ..> armIn
 
   component "<b>Ventilator Splitter Assembly</b>" <<block>> as vsb {
-    component "<b>Inspiratory Section</b>" <<block>> as vsbIn
-    component "<b>Expiratory Section</b>" <<block>> as vsbOut
-    interface "<b>Inspiratory Port</b>" as vsbpIn
-    interface "<b>Expiratory Port</b>" as vsbpOut
-
-    component "<b>Bias Circuit P/N</b>" <<bias circuit>> as bc
+    !include system_model/block-ventilator-splitter-assembly.puml
 
     vsbpOut -- vsbOut
     vsbpIn -- vsbIn
     vsbOut <. bc
     bc <. vsbIn
 
-    component "<b>1-Way Valve P/N</b>" <<1-Way valve>> as vIn1
-    component "<b>Flow Control P/N</b>" <<flow control>> as fcIn1
-    component "<b>Shutoff valve P/N</b>" <<shutoff valve>> as sIn1
-
     vsbIn ...> vIn1
     vIn1 ..> fcIn1
     fcIn1 ..> sIn1
-
-    component "<b>1-Way Valve P/N</b>" <<1-Way valve>> as vOut1
-    component "<b>Pressure sensor P/N</b>" <<pressure sensor>> as psOut1
-    component "<b>Shutoff valve P/N</b>" <<shutoff valve>> as sOut1
 
     vsbOut <... vOut1
     vOut1 <.. psOut1
