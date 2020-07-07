@@ -21,7 +21,7 @@ class TestI2CCommunication(unittest.TestCase):
         warnings.filterwarnings("ignore",
                                 message="unclosed file",
                                 category=ResourceWarning)
-        self._mux_select(2)
+        self._mux_select(4)
         self._communicator = I2CCommunication()
 
     def tearDown(self):
@@ -31,7 +31,7 @@ class TestI2CCommunication(unittest.TestCase):
         if channel > 7:
             raise ValueError("Multiplexor channel must be an integer 0-7")
         else:
-            pressure_mux_address = 0x74
+            pressure_mux_address = 0x70
             busio.I2C(board.SCL, board.SDA).writeto(pressure_mux_address,
                                                     bytes([1 << channel]))
             
@@ -50,62 +50,18 @@ class TestI2CCommunication(unittest.TestCase):
             "Fails to successfully set the SPL006-007 into background mode"
         )
 
-    def test_set_op_mode_command_pressure(self):
+    def test_set_op_mode_command(self):
         self.assertEqual(
-            self._communicator.set_op_mode(PressureSensor.OpMode.command,
-                                           use_pressure=True,
-                                           use_temperature=False),
+            self._communicator.set_op_mode(PressureSensor.OpMode.command),
             PressureSensor.OpMode.command,
-            "Fails to successfully set the SPL006-007 into command mode "
-            "to detect pressure."
+            "Fails to successfully set the SPL006-007 into command mode."
         )
 
-    def test_set_op_mode_command_temperature(self):
-        self.assertEqual(
-            self._communicator.set_op_mode(PressureSensor.OpMode.command,
-                                           use_pressure=False,
-                                           use_temperature=True),
-            PressureSensor.OpMode.command,
-            "Fails to successfully set the SPL006-007 into command mode "
-            "to detect temperature."
-        )
-        
-    def test_set_op_mode_background_pressure_temperature_false(self):
-        with self.assertWarns(RuntimeWarning):
-            self.assertEqual(
-                self._communicator.set_op_mode(
-                    PressureSensor.OpMode.background,
-                    use_pressure=False,
-                    use_temperature=False),
-                PressureSensor.OpMode.standby,
-                "Fails to set the SPL006-007 into standby mode when "
-                "background mode is requested but use_pressure and "
-                "use_temperature are both set to False."
-            )
-
-    def test_set_op_mode_command_pressure_temperature_false(self):
-        with self.assertWarns(RuntimeWarning):
-            self.assertEqual(
-                self._communicator.set_op_mode(PressureSensor.OpMode.command,
-                                               use_pressure=False,
-                                               use_temperature=False),
-                PressureSensor.OpMode.standby,
-                "Fails to set the SPL006-007 into standby mode when "
-                "command mode is requested but use_pressure and "
-                "use_temperature are both set to False."
-            )
-
-    def test_set_op_mode_command_pressure_temperature_true(self):
-        with self.assertWarns(RuntimeWarning):
-            self.assertEqual(
-                self._communicator.set_op_mode(PressureSensor.OpMode.command,
-                                         use_pressure=True,
-                                         use_temperature=True),
-                PressureSensor.OpMode.standby,
-                "Fails to set the SPL006-007 into standby mode when "
-                "command mode is requested but use_pressure and "
-                "use_temperature are both set to True."
-            )
+    def test_set_op_mode_undefined(self):
+        with self.assertWarns(RuntimeWarning,
+                              msg="Fails to raise a warning when an "
+                              "undefined op mode is set."):
+            self._communicator.set_op_mode("Undefined Op Mode")
                 
     def test_calibration_coefficients(self):
         self.assertEqual(len(self._communicator.calibration_coefficients), 9,
@@ -118,9 +74,9 @@ class TestI2CCommunication(unittest.TestCase):
     def test_set_pressure_sampling_sets_scale_factor(self):
         self._communicator.set_pressure_sampling()
         self.assertEqual(self._communicator.pressure_scale_factor,
-                          253952,
-                          "Fails to get the correct pressure scaling "
-                          "factor of 253952 for oversampling=16.")
+                         253952,
+                         "Fails to get the correct pressure scaling "
+                         "factor of 253952 for oversampling=16.")
         
     def test_set_pressure_sampling_invalid_oversample(self):
         with self.assertRaises(ValueError,
@@ -139,9 +95,9 @@ class TestI2CCommunication(unittest.TestCase):
     def test_set_temperature_sampling_sets_scale_factor(self):
         self._communicator.set_temperature_sampling()
         self.assertEqual(self._communicator.temperature_scale_factor,
-                          524288,
-                          "Fails to get the correct temperature scaling "
-                          "factor of 524288 for oversampling=16.")
+                         524288,
+                         "Fails to get the correct temperature scaling "
+                         "factor of 524288 for oversampling=16.")
         
     def test_set_temperature_sampling_invalid_oversample(self):
         with self.assertRaises(ValueError,
@@ -158,6 +114,7 @@ class TestI2CCommunication(unittest.TestCase):
             self._communicator.set_temperature_sampling(rate=3)
 
     def test_raw_pressure(self):
+        self._communicator.set_op_mode(PressureSensor.OpMode.background)
         self._communicator.set_pressure_sampling()
         raw_pressure = self._communicator.raw_pressure()
         self.assertIsInstance(raw_pressure, int,
@@ -167,6 +124,7 @@ class TestI2CCommunication(unittest.TestCase):
                         "2's complement number.")
 
     def test_raw_temperature(self):
+        self._communicator.set_op_mode(PressureSensor.OpMode.background)
         self._communicator.set_temperature_sampling()
         raw_temperature = self._communicator.raw_temperature()
         self.assertIsInstance(raw_temperature, int,
@@ -232,15 +190,89 @@ class TestCalibrator(unittest.TestCase):
                                     0,
                                     0)
 
+    def test_returns_standard_pressure_given_actual_data(self):
+        # calibration coefficients pulled from a sensor
+        calibrator = Calibrator((199, -249,
+                                 12179, 14472, -2172, 1284, -7681, -33, -823),
+                                253952,
+                                524288)
+        # raw pressure and temperature found by solving the compensating
+        # equation for raw pressure and temperature given the above
+        # coefficients
+        self.assertAlmostEqual(calibrator.pressure(-2968390, 167393), 101000,
+                               places=-1,
+                               msg="Fails to return sea level pressure given "
+                              "data that matches that.")
+
+    def test_returns_1_5_atm_pressure_given_actual_data(self):
+        calibrator = Calibrator((199, -249,
+                                 12179, 14472, -2172, 1284, -7681, -33, -823),
+                                253952,
+                                524288)
+        self.assertAlmostEqual(calibrator.pressure(-3053970, 167393), 151500,
+                               places=-1,
+                               msg="Fails to return 1.5 atm pressure given "
+                               "data that matches that.")
+
+    def test_returns_2_atm_pressure_given_actual_data(self):
+        calibrator = Calibrator((199, -249,
+                                 12179, 14472, -2172, 1284, -7681, -33, -823),
+                                253952,
+                                524288)
+        self.assertAlmostEqual(calibrator.pressure(-3132150, 167393), 202000,
+                               places=-1,
+                               msg="Fails to return 2 atm pressure given "
+                               "data that matches that.")
+
+    def test_returns_3_atm_pressure_given_actual_data(self):
+        calibrator = Calibrator((199, -249,
+                                 12179, 14472, -2172, 1284, -7681, -33, -823),
+                                253952,
+                                524288)
+        self.assertAlmostEqual(calibrator.pressure(-3274260, 209505), 303000,
+                               places=-1,
+                               msg="Fails to return 3 atm pressure given "
+                               "data that matches that.")
+        
+
+    def test_return_standard_temperature_given_actual_data(self):
+        calibrator = Calibrator((199, -249,
+                                 12179, 14472, -2172, 1284, -7681, -33, -823),
+                                253952,
+                                524288)
+        self.assertAlmostEqual(calibrator.temperature(167393), 20,
+                               places=-1,
+                               msg="Fails to return 20degC given data that "
+                               "matches that.")
+
+    def test_return_freezing_given_actual_data(self):
+        calibrator = Calibrator((199, -249,
+                                 12179, 14472, -2172, 1284, -7681, -33, -823),
+                                253952,
+                                524288)
+        self.assertAlmostEqual(calibrator.temperature(209505), 0,
+                               places=-1,
+                               msg="Fails to return 0degC given data that "
+                               "matches that.")
+
             
 class TestPressureSensor(unittest.TestCase):
 
     def setUp(self):
+        self._mux_select(0)
         self._sensor = PressureSensor()
 
     def tearDown(self):
         self._sensor.close()
 
+    def _mux_select(self, channel):
+        if channel > 7:
+            raise ValueError("Multiplexor channel must be an integer 0-7")
+        else:
+            pressure_mux_address = 0x70
+            busio.I2C(board.SCL, board.SDA).writeto(pressure_mux_address,
+                                                    bytes([1 << channel]))
+            
 
     def test_set_op_mode_standby(self):
         self.assertEqual(
@@ -254,21 +286,11 @@ class TestPressureSensor(unittest.TestCase):
             PressureSensor.OpMode.background,
             "Fails to put the sensor into Background Mode")
 
-    def test_set_op_mode_command_pressure(self):
+    def test_set_op_mode_command(self):
         self.assertEqual(
-            self._sensor.set_op_mode(PressureSensor.OpMode.command,
-                                     pressure_if_true_else_temperature=True),
+            self._sensor.set_op_mode(PressureSensor.OpMode.command),
             PressureSensor.OpMode.command,
-            "Fails to put the sensor into Command Mode measuring "
-            "pressure.")
-
-    def test_set_op_mode_command_temperature(self):
-        self.assertEqual(
-            self._sensor.set_op_mode(PressureSensor.OpMode.command,
-                                     pressure_if_true_else_temperature=False),
-            PressureSensor.OpMode.command,
-            "Fails to put the sensor into Command Mode measureing "
-            "temperature.")
+            "Fails to put the sensor into Command Mode.")
 
     def test_set_sampling_default(self):
         self.assertTrue(self._sensor.set_sampling(),
@@ -296,33 +318,37 @@ class TestPressureSensor(unittest.TestCase):
                                       temperature_sampling_rate=3)
 
     def test_pressure_without_sampling_set(self):
-        self.assertTrue(math.isnan(self._sensor.pressure),
+        self.assertTrue(math.isnan(self._sensor.pressure()),
                         "Fails to return NaN for pressure when the user "
                         "has not yet set the sampling parameters.")
-        self.assertTrue(math.isnan(self._sensor.temperature),
+        self.assertTrue(math.isnan(self._sensor.temperature()),
                         "Fails to return NaN for temperature when the "
                         "user has not yet set the sampling parameters.")
 
     def test_ambient_temperature(self):
-        self._sensor.set_sampling()
-        measured_temperature = self._sensor.temperature
+        self._sensor.set_op_mode(PressureSensor.OpMode.command)
+        self._sensor.set_sampling(temperature_sampling_rate=8)
+        measured_temperature = self._sensor.temperature()
         self.assertTrue(math.isclose(measured_temperature, 20,
                                      rel_tol=0.50),
-                        f"{measured_temperature} != 20 +/- 50% degC : "
-                        "Fails to\nreturn ambient temperature in degC.\n"
-                        "Note that if this test is performed in an "
-                        "extreme temperature\nenvironment, the ambient "
-                        "pressure may fall outside the range of this\n"
-                        "test.")
+                        f"{measured_temperature} != "
+                        "20 +/- 50% degC :\n"
+                        "Fails to return ambient temperature in "
+                        "degC.\nNote that if this test is "
+                        "performed in a very cold or hot "
+                        "environment, the\nambient temperature "
+                        "may fall outside the range of this test.")
         
     def test_ambient_pressure(self):
+        self._sensor.set_op_mode(PressureSensor.OpMode.command)
         self._sensor.set_sampling()
-        measured_pressure = self._sensor.pressure
-        self.assertTrue(math.isclose(measured_pressure, 1013.25,
+        measured_pressure = self._sensor.pressure()
+        self.assertTrue(math.isclose(measured_pressure, 101325,
                                      rel_tol=0.10),
-                        f"{measured_pressure} != 1013.25 +/- 10% hPa"
-                        "Fails to\nreturn ambient pressure in hPa.\n"
-                        "Note that if this test is performed in an "
-                        "extreme pressure environment,\nthe ambient "
+                        f"{measured_pressure} != "
+                        "101.25 +/- 10% Pa :\n"
+                        "Fails to return ambient pressure in Pa.\n"
+                        "Note that if this test is performed in a "
+                        "very low pressure environment,\nthe ambient "
                         "pressure may fall outside the range of this "
                         "test.")

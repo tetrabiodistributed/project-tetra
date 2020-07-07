@@ -12,6 +12,7 @@ class PressureSensor():
     def __init__(self):
         self._communicator = I2CCommunication()
         self._sampling_set = False
+        self._first_measurement_has_happened = False
 
     def close(self):
         self._communicator.close()
@@ -37,16 +38,12 @@ class PressureSensor():
         self._sampling_set = True
         return self._sampling_set
         
-    def set_op_mode(self, op_mode, pressure_if_true_else_temperature=True):
-        return self._communicator.set_op_mode(
-            op_mode,
-            use_pressure=pressure_if_true_else_temperature,
-            use_temperature=not pressure_if_true_else_temperature
-        )
+    def set_op_mode(self, op_mode):
+        return self._communicator.set_op_mode(op_mode)
 
-    @property
     def pressure(self):
         if self._sampling_set:
+            self._first_measurement_delay()
             return self._calibrator.pressure(
                 self._communicator.raw_pressure(),
                 self._communicator.raw_temperature()
@@ -54,9 +51,9 @@ class PressureSensor():
         else:
             return float("nan")
 
-    @property
     def temperature(self):
         if self._sampling_set:
+            self._first_measurement_delay()
             return self._calibrator.temperature(
                 self._communicator.raw_temperature()
             )
@@ -82,9 +79,60 @@ class PressureSensor():
         # results"""
     
     class OpMode():
-        standby = 0
-        background = 1
-        command = 2
+        standby = "Standby"
+        background = "Background"
+        command = "Command"
+
+    def _first_measurement_delay(self):
+        first_measurement_delay = 0.151
+        if self._first_measurement_has_happened:
+            self._first_measurement_has_happened = True
+            time.sleep(first_measurement_delay)
+
+
+class Calibrator():
+
+    def __init__(self,
+                 calibration_coefficients,
+                 pressure_scaling_factor,
+                 temperature_scaling_factor):
+        self._c0 = calibration_coefficients[0]
+        self._c1 = calibration_coefficients[1]
+        self._c00 = calibration_coefficients[2]
+        self._c10 = calibration_coefficients[3]
+        self._c01 = calibration_coefficients[4]
+        self._c11 = calibration_coefficients[5]
+        self._c20 = calibration_coefficients[6]
+        self._c21 = calibration_coefficients[7]
+        self._c30 = calibration_coefficients[8]
+
+        if (math.isclose(pressure_scaling_factor, 0.0)
+            or math.isclose(temperature_scaling_factor, 0.0)):
+            raise ZeroDivisionError("Cannot have pressure or temperature "
+                                    "scaling factor equal to 0.")
+
+        self._pressure_scaling_factor = pressure_scaling_factor
+        self._temperature_scaling_factor = temperature_scaling_factor
+
+    def pressure(self, raw_pressure, raw_temperature):
+        scaled_pressure = raw_pressure / self._pressure_scaling_factor
+        scaled_temperature = raw_temperature / self._temperature_scaling_factor
+
+        compensated_pressure = (                                       
+            self._c00
+            + scaled_pressure*(self._c10
+                               + scaled_pressure*(self._c20
+                                                  + scaled_pressure*self._c30))
+            + scaled_temperature*self._c01
+            + scaled_temperature*scaled_pressure*(self._c11
+                                                  + scaled_pressure*self._c21)
+        )                                                              
+        return compensated_pressure
+
+    def temperature(self, raw_temperature):
+        scaled_temperature = raw_temperature / self._temperature_scaling_factor
+        compensated_temperature = self._c0 * 0.5 + self._c1 * scaled_temperature
+        return compensated_temperature
 
 
 class I2CCommunication():
@@ -124,16 +172,16 @@ class I2CCommunication():
     _C00_3_0_C10_19_16 = 0x15
     _C10_15_8          = 0x16
     _C10_7_0           = 0x17
-    _C01_15_8 = 0x18
-    _C01_7_0  = 0x19
-    _C11_15_8 = 0x1A
-    _C11_7_0  = 0x1B
-    _C20_15_8 = 0x1C
-    _C20_7_0  = 0x1D
-    _C21_15_8 = 0x1E
-    _C21_7_0  = 0x1F
-    _C30_15_8 = 0x20
-    _C30_7_0  = 0x21
+    _C01_15_8          = 0x18
+    _C01_7_0           = 0x19
+    _C11_15_8          = 0x1A
+    _C11_7_0           = 0x1B
+    _C20_15_8          = 0x1C
+    _C20_7_0           = 0x1D
+    _C21_15_8          = 0x1E
+    _C21_7_0           = 0x1F
+    _C30_15_8          = 0x20
+    _C30_7_0           = 0x21
 
     # Bitmasks to read from registers
     #   Read these from self._SENSOR_OP_MODE
@@ -151,7 +199,7 @@ class I2CCommunication():
     #   Read these from self._PRODUCT_AND_REVISION_ID
     _PROD_ID = 0b11110000
     _REV_ID  = 0b00001111
-
+    
     # Codes to write to registers
     #   Write these to self._PRESSURE_CONFIGURATION
     #   The rate and oversample can bitwise-or'ed together
@@ -198,7 +246,7 @@ class I2CCommunication():
     _BACKGROUND_PRESSURE             = 0b00000101
     _BACKGROUND_TEMPERATURE          = 0b00000110
     _BACKGROUND_PRESSURE_TEMPERATURE = 0b00000111
-    #  Write these to self._INTERRUPT_AND_FIFO_CONFIGURATION
+    #  Read or write these to self._INTERRUPT_AND_FIFO_CONFIGURATION
     #  Note: temperature or pressure bit shift must be set when
     #  their respective oversample rates are set to > 8
     _SET_INTERRUPT_ACTIVE_LEVEL                   = 0b10000000
@@ -306,7 +354,7 @@ class I2CCommunication():
         # results"""
         return 2
 
-    def set_op_mode(self, mode, use_pressure=True, use_temperature=True):
+    def set_op_mode(self, mode):
         """Sets the pressure sensor into a mode for data collection
         
         Parameters
@@ -325,46 +373,15 @@ class I2CCommunication():
 
         set_standby = False
         if mode == PressureSensor.OpMode.command:
-            if use_pressure and not use_temperature:
-                self._write_register(self._SENSOR_OP_MODE,
-                                     self._COMMAND_TEMPERATURE)
-                return PressureSensor.OpMode.command
-            elif not use_pressure and use_temperature:
-                self._write_register(self._SENSOR_OP_MODE,
-                                     self._COMMAND_PRESSURE)
-                return PressureSensor.OpMode.command
-            elif use_pressure and use_temperature:
-                set_standby = True
-                warnings.warn("Cannot use Command Mode to read "
-                              "pressure and temperature at the "
-                              "same time.  Defaulting to "
-                              "Idle Mode.",
-                              RuntimeWarning)
-            else:
-                set_standby = True
-                warnings.warn("Command Mode specified, but no "
-                              "data is set to be collected.  "
-                              "Defaulting to Idle Mode.",
-                              RuntimeWarning)
+            self._op_mode = PressureSensor.OpMode.command
+            return PressureSensor.OpMode.command
+        
         elif mode == PressureSensor.OpMode.background:
-            if use_pressure and use_temperature:
-                self._write_register(self._SENSOR_OP_MODE,
-                                     self._BACKGROUND_PRESSURE_TEMPERATURE)
-                return PressureSensor.OpMode.background
-            elif use_pressure:
-                self._write_register(self._SENSOR_OP_MODE,
-                                     self._BACKGROUND_TEMPERATURE)
-                return PressureSensor.OpMode.background
-            elif use_temperature:
-                self._write_register(self._SENSOR_OP_MODE,
-                                     self._BACKGROUND_PRESSURE)
-                return PressureSensor.OpMode.background
-            else:
-                set_standby = True
-                warnings.warn("Background Mode specified, but no "
-                              "data is set to be collected.  "
-                              "Defaulting to Idle Mode.",
-                              RuntimeWarning)
+            self._write_register(self._SENSOR_OP_MODE,
+                                 self._BACKGROUND_PRESSURE_TEMPERATURE)
+            self._op_mode = PressureSensor.OpMode.background
+            return PressureSensor.OpMode.background
+        
         else:
             if mode != PressureSensor.OpMode.standby:
                 warnings.warn("Undefined mode.  Defaulting to"
@@ -373,6 +390,7 @@ class I2CCommunication():
             set_standby = True
         if set_standby:
             self._write_register(self._SENSOR_OP_MODE, self._STANDBY)
+            self._op_mode = PressureSensor.OpMode.standby
             return PressureSensor.OpMode.standby
 
     @property
@@ -421,12 +439,25 @@ class I2CCommunication():
                              "1, 2, 4, 8, 16, 32, 64, or 128X")
         self._write_register(self._PRESSURE_CONFIGURATION,
                              rate_mode | oversample_mode)
+        if oversample > 8:
+            self._write_register(self._INTERRUPT_AND_FIFO_CONFIGURATION,
+                                 self._PRESSURE_RESULT_BIT_SHIFT)
+        else:
+            new_interrupt_and_fifo_configuration_state = (
+                self._read_register(self._INTERRUPT_AND_FIFO_CONFIGURATION)
+                ) & (0xff - self._PRESSURE_RESULT_BIT_SHIFT)
+            self._write_register(self._INTERRUPT_AND_FIFO_CONFIGURATION,
+                                 new_interrupt_and_fifo_configuration_state)
 
     def raw_pressure(self):
         """The raw pressuring reading from the sensor.  This needs to
         be scaled and compensated to be useful.
         """
-
+        if self._op_mode == PressureSensor.OpMode.command:
+            self._write_register(self._SENSOR_OP_MODE, self._COMMAND_PRESSURE)
+            
+        while (self._read_register(self._SENSOR_OP_MODE) & self._PRS_RDY) == 0:
+            pass
         pressure_msb = self._read_register(self._PRESSURE_MSB)
         pressure_lsb = self._read_register(self._PRESSURE_LSB)
         pressure_xlsb = self._read_register(self._PRESSURE_XLSB)
@@ -474,12 +505,26 @@ class I2CCommunication():
                              "1, 2, 4, 8, 16, 32, 64, or 128X")
         self._write_register(self._TEMPERATURE_CONFIGURATION,
                              rate_mode | oversample_mode)
+        if oversample > 8:
+            self._write_register(self._INTERRUPT_AND_FIFO_CONFIGURATION,
+                                 self._TEMPERATURE_RESULT_BIT_SHIFT)
+        else:
+            new_interrupt_and_fifo_configuration_state = (
+                self._read_register(self._INTERRUPT_AND_FIFO_CONFIGURATION)
+                ) & (0xff - self._TEMPERATURE_RESULT_BIT_SHIFT)
+            self._write_register(self._INTERRUPT_AND_FIFO_CONFIGURATION,
+                                 new_interrupt_and_fifo_configuration_state)
 
     def raw_temperature(self):
         """The raw temperature reading from the sensor.  This need to
         be scaled and compensated to be useful.
         """
-                                                              
+        if self._op_mode == PressureSensor.OpMode.command:
+            self._write_register(self._SENSOR_OP_MODE,
+                                 self._COMMAND_TEMPERATURE)
+        
+        while (self._read_register(self._SENSOR_OP_MODE) & self._TMP_RDY) == 0:
+            pass
         temperature_msb = self._read_register(self._TEMPERATURE_MSB) << 16
         temperature_lsb = self._read_register(self._TEMPERATURE_LSB) << 8
         temperature_xlsb = self._read_register(self._TEMPERATURE_XLSB)
@@ -509,6 +554,9 @@ class I2CCommunication():
         Note: The coefficients read from the coefficient register
         {c0, c1} 12 bit 2´s complement numbers.
         """
+
+        while (self._read_register(self._SENSOR_OP_MODE) & self._COEF_RDY) == 0:
+            pass
 
         _c0_11_4 =           self._read_register(self._C0_11_4)
         _c0_3_0_c1_11_8 =    self._read_register(self._C0_3_0_C1_11_8)
@@ -595,74 +643,30 @@ class I2CCommunication():
         else:
             complement = value & (2**bits - 1)
         return complement
-
-
-class Calibrator():
-
-    def __init__(self,
-                 calibration_coefficients,
-                 pressure_scaling_factor,
-                 temperature_scaling_factor):
-        self._c0 = calibration_coefficients[0]
-        self._c1 = calibration_coefficients[1]
-        self._c00 = calibration_coefficients[2]
-        self._c10 = calibration_coefficients[3]
-        self._c01 = calibration_coefficients[4]
-        self._c11 = calibration_coefficients[5]
-        self._c20 = calibration_coefficients[6]
-        self._c21 = calibration_coefficients[7]
-        self._c30 = calibration_coefficients[8]
-
-        if (math.isclose(pressure_scaling_factor, 0.0)
-            or math.isclose(temperature_scaling_factor, 0.0)):
-            raise ZeroDivisionError("Cannot have pressure or temperature "
-                                    "scaling factor equal to 0.")
-
-        self._pressure_scaling_factor = pressure_scaling_factor
-        self._temperature_scaling_factor = temperature_scaling_factor
-
-    def pressure(self, raw_pressure, raw_temperature):
-        scaled_pressure = raw_pressure / self._pressure_scaling_factor
-        scaled_temperature = raw_temperature / self._temperature_scaling_factor
-
-        compensated_pressure = (
-            self._c00 
-            + scaled_pressure*(self._c10
-                               + scaled_pressure*(self._c20
-                                                  + scaled_pressure*self._c30))
-            + scaled_temperature*self._c01
-            + scaled_temperature*scaled_pressure*(self._c11
-                                                  + scaled_pressure*self._c21)
-        )
-        return compensated_pressure
-
-    def temperature(self, raw_temperature):
-        scaled_temperature = raw_temperature / self._temperature_scaling_factor
-        compensated_temperature = self._c0 * 0.5 + self._c1 * scaled_temperature
-        return compensated_temperature
         
 
 if "__main__" == __name__:
     comms = I2CCommunication()
-    comms.set_op_mode(PressureSensor.OpMode.background)
+    comms.set_op_mode(PressureSensor.OpMode.command)
     comms.set_pressure_sampling()
     comms.set_temperature_sampling()
+    print(comms.calibration_coefficients)
     calibrator = Calibrator(comms.calibration_coefficients,
                             comms.pressure_scale_factor,
                             comms.temperature_scale_factor)
+    #time.sleep(0.151)
+    running = True
 
-    while True:
-        raw_pressure = comms.raw_pressure()
-        raw_temperature = comms.raw_temperature()
-        pressure = calibrator.pressure(raw_pressure, raw_temperature)
-        temperature = calibrator.temperature(raw_temperature)
-        print(f"pressure: {pressure}\ttemperature: {temperature}\n"
-              f"raw pressure: {raw_pressure}\t"
-              f"raw temperature: {raw_temperature}")
-        print(f"{comms._read_register(comms._PRESSURE_MSB):08b}"
-              f"{comms._read_register(comms._PRESSURE_LSB):08b}"
-              f"{comms._read_register(comms._PRESSURE_XLSB):08b}")
-        print(f"{comms._read_register(comms._TEMPERATURE_MSB):08b}"
-              f"{comms._read_register(comms._TEMPERATURE_LSB):08b}"
-              f"{comms._read_register(comms._TEMPERATURE_XLSB):08b}\n")
-        time.sleep(1.0)
+    while running:
+        try:
+            raw_pressure = comms.raw_pressure()
+            raw_temperature = comms.raw_temperature()
+            pressure = calibrator.pressure(raw_pressure, raw_temperature)
+            temperature = calibrator.temperature(raw_temperature)
+            print(f"pressure: {pressure}\ttemperature: {temperature}\n"
+                  f"raw pressure: {raw_pressure}\t\t"
+                  f"raw temperature: {raw_temperature}\n")
+            time.sleep(1.0)
+        except KeyboardInterrupt:
+            running = False
+            comms.close()
