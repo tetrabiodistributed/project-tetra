@@ -326,7 +326,9 @@ class TestCommunicator(unittest.TestCase):
                                "{1, 2, 4, 8, 16, 32, 64, 128}."):
             self._communicator.set_pressure_sampling(rate=3)
 
-    def test_set_temperature_sampling_sets_scale_factor(self):
+
+<< << << < HEAD: 02_Development/Display/Tests/test_spl06_007.py
+   def test_set_temperature_sampling_sets_scale_factor(self):
         self._communicator.set_temperature_sampling(oversample=1,
                                                     rate=1)
         self.assertEqual(self._communicator.temperature_scale_factor,
