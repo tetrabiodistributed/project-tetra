@@ -3,6 +3,7 @@ import math
 import warnings
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 from spl06_007 import (PressureSensor,
                        Communicator,
                        Calibrator,
@@ -12,77 +13,113 @@ from spl06_007 import PressureSensor, Communicator, Calibrator
 >>>>>>> changed the sensors module so it will read data from a file when it's not run on a raspberry pi and added the start of a behave test to verify that the Docker image works.
 from i2c_interface import I2CInterface
 from rpi_check import is_on_raspberry_pi
+=======
+import board
+import busio
+>>>>>>> moved the pressure driver to the new working directory
 
+from spl06_007 import PressureSensor, I2CCommunication, Calibrator
 
-class TestPressureSensor(unittest.TestCase):
+is_on_rpi = True
+
+@unittest.skipIf(not is_on_rpi,
+                 "Cannot test I2C communication without being connected "
+                 "to hardware")
+class TestI2CCommunication(unittest.TestCase):
 
     def setUp(self):
-        self._mux_select(0)
-        self._sensor = PressureSensor()
+        # A bug in adafruit_platformdetect causes resource warnings
+        # to come up in unittest, so the warnings must be filtered out
+        # https://github.com/adafruit/Adafruit_Python_PlatformDetect/issues/89
+        warnings.filterwarnings("ignore",
+                                message="unclosed file",
+                                category=ResourceWarning)
+        self._mux_select(4)
+        self._communicator = I2CCommunication()
 
     def tearDown(self):
-        self._sensor.close()
+        self._communicator.close()
 
     def _mux_select(self, channel):
         if channel > 7:
             raise ValueError("Multiplexor channel must be an integer 0-7")
         else:
             pressure_mux_address = 0x70
-            I2CInterface(pressure_mux_address).write_data(
-                bytes([1 << channel]))
+            busio.I2C(board.SCL, board.SDA).writeto(pressure_mux_address,
+                                                    bytes([1 << channel]))
+            
 
     def test_set_op_mode_standby(self):
         self.assertEqual(
-            self._sensor.set_op_mode(PressureSensor.OpMode.standby),
+            self._communicator.set_op_mode(PressureSensor.OpMode.standby),
             PressureSensor.OpMode.standby,
-            "Fails to put the sensor into Standby Mode.")
+            "Fails to successfully set the SPL006-007 into standy mode"
+        )
 
     def test_set_op_mode_background(self):
         self.assertEqual(
-            self._sensor.set_op_mode(PressureSensor.OpMode.background),
+            self._communicator.set_op_mode(PressureSensor.OpMode.background),
             PressureSensor.OpMode.background,
-            "Fails to put the sensor into Background Mode")
+            "Fails to successfully set the SPL006-007 into background mode"
+        )
 
     def test_set_op_mode_command(self):
         self.assertEqual(
-            self._sensor.set_op_mode(PressureSensor.OpMode.command),
+            self._communicator.set_op_mode(PressureSensor.OpMode.command),
             PressureSensor.OpMode.command,
-            "Fails to put the sensor into Command Mode.")
+            "Fails to successfully set the SPL006-007 into command mode."
+        )
 
-    def test_set_sampling_default(self):
-        self.assertTrue(self._sensor.set_sampling(),
-                        "Fails to successfully set the oversample and "
-                        "sampling rate to default values for temerature "
-                        "and pressure.")
+    def test_set_op_mode_undefined(self):
+        with self.assertWarns(RuntimeWarning,
+                              msg="Fails to raise a warning when an "
+                              "undefined op mode is set."):
+            self._communicator.set_op_mode("Undefined Op Mode")
+                
+    def test_calibration_coefficients(self):
+        self.assertEqual(len(self._communicator.calibration_coefficients), 9,
+                          "Fails to generate a list of 9 coefficients.")
+        for coefficient in self._communicator.calibration_coefficients:
+            self.assertIsInstance(coefficient, int,
+                                  "Fails to generate a list of integer "
+                                  "coefficients.")
 
-    def test_set_sampling_valid_values(self):
-        self.assertTrue(
-            self._sensor.set_sampling(pressure_oversample=1,
-                                      pressure_sampling_rate=1,
-                                      temperature_oversample=1,
-                                      temperature_sampling_rate=1),
-            "Fails to set the oversample and sampling rate "
-            "to valid custom values for temperature and "
-            "pressure")
-
-    def test_set_sampling_invalid_values(self):
+    def test_set_pressure_sampling_sets_scale_factor(self):
+        self._communicator.set_pressure_sampling()
+        self.assertEqual(self._communicator.pressure_scale_factor,
+                         253952,
+                         "Fails to get the correct pressure scaling "
+                         "factor of 253952 for oversampling=16.")
+        
+    def test_set_pressure_sampling_invalid_oversample(self):
         with self.assertRaises(ValueError,
                                msg="Fails to raise a ValueError when "
-                               "oversample or temperature values are not "
-                               "in the set {1, 2, 4, 8, 16, 32, 64, 128}."):
-            self._sensor.set_sampling(pressure_oversample=3,
-                                      pressure_sampling_rate=3,
-                                      temperature_oversample=3,
-                                      temperature_sampling_rate=3)
+                               "pressure oversample is not in the set "
+                               "{1, 2, 4, 8, 16, 32, 64, 128}."):
+            self._communicator.set_pressure_sampling(oversample=3)
 
-    def test_pressure_without_sampling_set(self):
-        self.assertTrue(math.isnan(self._sensor.pressure()),
-                        "Fails to return NaN for pressure when the user "
-                        "has not yet set the sampling parameters.")
-        self.assertTrue(math.isnan(self._sensor.temperature()),
-                        "Fails to return NaN for temperature when the "
-                        "user has not yet set the sampling parameters.")
+    def test_set_pressure_sampling_invalid_rate(self):
+        with self.assertRaises(ValueError,
+                               msg="Fails to raise a ValueError when "
+                               "pressure sampling rate is not in the set "
+                               "{1, 2, 4, 8, 16, 32, 64, 128}."):
+            self._communicator.set_pressure_sampling(rate=3)
 
+    def test_set_temperature_sampling_sets_scale_factor(self):
+        self._communicator.set_temperature_sampling()
+        self.assertEqual(self._communicator.temperature_scale_factor,
+                         524288,
+                         "Fails to get the correct temperature scaling "
+                         "factor of 524288 for oversampling=16.")
+        
+    def test_set_temperature_sampling_invalid_oversample(self):
+        with self.assertRaises(ValueError,
+                               msg="Fails to raise a ValueError when "
+                               "temperature oversample is not in the set "
+                               "{1, 2, 4, 8, 16, 32, 64, 128}."):
+            self._communicator.set_temperature_sampling(oversample=3)
+
+<<<<<<< HEAD
     @unittest.skipIf(not is_on_raspberry_pi(),
                      "Cannot determine ambient temperature unless "
                      "connected to hardware.")
@@ -127,7 +164,34 @@ class TestPressureSensor(unittest.TestCase):
                         "very low pressure environment,\nthe ambient "
                         "pressure may fall outside the range of this "
                         "test.")
+=======
+    def test_set_temperature_sampling_invalid_rate(self):
+        with self.assertRaises(ValueError,
+                               msg="Fails to raise a ValueError when "
+                               "temperature sampling rate is not in the "
+                               "set {1, 2, 4, 8, 16, 32, 64, 128}."):
+            self._communicator.set_temperature_sampling(rate=3)
 
+    def test_raw_pressure(self):
+        self._communicator.set_op_mode(PressureSensor.OpMode.background)
+        self._communicator.set_pressure_sampling()
+        raw_pressure = self._communicator.raw_pressure()
+        self.assertIsInstance(raw_pressure, int,
+                             "Fails to return raw pressure as an integer.")
+        self.assertTrue(-2**23 <= raw_pressure < 2**23,
+                        "Fails to return raw pressure as a 24-bit "
+                        "2's complement number.")
+>>>>>>> moved the pressure driver to the new working directory
+
+    def test_raw_temperature(self):
+        self._communicator.set_op_mode(PressureSensor.OpMode.background)
+        self._communicator.set_temperature_sampling()
+        raw_temperature = self._communicator.raw_temperature()
+        self.assertIsInstance(raw_temperature, int,
+                             "Fails to return raw temperature as an integer.")
+        self.assertTrue(-2**23 <= raw_temperature < 2**23,
+                        "Fails to return raw temperature as a 24-bit "
+                        "2's complement number.")
 
 class TestCalibrator(unittest.TestCase):
 
@@ -217,7 +281,7 @@ class TestCalibrator(unittest.TestCase):
         self.assertAlmostEqual(calibrator.pressure(-2968390, 167393), 101000,
                                places=-1,
                                msg="Fails to return sea level pressure given "
-                               "data that matches that.")
+                              "data that matches that.")
 
     def test_returns_1_5_atm_pressure_given_actual_data(self):
 <<<<<<< HEAD
@@ -260,6 +324,7 @@ class TestCalibrator(unittest.TestCase):
                                places=-1,
                                msg="Fails to return 3 atm pressure given "
                                "data that matches that.")
+        
 
     def test_return_standard_temperature_given_actual_data(self):
 <<<<<<< HEAD
@@ -289,10 +354,11 @@ class TestCalibrator(unittest.TestCase):
                                msg="Fails to return 0degC given data that "
                                "matches that.")
 
-
-class TestCommunicator(unittest.TestCase):
+            
+class TestPressureSensor(unittest.TestCase):
 
     def setUp(self):
+<<<<<<< HEAD
         # A bug in adafruit_platformdetect causes resource warnings
         # to come up in unittest, so the warnings must be filtered out
         # https://github.com/adafruit/Adafruit_Python_PlatformDetect/issues/89
@@ -305,36 +371,40 @@ class TestCommunicator(unittest.TestCase):
         self._mux_select(4)
 >>>>>>> changed the sensors module so it will read data from a file when it's not run on a raspberry pi and added the start of a behave test to verify that the Docker image works.
         self._communicator = Communicator()
+=======
+        self._mux_select(0)
+        self._sensor = PressureSensor()
+>>>>>>> moved the pressure driver to the new working directory
 
     def tearDown(self):
-        self._communicator.close()
+        self._sensor.close()
 
     def _mux_select(self, channel):
         if channel > 7:
             raise ValueError("Multiplexor channel must be an integer 0-7")
         else:
             pressure_mux_address = 0x70
-            I2CInterface(pressure_mux_address).write_data(
-                bytes([1 << channel]))
+            busio.I2C(board.SCL, board.SDA).writeto(pressure_mux_address,
+                                                    bytes([1 << channel]))
+            
 
     def test_set_op_mode_standby(self):
         self.assertEqual(
-            self._communicator.set_op_mode(PressureSensor.OpMode.standby),
+            self._sensor.set_op_mode(PressureSensor.OpMode.standby),
             PressureSensor.OpMode.standby,
-            "Fails to successfully set the SPL006-007 into standy mode"
-        )
+            "Fails to put the sensor into Standby Mode.")
 
     def test_set_op_mode_background(self):
         self.assertEqual(
-            self._communicator.set_op_mode(PressureSensor.OpMode.background),
+            self._sensor.set_op_mode(PressureSensor.OpMode.background),
             PressureSensor.OpMode.background,
-            "Fails to successfully set the SPL006-007 into background mode"
-        )
+            "Fails to put the sensor into Background Mode")
 
     def test_set_op_mode_command(self):
         self.assertEqual(
-            self._communicator.set_op_mode(PressureSensor.OpMode.command),
+            self._sensor.set_op_mode(PressureSensor.OpMode.command),
             PressureSensor.OpMode.command,
+<<<<<<< HEAD
             "Fails to successfully set the SPL006-007 into command mode."
         )
 
@@ -394,31 +464,44 @@ class TestCommunicator(unittest.TestCase):
 >>>>>>> changed the sensors module so it will read data from a file when it's not run on a raspberry pi and added the start of a behave test to verify that the Docker image works.
                          "Fails to get the correct temperature scaling "
                          "factor of 524288 for oversampling=16.")
+=======
+            "Fails to put the sensor into Command Mode.")
 
-    def test_set_temperature_sampling_invalid_oversample(self):
+    def test_set_sampling_default(self):
+        self.assertTrue(self._sensor.set_sampling(),
+                        "Fails to successfully set the oversample and "
+                        "sampling rate to default values for temerature "
+                        "and pressure.")
+>>>>>>> moved the pressure driver to the new working directory
+
+    def test_set_sampling_valid_values(self):
+        self.assertTrue(self._sensor.set_sampling(pressure_oversample=1,
+                                                  pressure_sampling_rate=1,
+                                                  temperature_oversample=1,
+                                                  temperature_sampling_rate=1),
+                        "Fails to set the oversample and sampling rate "
+                        "to valid custom values for temperature and "
+                        "pressure")
+
+    def test_set_sampling_invalid_values(self):
         with self.assertRaises(ValueError,
                                msg="Fails to raise a ValueError when "
-                               "temperature oversample is not in the set "
-                               "{1, 2, 4, 8, 16, 32, 64, 128}."):
-            self._communicator.set_temperature_sampling(oversample=3)
+                               "oversample or temperature values are not "
+                               "in the set {1, 2, 4, 8, 16, 32, 64, 128}."):
+            self._sensor.set_sampling(pressure_oversample=3,
+                                      pressure_sampling_rate=3,
+                                      temperature_oversample=3,
+                                      temperature_sampling_rate=3)
 
-    def test_set_temperature_sampling_invalid_rate(self):
-        with self.assertRaises(ValueError,
-                               msg="Fails to raise a ValueError when "
-                               "temperature sampling rate is not in the "
-                               "set {1, 2, 4, 8, 16, 32, 64, 128}."):
-            self._communicator.set_temperature_sampling(rate=3)
+    def test_pressure_without_sampling_set(self):
+        self.assertTrue(math.isnan(self._sensor.pressure()),
+                        "Fails to return NaN for pressure when the user "
+                        "has not yet set the sampling parameters.")
+        self.assertTrue(math.isnan(self._sensor.temperature()),
+                        "Fails to return NaN for temperature when the "
+                        "user has not yet set the sampling parameters.")
 
-    def test_raw_pressure(self):
-        self._communicator.set_op_mode(PressureSensor.OpMode.background)
-        self._communicator.set_pressure_sampling()
-        raw_pressure = self._communicator.raw_pressure()
-        self.assertIsInstance(raw_pressure, int,
-                              "Fails to return raw pressure as an integer.")
-        self.assertTrue(-2**23 <= raw_pressure < 2**23,
-                        "Fails to return raw pressure as a 24-bit "
-                        "2's complement number.")
-
+<<<<<<< HEAD
     def test_raw_temperature(self):
         self._communicator.set_op_mode(PressureSensor.OpMode.background)
         self._communicator.set_temperature_sampling()
@@ -430,6 +513,8 @@ class TestCommunicator(unittest.TestCase):
                         "Fails to return raw temperature as a 24-bit "
                         "2's complement number.")
 =======
+=======
+>>>>>>> moved the pressure driver to the new working directory
     def test_ambient_temperature(self):
         self._sensor.set_op_mode(PressureSensor.OpMode.command)
         self._sensor.set_sampling(temperature_sampling_rate=8)
@@ -457,4 +542,7 @@ class TestCommunicator(unittest.TestCase):
                         "very low pressure environment,\nthe ambient "
                         "pressure may fall outside the range of this "
                         "test.")
+<<<<<<< HEAD
 >>>>>>> improved the pressure driver a bit (though it still returns wrong values) and added a script to find all i2c devices and documentation on the sensor:Display/Tests/test_spl06_007.py
+=======
+>>>>>>> moved the pressure driver to the new working directory
