@@ -2,7 +2,7 @@ import os
 import random
 from abc import ABC, abstractmethod
 
-from processsampledata import ProcessSampleData
+from process_sample_data import ProcessSampleData
 from rpi_check import is_on_raspberry_pi
 import constants
 
