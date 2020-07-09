@@ -340,8 +340,8 @@ class TestPressureSensor(unittest.TestCase):
                         "may fall outside the range of this test.")
         
     def test_ambient_pressure(self):
-        self._sensor.set_op_mode(PressureSensor.OpMode.command)
         self._sensor.set_sampling()
+        self._sensor.set_op_mode(PressureSensor.OpMode.command)
         measured_pressure = self._sensor.pressure()
         self.assertTrue(math.isclose(measured_pressure, 101325,
                                      rel_tol=0.10),

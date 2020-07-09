@@ -308,6 +308,8 @@ class I2CCommunication():
                                        64: _TEMPERATURE_OVERSAMPLE_64X,
                                        128: _TEMPERATURE_OVERSAMPLE_128X}
 
+    _READY_WAIT_TIME = 0.0036
+
     def __init__(self, SDO_high=True):
         """The sensor takes (107 +/- 8) ms to initialize."""
         if SDO_high:
@@ -457,7 +459,7 @@ class I2CCommunication():
             self._write_register(self._SENSOR_OP_MODE, self._COMMAND_PRESSURE)
             
         while (self._read_register(self._SENSOR_OP_MODE) & self._PRS_RDY) == 0:
-            pass
+            time.sleep(self._READY_WAIT_TIME)
         pressure_msb = self._read_register(self._PRESSURE_MSB)
         pressure_lsb = self._read_register(self._PRESSURE_LSB)
         pressure_xlsb = self._read_register(self._PRESSURE_XLSB)
@@ -524,7 +526,7 @@ class I2CCommunication():
                                  self._COMMAND_TEMPERATURE)
         
         while (self._read_register(self._SENSOR_OP_MODE) & self._TMP_RDY) == 0:
-            pass
+            time.sleep(self._READY_WAIT_TIME)
         temperature_msb = self._read_register(self._TEMPERATURE_MSB) << 16
         temperature_lsb = self._read_register(self._TEMPERATURE_LSB) << 8
         temperature_xlsb = self._read_register(self._TEMPERATURE_XLSB)
@@ -556,7 +558,7 @@ class I2CCommunication():
         """
 
         while (self._read_register(self._SENSOR_OP_MODE) & self._COEF_RDY) == 0:
-            pass
+            time.sleep(self._READY_WAIT_TIME)
 
         _c0_11_4 =           self._read_register(self._C0_11_4)
         _c0_3_0_c1_11_8 =    self._read_register(self._C0_3_0_C1_11_8)
@@ -581,42 +583,36 @@ class I2CCommunication():
         least_significant_nibble = lambda byte : byte & 0x0f
 
         c0 = self._twos_complement(
-            (_c0_11_4 << 4)
-            + most_significant_nibble(_c0_3_0_c1_11_8), 12)
+            (_c0_11_4 << 4) | most_significant_nibble(_c0_3_0_c1_11_8),
+            12
+        )
         c1 = self._twos_complement(
-            (least_significant_nibble(_c0_3_0_c1_11_8) << 8)
-            + _c1_7_0, 12)
+            (least_significant_nibble(_c0_3_0_c1_11_8) << 8) | _c1_7_0,
+            12
+        )
+        
         c00 = self._twos_complement(
-            (_c00_19_12 << 12)
-            + (_c00_11_4 << 4)
-            + most_significant_nibble(_c00_3_0_c10_19_16),
-            16)
+            (_c00_19_12 << 12) | (_c00_11_4 << 4)
+            | most_significant_nibble(_c00_3_0_c10_19_16),
+            16
+        )
         c10 = self._twos_complement(
             (least_significant_nibble(_c00_3_0_c10_19_16) << 16)
-            + (_c10_15_8 << 8)
-            + _c10_7_0, 16)
-        c01 = self._twos_complement(
-            (_c01_15_8 << 8)
-            + _c01_7_0, 16)
-        c11 = self._twos_complement(
-            (_c11_15_8 << 8)
-            + _c11_7_0, 16)
-        c20 = self._twos_complement(
-            (_c20_15_8 << 8)
-            + _c20_7_0, 16)
-        c21 = self._twos_complement(
-            (_c21_15_8 << 8)
-            + _c21_7_0, 16)
-        c30 = self._twos_complement(
-            (_c30_15_8 << 8)
-            + _c30_7_0, 16)
+            | (_c10_15_8 << 8) | _c10_7_0,
+            16
+        )
+        c01 = self._twos_complement((_c01_15_8 << 8) | _c01_7_0, 16)
+        c11 = self._twos_complement((_c11_15_8 << 8) | _c11_7_0, 16)
+        c20 = self._twos_complement((_c20_15_8 << 8) | _c20_7_0, 16)
+        c21 = self._twos_complement((_c21_15_8 << 8) | _c21_7_0, 16)
+        c30 = self._twos_complement((_c30_15_8 << 8) | _c30_7_0, 16)
         
         self._calibration_coefficients = (c0, c1,
                                           c00, c10, c01, c11, c20, c21, c30)
 
     def _find_sensor(self):
         while not self._i2c_address in self._i2c.scan():
-            pass
+            time.sleep(self._READY_WAIT_TIME)
 
     def _reset_sensor(self):
         reset_time = 0.02
@@ -625,16 +621,19 @@ class I2CCommunication():
         while (self._read_register(self._SENSOR_OP_MODE)
                & self._SENSOR_RDY == 0):
             # Wait for the sensor to be ready
-            pass
+            time.sleep(0.005)
 
     def _read_register(self, register):
         data = bytearray(1)
         self._i2c.writeto(self._i2c_address, bytes([register]))
+        print(f"{1000*time.time():.4f} TX -> {bytes([register]).hex()}")
         self._i2c.readfrom_into(self._i2c_address, data)
+        print(f"{1000*time.time():.4f} RX <- {data.hex()}")
         return int(data.hex(), 16)
 
     def _write_register(self, register, to_write):
         self._i2c.writeto(self._i2c_address, bytes([register, to_write]))
+        print(f"{1000*time.time():.4f} TX -> {bytes([register, to_write]).hex()}")
                 
     def _twos_complement(self, value, bits):
         
@@ -643,30 +642,51 @@ class I2CCommunication():
         else:
             complement = value & (2**bits - 1)
         return complement
+
+
+# class SPICommunication():
+
+#     def __init__(self, four_pin=True):
+#         """The sensor takes (107 +/- 8) ms to initialize."""
+#         self._i2c = busio.SPI(
+#         if not four_pin::
+#             pass
+#         while not self._i2c.try_lock():
+#             pass
+#         self._find_sensor()
+#         self._reset_sensor()
+#         self.set_op_mode(PressureSensor.OpMode.standby)
+#         self._calculate_calibration_coefficients()
         
 
 if "__main__" == __name__:
+    print("--Initialization")
     comms = I2CCommunication()
+    print("--Set Op Mode")
     comms.set_op_mode(PressureSensor.OpMode.command)
+    print("--Set Pressure Sampling")
     comms.set_pressure_sampling()
+    print("--Set Temperature Sampling")
     comms.set_temperature_sampling()
-    print(comms.calibration_coefficients)
+    # print(comms.calibration_coefficients)
     calibrator = Calibrator(comms.calibration_coefficients,
                             comms.pressure_scale_factor,
                             comms.temperature_scale_factor)
     #time.sleep(0.151)
     running = True
-
     while running:
         try:
+            print("--Get Pressure")
             raw_pressure = comms.raw_pressure()
+            print("--Get Temperature")
             raw_temperature = comms.raw_temperature()
             pressure = calibrator.pressure(raw_pressure, raw_temperature)
             temperature = calibrator.temperature(raw_temperature)
-            print(f"pressure: {pressure}\ttemperature: {temperature}\n"
-                  f"raw pressure: {raw_pressure}\t\t"
-                  f"raw temperature: {raw_temperature}\n")
+            # print(f"pressure: {pressure}\ttemperature: {temperature}\n"
+            #       f"raw pressure: {raw_pressure}\t\t"
+            #       f"raw temperature: {raw_temperature}\n")
             time.sleep(1.0)
+            break
         except KeyboardInterrupt:
             running = False
             comms.close()
