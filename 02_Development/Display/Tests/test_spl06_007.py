@@ -380,6 +380,7 @@ class TestCommunicator(unittest.TestCase):
                                "{1, 2, 4, 8, 16, 32, 64, 128}."):
             self._communicator.set_pressure_sampling(rate=3)
 
+<<<<<<< HEAD:02_Development/Display/Tests/test_spl06_007.py
     def test_set_temperature_sampling_sets_scale_factor(self):
 <<<<<<< HEAD
         self._communicator.set_temperature_sampling(oversample=1,
@@ -428,3 +429,32 @@ class TestCommunicator(unittest.TestCase):
         self.assertTrue(-2**23 <= raw_temperature < 2**23,
                         "Fails to return raw temperature as a 24-bit "
                         "2's complement number.")
+=======
+    def test_ambient_temperature(self):
+        self._sensor.set_op_mode(PressureSensor.OpMode.command)
+        self._sensor.set_sampling(temperature_sampling_rate=8)
+        measured_temperature = self._sensor.temperature()
+        self.assertTrue(math.isclose(measured_temperature, 20,
+                                     rel_tol=0.50),
+                        f"{measured_temperature} != "
+                        "20 +/- 50% degC :\n"
+                        "Fails to return ambient temperature in "
+                        "degC.\nNote that if this test is "
+                        "performed in a very cold or hot "
+                        "environment, the\nambient temperature "
+                        "may fall outside the range of this test.")
+        
+    def test_ambient_pressure(self):
+        self._sensor.set_sampling()
+        self._sensor.set_op_mode(PressureSensor.OpMode.command)
+        measured_pressure = self._sensor.pressure()
+        self.assertTrue(math.isclose(measured_pressure, 101325,
+                                     rel_tol=0.10),
+                        f"{measured_pressure} != "
+                        "101.25 +/- 10% Pa :\n"
+                        "Fails to return ambient pressure in Pa.\n"
+                        "Note that if this test is performed in a "
+                        "very low pressure environment,\nthe ambient "
+                        "pressure may fall outside the range of this "
+                        "test.")
+>>>>>>> improved the pressure driver a bit (though it still returns wrong values) and added a script to find all i2c devices and documentation on the sensor:Display/Tests/test_spl06_007.py
