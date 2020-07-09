@@ -40,24 +40,6 @@ class TestPressureSensor(unittest.TestCase):
                         "Fails to correctly identify that a sensor is not "
                         "present.")
 
-    def test_set_op_mode_standby(self):
-        self.assertEqual(
-            self._sensor.set_op_mode(PressureSensor.OpMode.standby),
-            PressureSensor.OpMode.standby,
-            "Fails to put the sensor into Standby Mode.")
-
-    def test_set_op_mode_background(self):
-        self.assertEqual(
-            self._sensor.set_op_mode(PressureSensor.OpMode.background),
-            PressureSensor.OpMode.background,
-            "Fails to put the sensor into Background Mode")
-
-    def test_set_op_mode_command(self):
-        self.assertEqual(
-            self._sensor.set_op_mode(PressureSensor.OpMode.command),
-            PressureSensor.OpMode.command,
-            "Fails to put the sensor into Command Mode.")
-
     def test_set_sampling_default(self):
         self.assertTrue(self._sensor.set_sampling(),
                         "Fails to successfully set the oversample and "
@@ -273,22 +255,19 @@ class TestCommunicator(unittest.TestCase):
         self.assertEqual(
             self._communicator.set_op_mode(PressureSensor.OpMode.standby),
             PressureSensor.OpMode.standby,
-            "Fails to successfully set the SPL006-007 into standy mode"
-        )
+            "Fails to put the sensor into Standby Mode.")
 
     def test_set_op_mode_background(self):
         self.assertEqual(
             self._communicator.set_op_mode(PressureSensor.OpMode.background),
             PressureSensor.OpMode.background,
-            "Fails to successfully set the SPL006-007 into background mode"
-        )
+            "Fails to put the sensor into Background Mode")
 
     def test_set_op_mode_command(self):
         self.assertEqual(
             self._communicator.set_op_mode(PressureSensor.OpMode.command),
             PressureSensor.OpMode.command,
-            "Fails to successfully set the SPL006-007 into command mode."
-        )
+            "Fails to successfully set the SPL006-007 into command mode.")
 
     def test_set_op_mode_undefined(self):
         with self.assertWarns(RuntimeWarning,
@@ -326,9 +305,7 @@ class TestCommunicator(unittest.TestCase):
                                "{1, 2, 4, 8, 16, 32, 64, 128}."):
             self._communicator.set_pressure_sampling(rate=3)
 
-
-<< << << < HEAD: 02_Development/Display/Tests/test_spl06_007.py
-   def test_set_temperature_sampling_sets_scale_factor(self):
+    def test_set_temperature_sampling_sets_scale_factor(self):
         self._communicator.set_temperature_sampling(oversample=1,
                                                     rate=1)
         self.assertEqual(self._communicator.temperature_scale_factor,
@@ -371,44 +348,24 @@ class TestCommunicator(unittest.TestCase):
                                "{1, 2, 4, 8, 16, 32, 64, 128}."):
             self._communicator.set_pressure_sampling(rate=3)
 
-    def test_set_temperature_sampling_sets_scale_factor(self):
+    def test_raw_temperature(self):
+        self._communicator.set_op_mode(PressureSensor.OpMode.command)
         self._communicator.set_temperature_sampling()
-        self.assertEqual(self._communicator.temperature_scale_factor,
-                         524288,
-                         "Fails to get the correct temperature scaling "
-                         "factor of 524288 for oversampling=16.")
-
-    def test_set_temperature_sampling_invalid_oversample(self):
-        with self.assertRaises(ValueError,
-                               msg="Fails to raise a ValueError when "
-                               "temperature oversample is not in the set "
-                               "{1, 2, 4, 8, 16, 32, 64, 128}."):
-            self._communicator.set_temperature_sampling(oversample=3)
-
-    def test_set_temperature_sampling_invalid_rate(self):
-        with self.assertRaises(ValueError,
-                               msg="Fails to raise a ValueError when "
-                               "temperature sampling rate is not in the "
-                               "set {1, 2, 4, 8, 16, 32, 64, 128}."):
-            self._communicator.set_temperature_sampling(rate=3)
-
-    def test_raw_pressure(self):
-        self._communicator.set_op_mode(PressureSensor.OpMode.background)
-        self._communicator.set_pressure_sampling()
-        raw_pressure = self._communicator.raw_pressure()
-        self.assertIsInstance(raw_pressure, int,
-                              "Fails to return raw pressure as an integer.")
-        self.assertTrue(-2**23 <= raw_pressure < 2**23,
-                        "Fails to return raw pressure as a 24-bit "
+        raw_temperature = self._communicator.raw_temperature()
+        self.assertIsInstance(
+            raw_temperature,
+            int,
+            "Fails to return raw temperature as an integer.")
+        self.assertTrue(-2**23 <= raw_temperature < 2**23,
+                        "Fails to return raw temperature as a 24-bit "
                         "2's complement number.")
 
     def test_raw_temperature(self):
-        self._communicator.set_op_mode(PressureSensor.OpMode.background)
-        self._communicator.set_temperature_sampling()
-        raw_temperature = self._communicator.raw_temperature()
-        self.assertIsInstance(raw_temperature, int,
-                              "Fails to return raw temperature as an "
-                              "integer.")
-        self.assertTrue(-2**23 <= raw_temperature < 2**23,
+        self._communicator.set_op_mode(PressureSensor.OpMode.command)
+        self._communicator.set_pressure_sampling()
+        raw_pressure = self._communicator.raw_pressure()
+        self.assertIsInstance(raw_pressure, int,
+                              "Fails to return raw temperature as an integer.")
+        self.assertTrue(-2**23 <= raw_pressure < 2**23,
                         "Fails to return raw temperature as a 24-bit "
                         "2's complement number.")
