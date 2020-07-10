@@ -243,7 +243,7 @@ class Communicator():
 
     Parameters
     ----------
-    SDO_high=True: bool
+    SDO_high = True: bool
         Set to false if the SDO pin on the SPL06-007 is pulled to ground
     dump_communication=False: bool
         For every read or write to the I2C device, the transmitted and
@@ -583,9 +583,9 @@ class Communicator():
                                  SensorConstants.SOFT_RESET)
         time.sleep(reset_time)
 
-        def sensor_ready(): return (
-            self._i2c.read_register(SensorConstants.SENSOR_OP_MODE)
-            & SensorConstants.SENSOR_RDY != 0)
+        def sensor_ready():
+            return (self._i2c.read_register(SensorConstants.SENSOR_OP_MODE)
+                    & SensorConstants.SENSOR_RDY != 0)
         self._wait_for_condition_else_timeout(sensor_ready, 4)
 
     def _wait_for_condition_else_timeout(self, conditionFunction, timeout):

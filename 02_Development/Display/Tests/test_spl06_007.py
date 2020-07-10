@@ -40,6 +40,24 @@ class TestPressureSensor(unittest.TestCase):
                         "Fails to correctly identify that a sensor is not "
                         "present.")
 
+    def test_set_op_mode_standby(self):
+        self.assertEqual(
+            self._sensor.set_op_mode(PressureSensor.OpMode.standby),
+            PressureSensor.OpMode.standby,
+            "Fails to put the sensor into Standby Mode.")
+
+    def test_set_op_mode_background(self):
+        self.assertEqual(
+            self._sensor.set_op_mode(PressureSensor.OpMode.background),
+            PressureSensor.OpMode.background,
+            "Fails to put the sensor into Background Mode")
+
+    def test_set_op_mode_command(self):
+        self.assertEqual(
+            self._sensor.set_op_mode(PressureSensor.OpMode.command),
+            PressureSensor.OpMode.command,
+            "Fails to put the sensor into Command Mode.")
+
     def test_set_sampling_default(self):
         self.assertTrue(self._sensor.set_sampling(),
                         "Fails to successfully set the oversample and "
@@ -255,13 +273,15 @@ class TestCommunicator(unittest.TestCase):
         self.assertEqual(
             self._communicator.set_op_mode(PressureSensor.OpMode.standby),
             PressureSensor.OpMode.standby,
-            "Fails to put the sensor into Standby Mode.")
+            "Fails to successfully set the SPL006-007 into standy mode"
+        )
 
     def test_set_op_mode_background(self):
         self.assertEqual(
             self._communicator.set_op_mode(PressureSensor.OpMode.background),
             PressureSensor.OpMode.background,
-            "Fails to put the sensor into Background Mode")
+            "Fails to successfully set the SPL006-007 into background mode"
+        )
 
     def test_set_op_mode_command(self):
         self.assertEqual(
