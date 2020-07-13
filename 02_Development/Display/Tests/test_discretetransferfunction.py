@@ -1,7 +1,7 @@
 import unittest
 import math
 
-from DiscreteTransferFunction import DiscreteTransferFunction
+from discretetransferfunction import DiscreteTransferFunction
 
 
 class TestDiscreteTransferFunction(unittest.TestCase):
@@ -12,7 +12,7 @@ class TestDiscreteTransferFunction(unittest.TestCase):
         tf = DiscreteTransferFunction([1], [1])
         self.assertIsNotNone(tf,
                              "Fails to initialize a discrete "
-                             + "transfer function")
+                             "transfer function")
 
     def testInit_divideByZero(self):
 
@@ -30,7 +30,7 @@ class TestDiscreteTransferFunction(unittest.TestCase):
         tf.append(0)
         self.assertTrue(tf.is_full,
                         "Fails to append a datum to the transfer "
-                        + "function's buffer")
+                        "function's buffer")
 
     def testAppend_wrongDataType(self):
 
@@ -48,7 +48,7 @@ class TestDiscreteTransferFunction(unittest.TestCase):
         tf.append(4)
         self.assertTrue(tf.is_full,
                         "Fails to append many data to the transfer "
-                        + "function")
+                        "function")
 
     def testGetDatum_nominal(self):
 
@@ -56,9 +56,9 @@ class TestDiscreteTransferFunction(unittest.TestCase):
         tf.append(0)
         self.assertAlmostEqual(tf.get_datum(), 1,
                                msg="Fails to give the quotient of the "
-                                   + "constant terms when the "
-                                   + "numerator and denominator are "
-                                   + "both length 1")
+                                   "constant terms when the "
+                                   "numerator and denominator are "
+                                   "both length 1")
 
     def testGetDatum_firstOrderTerm(self):
 
@@ -66,7 +66,7 @@ class TestDiscreteTransferFunction(unittest.TestCase):
         tf.append(1)
         self.assertAlmostEqual(tf.get_datum(), 2,
                                msg="Fails to add a first order term "
-                                   + "in the numerator")
+                                   "in the numerator")
 
     def testGetDatum_secondOrderTerm(self):
         
@@ -75,7 +75,7 @@ class TestDiscreteTransferFunction(unittest.TestCase):
         tf.append(1)
         self.assertAlmostEqual(tf.get_datum(), 3,
                                msg="Fails to add a second order term "
-                                   + "in the numerator")
+                                   "in the numerator")
 
     def testGetDatum_underFilledBuffer(self):
 
@@ -84,7 +84,7 @@ class TestDiscreteTransferFunction(unittest.TestCase):
         tf.append(2)
         self.assertAlmostEqual(tf.get_datum(), 4,
                                msg="Fails to return data using only "
-                                   + "the lowest order coefficients")
+                                   "the lowest order coefficients")
 
     def testGetDatum_fibonacci(self):
 
@@ -103,10 +103,10 @@ class TestDiscreteTransferFunction(unittest.TestCase):
                             zip(fibonacciNumbers, 
                                 desiredList)),
                          "Fails to generate a sequence of numbers "
-                         + "with the numerator having non-constant "
-                         + "terms\n"
-                         + "   " + str(desiredList) + "\n"
-                         + "!= " + str(fibonacciNumbers))
+                         "with the numerator having non-constant "
+                         "terms\n"
+                         "   " + str(desiredList) + "\n"
+                         "!= " + str(fibonacciNumbers))
 
     def testGetDatum_inverseFibonacci(self):
         """invereFibonacci(n) =
@@ -128,9 +128,9 @@ class TestDiscreteTransferFunction(unittest.TestCase):
                             zip(inverseFibonacciNumbers, 
                                 desiredList)),
                         "Fails to generate a sequence of numbers with "
-                        + "the denominator having non-constant terms\n"
-                        + "   " + str(desiredList) + "\n"
-                        + "!= " + str(inverseFibonacciNumbers))
+                        "the denominator having non-constant terms\n"
+                        "   " + str(desiredList) + "\n"
+                        "!= " + str(inverseFibonacciNumbers))
 
     def testGetDatum_regularAndInverseFibonacci(self):
 
@@ -149,36 +149,36 @@ class TestDiscreteTransferFunction(unittest.TestCase):
                             zip(regularAndInverseFibonacciNumbers, 
                                 desiredList)),
                         "Fails to generate a sequence of numbers with "
-                        + "the numerator and denominator having "
-                        + "non-constant terms\n"
-                        + "   " + str(desiredList) + "\n"
-                        + "!= " + str(regularAndInverseFibonacciNumbers))
+                        "the numerator and denominator having "
+                        "non-constant terms\n"
+                        "   " + str(desiredList) + "\n"
+                        "!= " + str(regularAndInverseFibonacciNumbers))
 
     def testStr_nominal(self):
 
         tf = DiscreteTransferFunction([1, -1], [1, -1.85, 0.9])
-        self.assertEqual(str(tf),   "       z - 1\n"
-                                  + "-------------------\n"
-                                  + " z^2 - 1.85 z + 0.9",
+        self.assertEqual(str(tf), "       z - 1\n"
+                                  "-------------------\n"
+                                  " z^2 - 1.85 z + 0.9",
                          "Fails to represent a transfer function as a "
-                         + "pretty string.")
+                         "pretty string.")
 
     def testStr_leadingCoefficientOtherThanOne(self):
 
         tf = DiscreteTransferFunction([2, -2], [1, -0.8])
-        self.assertEqual(str(tf),   "2 z - 2\n"
-                                  + "--------\n"
-                                  + " z - 0.8",
+        self.assertEqual(str(tf), "2 z - 2\n"
+                                  "--------\n"
+                                  " z - 0.8",
                          "Fails to properly format a transfer function "
-                         + "that has a leading coefficient other than "
-                         + "one")
+                         "that has a leading coefficient other than "
+                         "one")
 
     def testStr_leadingCoefficientsAreConstantTermsAndOne(self):
 
         tf = DiscreteTransferFunction([1], [1])
-        self.assertEqual(str(tf),   "1\n"
-                                  + "-\n"
-                                  + "1",
+        self.assertEqual(str(tf), "1\n"
+                                  "-\n"
+                                  "1",
                          "Fails to properly format a transfer function "
-                         + "where the leading term is both constant "
-                         + "and the coefficient is equal to 1")
+                         "where the leading term is both constant "
+                         "and the coefficient is equal to 1")
