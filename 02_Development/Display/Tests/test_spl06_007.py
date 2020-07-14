@@ -86,7 +86,9 @@ class TestPressureSensor(unittest.TestCase):
         self._sensor.set_op_mode(PressureSensor.OpMode.command)
         self._sensor.set_sampling(temperature_sampling_rate=8)
         measured_temperature = self._sensor.temperature()
-        self.assertTrue(math.isclose(measured_temperature, 20,
+        standard_temperature = 20  # degC
+        self.assertTrue(math.isclose(measured_temperature,
+                                     standard_temperature,
                                      rel_tol=0.50),
                         f"{measured_temperature} != "
                         "20 +/- 50% degC :\n"
@@ -103,7 +105,8 @@ class TestPressureSensor(unittest.TestCase):
         self._sensor.set_sampling()
         self._sensor.set_op_mode(PressureSensor.OpMode.command)
         measured_pressure = self._sensor.pressure()
-        self.assertTrue(math.isclose(measured_pressure, 101325,
+        standard_pressure = 101325  # Pa
+        self.assertTrue(math.isclose(measured_pressure, standard_pressure,
                                      rel_tol=0.10),
                         f"{measured_pressure} != "
                         "101.25 +/- 10% Pa :\n"

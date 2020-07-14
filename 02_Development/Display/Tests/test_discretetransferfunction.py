@@ -7,24 +7,20 @@ from discrete_transfer_function import DiscreteTransferFunction
 class TestDiscreteTransferFunction(unittest.TestCase):
 
     def testInit_nominal(self):
-
         tf = DiscreteTransferFunction([1], [1])
         self.assertIsNotNone(tf,
                              "Fails to initialize a discrete "
                              "transfer function")
 
     def testInit_divideByZero(self):
-
         tf = DiscreteTransferFunction([1], [0])
         self.assertRaises(ZeroDivisionError)
 
     def testInit_divideByZeroMany(self):
-
         tf = DiscreteTransferFunction([1], [0] * 50)
         self.assertRaises(ZeroDivisionError)
 
     def testAppend_nominal(self):
-
         tf = DiscreteTransferFunction([1, 1], [1])
         tf.append(0)
         self.assertTrue(tf.is_full,
@@ -32,13 +28,11 @@ class TestDiscreteTransferFunction(unittest.TestCase):
                         "function's buffer")
 
     def testAppend_wrongDataType(self):
-
         tf = DiscreteTransferFunction([1], [1])
         tf.append("doesn't quack like a float")
         self.assertRaises(ValueError)
 
     def testAppend_manyData(self):
-
         tf = DiscreteTransferFunction([1, 1, 1, 1, 1], [1])
         tf.append(0)
         tf.append(1)
@@ -50,7 +44,6 @@ class TestDiscreteTransferFunction(unittest.TestCase):
                         "function")
 
     def testGetDatum_nominal(self):
-
         tf = DiscreteTransferFunction([1], [1])
         tf.append(0)
         self.assertAlmostEqual(tf.get_datum(), 1,
@@ -60,7 +53,6 @@ class TestDiscreteTransferFunction(unittest.TestCase):
                                    "both length 1")
 
     def testGetDatum_firstOrderTerm(self):
-
         tf = DiscreteTransferFunction([1, 1], [1])
         tf.append(1)
         self.assertAlmostEqual(tf.get_datum(), 2,
@@ -68,7 +60,6 @@ class TestDiscreteTransferFunction(unittest.TestCase):
                                    "in the numerator")
 
     def testGetDatum_secondOrderTerm(self):
-
         tf = DiscreteTransferFunction([1, 1, 1], [1])
         tf.append(1)
         tf.append(1)
@@ -77,7 +68,6 @@ class TestDiscreteTransferFunction(unittest.TestCase):
                                    "in the numerator")
 
     def testGetDatum_underFilledBuffer(self):
-
         tf = DiscreteTransferFunction(list(reversed(range(10))), [1])
         tf.append(1)
         tf.append(2)
@@ -86,7 +76,6 @@ class TestDiscreteTransferFunction(unittest.TestCase):
                                    "the lowest order coefficients")
 
     def testGetDatum_fibonacci(self):
-
         tf = DiscreteTransferFunction([1, 1, 0], [1])
         fibonacciNumbers = [1, 1]
         tf.append(1)
@@ -132,7 +121,6 @@ class TestDiscreteTransferFunction(unittest.TestCase):
                         "!= " + str(inverseFibonacciNumbers))
 
     def testGetDatum_regularAndInverseFibonacci(self):
-
         tf = DiscreteTransferFunction([1, 1, 0], [1, 1, 0])
         regularAndInverseFibonacciNumbers = [1, 1]
         tf.append(1)
@@ -154,7 +142,6 @@ class TestDiscreteTransferFunction(unittest.TestCase):
                         "!= " + str(regularAndInverseFibonacciNumbers))
 
     def testStr_nominal(self):
-
         tf = DiscreteTransferFunction([1, -1], [1, -1.85, 0.9])
         self.assertEqual(str(tf), "       z - 1\n"
                                   "-------------------\n"
@@ -163,7 +150,6 @@ class TestDiscreteTransferFunction(unittest.TestCase):
                          "pretty string.")
 
     def testStr_leadingCoefficientOtherThanOne(self):
-
         tf = DiscreteTransferFunction([2, -2], [1, -0.8])
         self.assertEqual(str(tf), "2 z - 2\n"
                                   "--------\n"
@@ -173,7 +159,6 @@ class TestDiscreteTransferFunction(unittest.TestCase):
                          "one")
 
     def testStr_leadingCoefficientsAreConstantTermsAndOne(self):
-
         tf = DiscreteTransferFunction([1], [1])
         self.assertEqual(str(tf), "1\n"
                                   "-\n"

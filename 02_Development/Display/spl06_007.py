@@ -219,11 +219,18 @@ class Communicator():
             self._i2c_address = SensorConstants.DEVICE_ADDRESS_SDO_HIGH
         else:
             self._i2c_address = SensorConstants.DEVICE_ADDRESS_SDO_LOW
-        self._i2c = I2CInterface(self._i2c_address)
+        self._i2c = I2CInterface(self._i2c_address,
+                                 dump_communication=dump_communication)
         self._i2c.find_device()
         self._reset_sensor()
         self.set_op_mode(PressureSensor.OpMode.standby)
         self._calculate_calibration_coefficients()
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        self.close()
 
     def close(self):
         """Deinitializes and unlocks the I2C bus."""
