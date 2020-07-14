@@ -105,10 +105,11 @@ else:
 
         def poll(self):
             """Pulls data from the pressure and flow sensors"""
+            datum = tuple((self._fake_data.pressures[self._data_index],
+                           self._fake_data.flow_rates[self._data_index])
+                          for _ in range(constants.NUMBER_OF_PATIENTS))
             self._data_index += 1
-            return tuple((self._fake_data.pressures[self._data_index-1],
-                          self._fake_data.flow_rates[self._data_index-1])
-                         for _ in range(constants.NUMBER_OF_PATIENTS))
+            return datum
 
         def _tubes_with_enough_sensors(self, tubes_sensors):
             tubes = []

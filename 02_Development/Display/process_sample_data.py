@@ -20,7 +20,6 @@ class ProcessSampleData():
     volume, and the last representing ten times the pressure.
     """
 
-
     def __init__(self, path_to_data):
         self._flow_data_file = open(path_to_data, "r")
         self._parseData()
@@ -43,15 +42,14 @@ class ProcessSampleData():
         milliseconds since the first data point
         """
 
-        return [ timestamp - self.timestamps[0]
-                 for timestamp in self.timestamps ]
-    
+        return [timestamp - self.timestamps[0]
+                for timestamp in self.timestamps]
 
     @property
     def flow_rates(self):
         """Gives the list of flow rates in mL/s"""
         return self._flow_rates
-    
+
     @property
     def tidal_volumes(self):
         """Gives the list of tidal volumes in mL"""
@@ -61,7 +59,6 @@ class ProcessSampleData():
     def pressures(self):
         """Gives the list of pressures in cmH2O"""
         return self._pressures
-    
 
     def _parseData(self):
         self._timestamps = []
@@ -78,22 +75,23 @@ class ProcessSampleData():
                 self._timestamps.append(float(splitDatum[0]))
             except ValueError:
                 self._timestamps \
-                     .append(timezone("US/Pacific")
-                             .localize(datetime
-                                       .strptime(splitDatum[0],
-                                                 "%H:%M:%S.%f")
-                                       .replace(year=2020,
+                    .append(timezone("US/Pacific")
+                            .localize(datetime
+                                      .strptime(splitDatum[0],
+                                                "%H:%M:%S.%f")
+                                      .replace(year=2020,
                                                month=6,
                                                day=9))
-                             .astimezone(pytz.utc)
-                             .timestamp() * 1000.0)
+                            .astimezone(pytz.utc)
+                            .timestamp() * 1000.0)
 
             self._flow_rates.append(float(splitDatum[1]
                                           .replace(flow_rate_marker,
                                                    "")
                                           .strip("\n")) / 10)
             self._tidal_volumes.append(float(splitDatum[2]
-                                             .replace(tidal_volume_marker,     "")
+                                             .replace(tidal_volume_marker,
+                                                      "")
                                              .strip("\n")))
 
             if (pressure_marker in datum):
@@ -101,4 +99,3 @@ class ProcessSampleData():
                                              .replace(pressure_marker,
                                                       "")
                                              .strip("\n")) / 10)
-

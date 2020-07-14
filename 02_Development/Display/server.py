@@ -16,12 +16,12 @@ class Calculator():
     def __init__(self):
 
         self._calculators = \
-            tuple(PatientTubingDescriptorCalculator()
+            tuple(PatientTubingDescriptorCalculator(time.time())
                   for _ in range(constants.NUMBER_OF_PATIENTS))
 
     def add_datum(self, datum):
         for i in range(len(self._calculators)):
-            self._calculators[i].add_flow_rate_datum(datum[i][0])
+            self._calculators[i].add_flow_rate_datum(datum[i][0], time.time())
             self._calculators[i].add_pressure_datum(datum[i][1])
 
     def get_datum(self):

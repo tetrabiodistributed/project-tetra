@@ -24,11 +24,7 @@ if "__main__" == __name__:
             raw_temperature = comms.raw_temperature()
             pressure = calibrator.pressure(raw_pressure, raw_temperature)
             temperature = calibrator.temperature(raw_temperature)
-            # print(f"pressure: {pressure}\ttemperature: {temperature}\n"
-            #       f"raw pressure: {raw_pressure}\t\t"
-            #       f"raw temperature: {raw_temperature}\n")
             time.sleep(1.0)
-            break
         except KeyboardInterrupt:
             running = False
             comms.close()

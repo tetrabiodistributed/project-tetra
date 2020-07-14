@@ -347,9 +347,11 @@ class Communicator():
                 SensorConstants.COMMAND_PRESSURE
             )
 
-        while (self._i2c.read_register(SensorConstants.SENSOR_OP_MODE)
-               & SensorConstants.PRS_RDY) == 0:
-            time.sleep(self._READY_WAIT_TIME)
+        def pressure_ready(): return (
+            self._i2c.read_register(SensorConstants.SENSOR_OP_MODE)
+            & SensorConstants.PRS_RDY == 0)
+        self._wait_for_condition_else_timeout(pressure_ready, 4)
+
         pressure_msb = self._i2c.read_register(
             SensorConstants.PRESSURE_MSB)
         pressure_lsb = self._i2c.read_register(
@@ -424,9 +426,10 @@ class Communicator():
             self._i2c.write_register(SensorConstants.SENSOR_OP_MODE,
                                      SensorConstants.COMMAND_TEMPERATURE)
 
-        while (self._i2c.read_register(SensorConstants.SENSOR_OP_MODE)
-               & SensorConstants.TMP_RDY) == 0:
-            time.sleep(self._READY_WAIT_TIME)
+        def temperature_ready(): return (
+            self._i2c.read_register(SensorConstants.SENSOR_OP_MODE)
+            & SensorConstants.TMP_RDY == 0)
+        self._wait_for_condition_else_timeout(temperature_ready, 4)
 
         temperature_msb = self._i2c.read_register(
             SensorConstants.TEMPERATURE_MSB)
@@ -459,9 +462,10 @@ class Communicator():
         {c0, c1} 12 bit 2´s complement numbers.
         """
 
-        while (self._i2c.read_register(SensorConstants.SENSOR_OP_MODE)
-               & SensorConstants.COEF_RDY) == 0:
-            time.sleep(self._READY_WAIT_TIME)
+        def coefficients_ready(): return(
+            self._i2c.read_register(SensorConstants.SENSOR_OP_MODE)
+            & SensorConstants.COEF_RDY == 0)
+        self._wait_for_condition_else_timeout(coefficients_ready, 4)
 
         _c0_11_4 = self._i2c.read_register(SensorConstants.C0_11_4)
         _c0_3_0_c1_11_8 = (
@@ -521,10 +525,20 @@ class Communicator():
         self._i2c.write_register(SensorConstants.RESET_AND_FLUSH,
                                  SensorConstants.SOFT_RESET)
         time.sleep(reset_time)
-        while (self._i2c.read_register(SensorConstants.SENSOR_OP_MODE)
-               & SensorConstants.SENSOR_RDY == 0):
-            # Wait for the sensor to be ready
-            time.sleep(0.005)
+
+        def sensor_ready(): return (
+            self._i2c.read_register(SensorConstants.SENSOR_OP_MODE)
+            & SensorConstants.SENSOR_RDY != 0)
+        self._wait_for_condition_else_timeout(sensor_ready, 4)
+
+    def _wait_for_condition_else_timeout(self, conditionFunction, timeout):
+
+        start_time = time.time()
+        while not conditionFunction():
+            if time.time() - start_time > timeout:
+                return False
+            time.sleep(self._READY_WAIT_TIME)
+        return True
 
     def _twos_complement(self, value, bits):
 
