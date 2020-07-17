@@ -1,6 +1,6 @@
 # Parts Released for production #
 
-**2020-07-13**
+(Project Tetra Printing Doc)[https://docs.google.com/spreadsheets/d/1FWTYRxglWDqIK_xI6HlBGKUegICQRsXe5NHCJTlTlHs/edit#gid=563995584&range=A2]
 
 Part number | Description | Quantity
 ------------ | ------------ | ------------ 
@@ -20,3 +20,9 @@ P-TET-000014-0 | Handle | 2
 P-TET-000015-0 | Corner Bracket Left | 1
 P-TET-000016-0 | Corner Bracket Right | 1
 P-TET-000017-0 | RPi display mounting bracket | 2
+P-TET-000018-0 | Shut off Valve Main Body | 4
+P-TET-000019-0 | Shut off Valve Thru Body | 8
+P-TET-000020-0 | Shut off Valve Cap | 8
+P-TET-000021-0 | Shut off Valve Knob | 8
+P-TET-000022-0 | Tetra Valve Plunger | 4
+P-TET-000023-0 | Tetra Valve Main Body | 4 
