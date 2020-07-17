@@ -1,6 +1,6 @@
 # Parts Released for production #
 
-(Project Tetra Printing Doc)[https://docs.google.com/spreadsheets/d/1FWTYRxglWDqIK_xI6HlBGKUegICQRsXe5NHCJTlTlHs/edit#gid=563995584&range=A2]
+[Project Tetra Printing Doc](https://docs.google.com/spreadsheets/d/1FWTYRxglWDqIK_xI6HlBGKUegICQRsXe5NHCJTlTlHs/edit#gid=563995584&range=A2)
 
 Part number | Description | Quantity
 ------------ | ------------ | ------------ 
