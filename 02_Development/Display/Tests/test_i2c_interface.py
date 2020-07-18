@@ -17,8 +17,8 @@ class TestI2CInterface(unittest.TestCase):
         self._i2c.close()
 
     def test_warn_when_i2c_isnt_available(self):
-        self._i2c.close()
         if not is_on_raspberry_pi():
+            self._i2c.close()
             with self.assertWarns(UserWarning,
                                   msg="Fails to warn the user when I2C "
                                   "communication isn't available."):

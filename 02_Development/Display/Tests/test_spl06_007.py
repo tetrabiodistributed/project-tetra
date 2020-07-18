@@ -13,7 +13,9 @@ from spl06_007 import (PressureSensor,
 from spl06_007 import PressureSensor, Communicator, Calibrator
 >>>>>>> changed the sensors module so it will read data from a file when it's not run on a raspberry pi and added the start of a behave test to verify that the Docker image works.
 from i2c_interface import I2CInterface
+from tca9548a import I2CMux
 from rpi_check import is_on_raspberry_pi
+<<<<<<< HEAD
 =======
 import board
 import busio
@@ -23,25 +25,39 @@ from spl06_007 import PressureSensor, Communicator, Calibrator
 from i2c_interface import I2CInterface
 from rpi_check import is_on_raspberry_pi
 >>>>>>> wrote a driver for the flow sensor.  It passes tests outside of hardware, but with hardware hasn't been verified yet.  Also added an off-hardware version of I2CInterface
+=======
+import constants    
+>>>>>>> Made most of the tests pass on hardware, working on the last stragglers
 
 
 class TestPressureSensor(unittest.TestCase):
 
     def setUp(self):
-        self._mux_select(0)
+        self._mux = I2CMux(constants.PRESSURE_SENSOR_MUX_ADDRESS)
+        self._mux.select_channel(0)
         self._sensor = PressureSensor()
 
     def tearDown(self):
         self._sensor.close()
+        self._mux.close()
 
-    def _mux_select(self, channel):
-        if channel > 7:
-            raise ValueError("Multiplexor channel must be an integer 0-7")
-        else:
-            pressure_mux_address = 0x70
-            I2CInterface(pressure_mux_address).write_data(
-                bytes([1 << channel]))
+    @unittest.skipIf(not is_on_raspberry_pi(),
+                     "Pressure sensor won't be present unless you're on "
+                     "hardware.")
+    def test_is_present(self):
+        self.assertTrue(self._sensor.is_present(),
+                        "Fails to identify that the sensor is present.\n"
+                        "Note that if the sensor is not connected, this "
+                        "test will fail.")
 
+    @unittest.skipIf(is_on_raspberry_pi(),
+                     "This can only be tested non-interactively off of "
+                     "hardware.")
+    def test_not_is_present(self):
+        self.assertTrue(not self._sensor_is_present(),
+                        "Fails to correctly identify that a sensor is not "
+                        "present.")
+        
     def test_set_op_mode_standby(self):
         self.assertEqual(
             self._sensor.set_op_mode(PressureSensor.OpMode.standby),
@@ -362,10 +378,15 @@ class TestCommunicator(unittest.TestCase):
                                 category=ResourceWarning)
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         self._mux_select(0)
 =======
         self._mux_select(4)
 >>>>>>> changed the sensors module so it will read data from a file when it's not run on a raspberry pi and added the start of a behave test to verify that the Docker image works.
+=======
+        self._mux = I2CMux(constants.PRESSURE_SENSOR_MUX_ADDRESS)
+        self._mux.select_channel(0)
+>>>>>>> Made most of the tests pass on hardware, working on the last stragglers
         self._communicator = Communicator()
 =======
         self._mux_select(0)
@@ -378,14 +399,7 @@ class TestCommunicator(unittest.TestCase):
 
     def tearDown(self):
         self._communicator.close()
-
-    def _mux_select(self, channel):
-        if channel > 7:
-            raise ValueError("Multiplexor channel must be an integer 0-7")
-        else:
-            pressure_mux_address = 0x70
-            I2CInterface(pressure_mux_address).write_data(
-                bytes([1 << channel]))
+        self._mux.close()
 
     def test_set_op_mode_standby(self):
         self.assertEqual(

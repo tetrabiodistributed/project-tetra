@@ -17,9 +17,18 @@ class PressureSensor():
         self._sampling_set = False
         self._first_measurement_has_happened = False
 
+    def __enter__(self):
+        return self._communicator.__enter__()
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        self._communicator.__exit__(exc_type, exc_val, exc_tb)
+
     def close(self):
         """Deinitializes and unlocks the I2C bus."""
         self._communicator.close()
+
+    def is_present(self):
+        return self._communicator.is_present()
 
     def set_sampling(self,
                      pressure_oversample=16,
@@ -144,11 +153,29 @@ class PressureSensor():
 
 
 class Calibrator():
+    """Takes raw data from a SPL06-007 pressure sensor and converts it
+    to pressure data in Pa and temperature data in degC.
+    """
 
     def __init__(self,
                  calibration_coefficients,
                  pressure_scaling_factor,
                  temperature_scaling_factor):
+        """Initializes self.
+
+        Parameters
+        ----------
+        calibration_coefficients : iterable
+            An iterable with the coefficients
+            (c0, c1, c00, c10, c01, c11, c20, c21, c30) as defined in the
+            data sheet.
+        pressure_scaling_factor : int
+            A scaling factor corresponding with the selected pressure
+            oversampling.
+        temperature_scaling_factor : int
+            A scaling factor corresponding with the selected temperature
+            oversampling
+        """
         self._c0 = calibration_coefficients[0]
         self._c1 = calibration_coefficients[1]
         self._c00 = calibration_coefficients[2]
@@ -168,6 +195,15 @@ class Calibrator():
         self._temperature_scaling_factor = temperature_scaling_factor
 
     def pressure(self, raw_pressure, raw_temperature):
+        """Pressure in Pa.
+
+        Parameters
+        ----------
+        raw_pressure : int
+            Raw pressure from the sensor.
+        raw_temperature : int
+            Raw temperature from the sensor.
+        """
         scaled_pressure = raw_pressure / self._pressure_scaling_factor
         scaled_temperature = (raw_temperature
                               / self._temperature_scaling_factor)
@@ -185,6 +221,13 @@ class Calibrator():
         return compensated_pressure
 
     def temperature(self, raw_temperature):
+        """Temperature in degC
+        
+        Parameters
+        ----------
+        raw_temperature : int
+            Raw temperature from the sensor.
+        """
         scaled_temperature = (raw_temperature
                               / self._temperature_scaling_factor)
         compensated_temperature = (
@@ -199,7 +242,7 @@ class Communicator():
 
     Parameters
     ----------
-    SDO_high = True: bool
+    SDO_high=True: bool
         Set to false if the SDO pin on the SPL06-007 is pulled to ground
     dump_communication=False: bool
         For every read or write to the I2C device, the transmitted and
@@ -256,6 +299,12 @@ class Communicator():
     def close(self):
         """Deinitializes and unlocks the I2C bus."""
         self._i2c.close()
+
+    def is_present(self):
+        if self._i2c_address in self._i2c.scan():
+            return True
+        else:
+            return False
 
     def set_op_mode(self, mode):
         """Sets the pressure sensor into a mode for data collection
@@ -381,9 +430,15 @@ class Communicator():
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         def pressure_ready(): return (
             self._i2c.read_register(SensorConstants.SENSOR_OP_MODE)
             & SensorConstants.PRS_RDY == 0)
+=======
+        def pressure_ready():
+            return (self._i2c.read_register(SensorConstants.SENSOR_OP_MODE)
+                    & SensorConstants.PRS_RDY != 0)
+>>>>>>> Made most of the tests pass on hardware, working on the last stragglers
         self._wait_for_condition_else_timeout(pressure_ready, 4)
 
 =======
@@ -488,9 +543,15 @@ class Communicator():
                                      SensorConstants.COMMAND_TEMPERATURE)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         def temperature_ready(): return (
             self._i2c.read_register(SensorConstants.SENSOR_OP_MODE)
             & SensorConstants.TMP_RDY == 0)
+=======
+        def temperature_ready():
+            return (self._i2c.read_register(SensorConstants.SENSOR_OP_MODE)
+                    & SensorConstants.TMP_RDY != 0)
+>>>>>>> Made most of the tests pass on hardware, working on the last stragglers
         self._wait_for_condition_else_timeout(temperature_ready, 4)
 =======
         while (self._i2c.read_register(SensorConstants.SENSOR_OP_MODE)
@@ -561,9 +622,15 @@ class Communicator():
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         def coefficients_ready(): return(
             self._i2c.read_register(SensorConstants.SENSOR_OP_MODE)
             & SensorConstants.COEF_RDY == 0)
+=======
+        def coefficients_ready():
+            return (self._i2c.read_register(SensorConstants.SENSOR_OP_MODE)
+                    & SensorConstants.COEF_RDY != 0)
+>>>>>>> Made most of the tests pass on hardware, working on the last stragglers
         self._wait_for_condition_else_timeout(coefficients_ready, 4)
 =======
         while (self._i2c.read_register(SensorConstants.SENSOR_OP_MODE)

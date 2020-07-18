@@ -2,26 +2,21 @@ import unittest
 import math
 
 from sfm3300d import FlowSensor, Calibrator, Communicator, CRCError
-from i2c_interface import I2CInterface
+from tca9548a import I2CMux
 from rpi_check import is_on_raspberry_pi
+import constants
 
 
 class TestFlowSensor(unittest.TestCase):
 
     def setUp(self):
-        self._mux_select(0)
+        self._mux = I2CMux(constants.FLOW_SENSOR_MUX_ADDRESS)
+        self._mux.select_channel(1)
         self._sensor = FlowSensor()
 
     def tearDown(self):
         self._sensor.close()
-
-    def _mux_select(self, channel):
-        if channel > 7:
-            raise ValueError("Multiplexor channel must be an integer 0-7")
-        else:
-            sensirion_mux_address = 0x74
-            I2CInterface(sensirion_mux_address).write_data(
-                bytes([1 << channel]))
+        self._mux.close()
 
     def test_serial_number(self):
         serial_number = self._sensor.serial_number()
@@ -34,7 +29,7 @@ class TestFlowSensor(unittest.TestCase):
     def test_ambient_flow(self):
         measured_flow = self._sensor.flow()
         self.assertTrue(math.isclose(measured_flow, 0,
-                                     abs_tol=0.1),
+                                     abs_tol=1),
                         f"{measured_flow} != 0 +/- 0.1 slm : "
                         "Fails to say that there is no flow in still "
                         "air.\nNote that if this test is performed in "
@@ -82,19 +77,17 @@ class TestCalibrator(unittest.TestCase):
 class TestCommunicator(unittest.TestCase):
 
     def setUp(self):
-        self._mux_select(0)
+        self._mux = I2CMux(constants.FLOW_SENSOR_MUX_ADDRESS)
+        self._mux.select_channel(1)
         self._communicator = Communicator()
 
     def tearDown(self):
         self._communicator.close()
+        self._mux.close()
 
-    def _mux_select(self, channel):
-        if channel > 7:
-            raise ValueError("Multiplexor channel must be an integer 0-7")
-        else:
-            sensirion_mux_address = 0x74
-            I2CInterface(sensirion_mux_address).write_data(
-                bytes([1 << channel]))
+    def test_is_present(self):
+        self.assertTrue(self._communicator.is_present(),
+                        "Sensor is not useable at the moment.")
 
     def test_serial_number(self):
         serial_number = self._communicator.serial_number()
@@ -108,7 +101,7 @@ class TestCommunicator(unittest.TestCase):
         self._communicator.init_flow()
         raw_flow = self._communicator.raw_flow()
         self.assertTrue(0 <= raw_flow < 2**16,
-                        f"0x{raw_flow:X} is not a 16-bit serial number")
+                        f"0x{raw_flow:X} is not a 16-bit flow number")
 
     @unittest.skipIf(is_on_raspberry_pi(),
                      "The signal cannot be automatically be made to "

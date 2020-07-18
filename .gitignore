@@ -8,12 +8,17 @@
 # python
 __pycache__
 venv
+*.pyc
 
 # hugo
 public/
 resources/
 node_modules/
 tech-doc-hugo
+
+# emacs
+*~
+*#
 
 # random
 .DS_Store

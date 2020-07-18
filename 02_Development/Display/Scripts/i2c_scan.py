@@ -1,19 +1,27 @@
 import board
 import busio
+import sys
+from pathlib import Path
+sys.path.append(str(Path(".").absolute().parent))
 
-i2c = busio.I2C(board.SCL, board.SDA)
+from tca9548a import I2CMux
+import constants
 
-def mux_select(channel, mux_address):
-    if channel > 7:
-            raise ValueError("Multiplexor channel must be an integer 0-7")
-    else:
-        busio.I2C(board.SCL, board.SDA).writeto(mux_address,
-                                                bytes([1 << channel]))
+pressure_sensor_mux = I2CMux(constants.PRESSURE_SENSOR_MUX_ADDRESS)
 
+print(f"Initial scan:\t\t{pressure_sensor_mux.scan()}")
 
-initial_scan = i2c.scan()
-print(f"Initial scan:\t{initial_scan}")
-for address in initial_scan:
-    for i in range(8):
-        mux_select(i, address)
-        print(f"{address} Mux Port {i}:\t{i2c.scan()}")
+for i in range(8):
+    pressure_sensor_mux.select_channel(i)
+    print(f"{constants.PRESSURE_SENSOR_MUX_ADDRESS:#x} Mux Port {i}:"
+          f"\t{pressure_sensor_mux.scan()}")
+pressure_sensor_mux.close()
+    
+flow_sensor_mux = I2CMux(constants.FLOW_SENSOR_MUX_ADDRESS)
+    
+for i in range(8):
+    flow_sensor_mux.select_channel(i)
+    print(f"{constants.FLOW_SENSOR_MUX_ADDRESS:#x} Mux Port {i}:"
+          f"\t{flow_sensor_mux.scan()}")
+flow_sensor_mux.close()
+
