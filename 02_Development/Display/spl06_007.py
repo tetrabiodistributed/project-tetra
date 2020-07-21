@@ -12,8 +12,9 @@ class PressureSensor():
     https://datasheet.lcsc.com/szlcsc/1912111437_Goertek-SPL06-007_C233787.pdf
     """
 
-    def __init__(self):
-        self._communicator = Communicator()
+    def __init__(self, dump_communication=False):
+        self._communicator = Communicator(
+            dump_communication=dump_communication)
         self._sampling_set = False
         self._first_measurement_has_happened = False
 
@@ -222,7 +223,7 @@ class Calibrator():
 
     def temperature(self, raw_temperature):
         """Temperature in degC
-        
+
         Parameters
         ----------
         raw_temperature : int

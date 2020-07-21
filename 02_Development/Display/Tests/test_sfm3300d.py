@@ -11,7 +11,7 @@ class TestFlowSensor(unittest.TestCase):
 
     def setUp(self):
         self._mux = I2CMux(constants.FLOW_SENSOR_MUX_ADDRESS)
-        self._mux.select_channel(1)
+        self._mux.select_channel(2)
         self._sensor = FlowSensor()
 
     def tearDown(self):
@@ -21,7 +21,8 @@ class TestFlowSensor(unittest.TestCase):
     def test_serial_number(self):
         serial_number = self._sensor.serial_number()
         self.assertTrue(0 <= serial_number < 2**32,
-                        f"{serial_number} is not a 32-bit serial number")
+                        f"{serial_number} is not an unsigned 32-bit "
+                        "serial number")
 
     @unittest.skipIf(not is_on_raspberry_pi(),
                      "Cannot determine ambient flow unless connected "
@@ -78,7 +79,7 @@ class TestCommunicator(unittest.TestCase):
 
     def setUp(self):
         self._mux = I2CMux(constants.FLOW_SENSOR_MUX_ADDRESS)
-        self._mux.select_channel(1)
+        self._mux.select_channel(2)
         self._communicator = Communicator()
 
     def tearDown(self):
@@ -92,7 +93,8 @@ class TestCommunicator(unittest.TestCase):
     def test_serial_number(self):
         serial_number = self._communicator.serial_number()
         self.assertTrue(0 <= serial_number < 2**32,
-                        f"0x{serial_number:X} is not a 32-bit serial number")
+                        f"{serial_number:#x} is not an unsigned 32-bit "
+                        "serial number")
 
     @unittest.skipIf(not is_on_raspberry_pi(),
                      "Signal isn't 2 bytes + CRC8 unless connected "
@@ -101,7 +103,7 @@ class TestCommunicator(unittest.TestCase):
         self._communicator.init_flow()
         raw_flow = self._communicator.raw_flow()
         self.assertTrue(0 <= raw_flow < 2**16,
-                        f"0x{raw_flow:X} is not a 16-bit flow number")
+                        f"{raw_flow:#x} is not a 16-bit flow number")
 
     @unittest.skipIf(is_on_raspberry_pi(),
                      "The signal cannot be automatically be made to "

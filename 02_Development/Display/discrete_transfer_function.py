@@ -65,11 +65,11 @@ class DiscreteTransferFunction(RingBuffer):
         return sum(coefficient * bufferValue
                    for (coefficient, bufferValue)
                    in zip(reversed(coefficients[:-1]), reversed(self))) \
-               + coefficients[-1]
+            + coefficients[-1]
 
     def __str__(self):
         """Makes a polynomial representation of the transfer function.
-        
+
         >>> print(DiscreteTransferFunction([1, -1], [1, -1.85, 0.9]))
               z - 1
         ------------------
@@ -79,7 +79,8 @@ class DiscreteTransferFunction(RingBuffer):
         numerator_string = self._z_polynomial(self._numerator)
         denominator_string = self._z_polynomial(self._denominator)
 
-        fraction_bar = "-" * max(len(numerator_string),len(denominator_string))
+        fraction_bar = "-" * max(len(numerator_string),
+                                 len(denominator_string))
 
         padding = " " * (abs(len(numerator_string)
                              - len(denominator_string)) // 2)
@@ -88,7 +89,8 @@ class DiscreteTransferFunction(RingBuffer):
         else:
             numerator_string = padding + numerator_string
 
-        return numerator_string + "\n" + fraction_bar + "\n" + denominator_string
+        return (numerator_string + "\n" + fraction_bar + "\n"
+                + denominator_string)
 
     def _z_polynomial(self, coefficients):
 
@@ -100,9 +102,10 @@ class DiscreteTransferFunction(RingBuffer):
                 if math.isclose(coefficients[i], 1) and i != 0:
                     polynomial_string = polynomial_string[1:]
             else:
-                polynomial_string = polynomial_string \
-                    + (" + " if coefficients[-(i+1)] >= 0 else " - ") \
-                    + self._z_term(abs(coefficients[-(i+1)]), i)
+                polynomial_string = (
+                    polynomial_string
+                    + (" + " if coefficients[-(i+1)] >= 0 else " - ")
+                    + self._z_term(abs(coefficients[-(i+1)]), i))
 
         return polynomial_string
 
@@ -111,8 +114,8 @@ class DiscreteTransferFunction(RingBuffer):
         if degree == 0:
             return str(coefficient)
         else:
-            coefficientString = "" if math.isclose(coefficient, 1) \
-                                   else str(coefficient)
+            coefficientString = ("" if math.isclose(coefficient, 1)
+                                 else str(coefficient))
             if degree == 1:
                 return coefficientString + " z"
             else:

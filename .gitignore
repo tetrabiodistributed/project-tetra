@@ -16,6 +16,9 @@ resources/
 node_modules/
 tech-doc-hugo
 
+# sublime
+sftp-config.json
+
 # emacs
 *~
 *#

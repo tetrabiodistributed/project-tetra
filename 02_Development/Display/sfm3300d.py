@@ -12,11 +12,12 @@ class FlowSensor():
     https://www.mouser.com/datasheet/2/682/Sensirion_Mass_Flow_Meters_SFM3300_Datasheet-1524535.pdf
     """
 
-    def __init__(self):
+    def __init__(self, dump_communication=False):
         """Initializes self."""
         self._calibrator = Calibrator(SensorConstants.OFFSET_FLOW,
                                       SensorConstants.SCALE_FACTOR_FLOW)
-        self._communicator = Communicator()
+        self._communicator = Communicator(
+            dump_communication=dump_communication)
         self._communicator.init_flow()
 
     def close(self):
@@ -50,7 +51,7 @@ class Calibrator():
             self._offset_flow = offset_flow
         else:
             self._offset_flow = SensorConstants.OFFSET_FLOW
-            
+
         if scale_factor_flow is not None:
             self._scale_factor_flow = scale_factor_flow
         else:
@@ -60,7 +61,7 @@ class Calibrator():
 
     def flow(self, measured_value):
         """Flow rate in standard liters per minute (SFM).
-        
+
         Parameters
         ----------
         measured_value : int
@@ -80,10 +81,10 @@ class Communicator():
     https://www.mouser.jp/pdfDocs/SFM3000_CRC_Checksum_Calculation.pdf
     """
 
-    def __init__(self):
+    def __init__(self, dump_communication=False):
         """Initializes self."""
         self._i2c = I2CInterface(SensorConstants.ADDRESS,
-                                 dump_communication=True)
+                                 dump_communication=dump_communication)
         if SensorConstants.ADDRESS in self._i2c.scan():
             print("reset")
             self._reset()

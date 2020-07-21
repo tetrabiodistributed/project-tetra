@@ -111,7 +111,7 @@ try:
 
         def close(self):
             self._i2c.unlock()
-        
+
         def scan(self):
             return self._i2c.scan()
 
@@ -174,16 +174,16 @@ try:
                     bytearray(
                         reversed([(integer >> 8*i) & 0xff
                                   for i in range(math.ceil((math.log2(integer)
-                                                              +1)/8))])))
+                                                            + 1)/8))
+                                  ])))
             else:
                 return bytearray([0])
 
 
-except ModuleNotFoundError:
+except NotImplementedError:
 
     class I2CInterface(I2CInterfaceBase):
         def __init__(self, address, dump_communication=False):
-            self._dump_communication = dump_communication
             warnings.warn("I2C communication is not available on this "
                           "hardware.  All data over I2C will be random "
                           "numbers.",
@@ -207,15 +207,10 @@ except ModuleNotFoundError:
             return self._read(number_of_bytes=number_of_bytes)
 
         def write_register(self, register, to_write):
-            time.sleep(0.0003)
-            if self._dump_communication:
-                print(f"{1000*time.time():.4f} "
-                      f"TX -> 0x" + bytes([register, to_write]).hex())
+            pass
 
         def write_data(self, byte):
-            if self._dump_communication:
-                print(f"{1000*time.time():.4f} TX -> 0x"
-                      + bytes([byte]).hex())
+            pass
 
         def _read(self, register=None, number_of_bytes=1):
             if number_of_bytes < 1:
@@ -227,18 +222,6 @@ except ModuleNotFoundError:
             else:
                 data = tuple(random.randrange(0, 255)
                              for _ in range(number_of_bytes))
-
-            if self._dump_communication:
-                if register is not None:
-                    print(f"{1000*time.time():.4f} TX -> 0x"
-                          + bytes([register]).hex())
-                rx_string = [f"{1000*time.time():.4f} RX <- 0x"]
-                if number_of_bytes > 1:
-                    rx_string.extend([f"{data[i]:02X}"
-                                      for i in range(number_of_bytes)])
-                else:
-                    rx_string.append(f"{data:02X}")
-                print("".join(rx_string))
 
             return data
 
