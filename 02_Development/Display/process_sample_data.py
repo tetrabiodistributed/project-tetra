@@ -1,6 +1,6 @@
 from datetime import datetime
 import pytz
-from pytz import timezone, common_timezones
+from pytz import timezone
 
 
 class ProcessSampleData():

@@ -54,7 +54,7 @@ class TestCalibrator(unittest.TestCase):
                                msg="Fails to raise a ZeroDivisionError "
                                "when initialized with a scale factor "
                                "flow equal to 0."):
-            calibrator = Calibrator(0, 0)
+            Calibrator(0, 0)
 
     def test_one_parameters_and_data(self):
         calibrator = Calibrator(1, 1)
@@ -120,4 +120,4 @@ class TestCommunicator(unittest.TestCase):
         with self.assertRaises(CRCError,
                                msg="Fails to raise an error when invalid "
                                "data is received."):
-            raw_flow = self._communicator.raw_flow()
+            self._communicator.raw_flow()

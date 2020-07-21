@@ -1,10 +1,7 @@
 import random
-import time
 
-import numpy as np
 from numpy_ringbuffer import RingBuffer
 
-from moving_average_filter import MovingAverageFilter
 from causal_integral_filter import CausalIntegralFilter
 
 

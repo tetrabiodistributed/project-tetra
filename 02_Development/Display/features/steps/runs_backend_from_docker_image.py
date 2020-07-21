@@ -12,11 +12,12 @@ import constants
 
 @given("A running Docker image on port {port}")
 def step_impl(context, port):
-    context.client.containers.run(context.tag,
+    context.port = port
+    context.client.containers.run(context.container_tag,
                                   name=context.container_name,
                                   detach=True,
                                   auto_remove=True,
-                                  ports={f"{port}": port})
+                                  ports={f"{context.port}": context.port})
     time.sleep(1.2)  # give the container a moment to start up
 
 

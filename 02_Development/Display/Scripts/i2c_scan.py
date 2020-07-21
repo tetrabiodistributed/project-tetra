@@ -1,7 +1,5 @@
 import constants
 from tca9548a import I2CMux
-import board
-import busio
 import sys
 from pathlib import Path
 sys.path.append(str(Path(".").absolute().parent))

@@ -3,10 +3,10 @@ import docker
 
 def before_all(context):
     context.client = docker.from_env()
+    context.container_tag = "zmq_proxy:latest"
     context.container_name = "zmq_proxy"
-    context.tag = "zmq_proxy:latest"
     context.image = context.client.images.build(path=".",
-                                                tag=context.tag)
+                                                tag=context.container_tag)
 
 
 def after_all(context):

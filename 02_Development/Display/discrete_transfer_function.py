@@ -1,5 +1,4 @@
 import math
-import numpy as np
 
 from numpy_ringbuffer import RingBuffer
 
@@ -34,7 +33,9 @@ class DiscreteTransferFunction(RingBuffer):
 
         where z^n is the nth most recent value added to the buffer.
         """
-
+        if all(math.isclose(i, 0.0) for i in denominator):
+            raise ZeroDivisionError("Denominator must have at least "
+                                    "one non-zero term.")
         super().__init__(max(len(numerator)-1, len(denominator)-1))
         self._numerator = numerator
         self._denominator = denominator
