@@ -111,13 +111,10 @@ try:
 
         def close(self):
             self._i2c.unlock()
+            self._i2c.deinit()
 
         def scan(self):
             return self._i2c.scan()
-
-        def close(self):
-            self._i2c.unlock()
-            self._i2c.deinit()
 
         def find_device(self, timeout=5):
             start_time = time.time()

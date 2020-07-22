@@ -1,11 +1,8 @@
 from behave import given, when, then
-from behave.api.async_step import async_run_until_complete
 import math
 import websocket
 import json
 import time
-
-import docker
 
 import constants
 

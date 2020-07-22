@@ -1,6 +1,5 @@
 import os
 from abc import ABC, abstractmethod
-import time
 
 from spl06_007 import PressureSensor
 from sfm3300d import FlowSensor
@@ -179,7 +178,7 @@ else:
                                                       NUMBER_OF_PATIENTS-1)
                                        ])
                     raise NotEnoughSensors(
-                        f"{len(self._tubes_with_enough_sensors(sensors))} "
+                        f"{len(self.tubes_with_enough_sensors())} "
                         "tube(s) do not have both a pressure sensor "
                         "and a flow sensor")
 
