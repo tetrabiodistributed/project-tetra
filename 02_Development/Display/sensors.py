@@ -1,5 +1,6 @@
 import os
 from abc import ABC, abstractmethod
+import warnings
 
 from spl06_007 import PressureSensor
 from sfm3300d import FlowSensor
@@ -127,7 +128,10 @@ if is_on_raspberry_pi():
                     and (constants.SENSIRION_SENSOR in sensors[i]
                          or constants.MASS_AIRFLOW_SENSOR in sensors[i])):
                     tubes.append(i)
-
+            if len(tubes) != constants.NUMBER_OF_PATIENTS:
+                warnings.warn("Not all tubes have a flow and a "
+                              "pressure sensor.",
+                              NotEnoughSensors)
             return tubes
 
         def calibration_pressure_sensor_connected(self):
@@ -165,22 +169,17 @@ else:
             self._data_index = 0
 
         def close(self):
-            self._fake_data.close()
+            pass
 
         def connected_sensors(self):
             try:
                 if (os.environ[constants.SENSOR_QUANTITY]
                         == constants.NOT_ENOUGH_SENSORS):
-                    sensors = tuple([(constants.PRESSURE_SENSOR,)]
-                                    + [(constants.PRESSURE_SENSOR,
-                                        constants.SENSIRION_SENSOR)
-                                       for _ in range(constants.
-                                                      NUMBER_OF_PATIENTS-1)
-                                       ])
-                    raise NotEnoughSensors(
-                        f"{len(self.tubes_with_enough_sensors())} "
-                        "tube(s) do not have both a pressure sensor "
-                        "and a flow sensor")
+                    return tuple([(constants.PRESSURE_SENSOR,)]
+                                 + [(constants.PRESSURE_SENSOR,
+                                     constants.SENSIRION_SENSOR)
+                                    for _ in range(constants.
+                                                   NUMBER_OF_PATIENTS-1)])
 
                 elif (os.environ[constants.SENSOR_QUANTITY]
                       == constants.TOO_MANY_SENSORS):
@@ -201,12 +200,16 @@ else:
         def tubes_with_enough_sensors(self):
             tubes = []
             sensors = self.connected_sensors()
-            for i in range(len(sensors)):
+            print(sensors)
+            for i in range(constants.NUMBER_OF_PATIENTS):
                 if (constants.PRESSURE_SENSOR in sensors[i]
                     and (constants.SENSIRION_SENSOR in sensors[i]
                          or constants.MASS_AIRFLOW_SENSOR in sensors[i])):
                     tubes.append(i)
-
+            if len(tubes) != constants.NUMBER_OF_PATIENTS:
+                warnings.warn("Not all tubes have a flow and a "
+                              "pressure sensor.",
+                              NotEnoughSensors)
             return tubes
 
         def calibration_pressure_sensor_connected(self, fail=False):
@@ -224,5 +227,5 @@ else:
             return datum
 
 
-class NotEnoughSensors(Exception):
+class NotEnoughSensors(Warning):
     pass

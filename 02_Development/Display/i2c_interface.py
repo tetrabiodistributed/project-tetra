@@ -207,21 +207,15 @@ except NotImplementedError:
             return self._read(number_of_bytes=number_of_bytes)
 
         def write_register(self, register, to_write):
-            time.sleep(0.0003)
-            if self._dump_communication:
-                print(f"{1000*time.time():.4f} "
-                      f"TX -> 0x" + bytes([register, to_write]).hex())
+            pass
 
         def write_data(self, byte):
-            if self._dump_communication:
-                print(f"{1000*time.time():.4f} TX -> 0x"
-                      + bytes([byte]).hex())
+            pass
 
         def _read(self, register=None, number_of_bytes=1):
             if number_of_bytes < 1:
                 raise ValueError("Cannot read fewer than 1 byte.")
 
-            time.sleep(0.0002)
             if number_of_bytes == 1:
                 data = random.randrange(0, 255)
             else:

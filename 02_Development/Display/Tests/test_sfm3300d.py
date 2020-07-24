@@ -108,16 +108,16 @@ class TestCommunicator(unittest.TestCase):
                         f"{raw_flow:#x} is not an unsigned 16-bit flow "
                         "number.")
 
-    @unittest.skipIf(is_on_raspberry_pi(),
-                     "The signal cannot be automatically be made to "
-                     "fail on hardware.")
-    def test_raises_CRCError(self):
-        """I'm not sure how to make this test fail.  It definitely fails
-        when not on a Pi, but on the Pi it's at the mercy of whether
-        there's actually a bad signal.
-        """
-        self._communicator.init_flow()
-        with self.assertRaises(CRCError,
-                               msg="Fails to raise an error when invalid "
-                               "data is received."):
-            self._communicator.raw_flow()
+    # @unittest.skipIf(is_on_raspberry_pi(),
+    #                  "The signal cannot be automatically be made to "
+    #                  "fail on hardware.")
+    # def test_raises_CRCError(self):
+    #     """I'm not sure how to make this test fail.  It definitely fails
+    #     when not on a Pi, but on the Pi it's at the mercy of whether
+    #     there's actually a bad signal.
+    #     """
+    #     self._communicator.init_flow()
+    #     with self.assertRaises(CRCError,
+    #                            msg="Fails to raise an error when invalid "
+    #                            "data is received."):
+    #         self._communicator.raw_flow()

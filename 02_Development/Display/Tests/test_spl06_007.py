@@ -36,7 +36,7 @@ class TestPressureSensor(unittest.TestCase):
                      "This can only be tested non-interactively off of "
                      "hardware.")
     def test_not_is_present(self):
-        self.assertTrue(not self._sensor_is_present(),
+        self.assertTrue(not self._sensor.is_present(),
                         "Fails to correctly identify that a sensor is not "
                         "present.")
 

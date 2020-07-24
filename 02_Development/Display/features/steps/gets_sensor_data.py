@@ -1,5 +1,6 @@
 import os
 from behave import given, when, then
+import warnings
 
 import server
 from sensors import Sensors, NotEnoughSensors
@@ -49,17 +50,21 @@ def step_impl(context):
 
 @when("the software diagnostic is run")
 def step_impl(context):
-    try:
+    with warnings.catch_warnings(record=True) as w:
+        warnings.simplefilter("always")
+        print("bar")
         context.sensors.tubes_with_enough_sensors()
-    except Exception as exception:
-        context.exception = exception
+        context.warnings = w
 
 
-@then("an exception {exception} will be raised")
-def step_impl(context, exception):
-    assert isinstance(context.exception, eval(exception)), \
-        ("Invalid exception\n"
-            f"{context.exception} received and {exception} expected")
+@then("{quantity:d} warning {warning} will be raised")
+def step_impl(context, quantity, warning):
+    assert len(context.warnings) == quantity, \
+        (f"{quantity} warnings expected, {len(context.warnings)} "
+         "warnings received.")
+    assert issubclass(context.warnings[-1].category, eval(warning)), \
+        (f"Recieved warning {context.warnings[-1].category} is not the "
+         f"expected warning {warning}")
 
 
 @given("{sensor} sensor on a tube")
