@@ -6,7 +6,7 @@ import constants
 
 @given("there are sensors connected")
 def step_impl(context):
-    context.sensors = server.Sensors(1, 1, 1, 1)
+    context.sensors = server.Sensors()
 
 
 @given("there is a calculator to parse sensor data")
