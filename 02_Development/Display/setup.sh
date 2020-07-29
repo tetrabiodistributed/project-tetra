@@ -3,10 +3,10 @@
 HIGHLIGHT='\033[0;33m'
 NO_COLOR='\033[0m'
 
+
 if ! [ -d venv ]; then
     python3 -m venv venv
 fi
-
 
 . venv/bin/activate
 

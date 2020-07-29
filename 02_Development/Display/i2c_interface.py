@@ -215,7 +215,6 @@ except NotImplementedError:
         def _read(self, register=None, number_of_bytes=1):
             if number_of_bytes < 1:
                 raise ValueError("Cannot read fewer than 1 byte.")
-
             if number_of_bytes == 1:
                 data = random.randrange(0, 255)
             else:
