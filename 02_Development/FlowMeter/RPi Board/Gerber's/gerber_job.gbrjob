@@ -1,0 +1,24 @@
+{
+    "Header": {
+        "Comment": "All values are metric (mm)",
+        "CreationDate": "2020-10-12T20:19:45Z",
+        "GenerationSoftware": {
+            "Application": "EAGLE",
+            "Vendor": "Autodesk",
+            "Version": "9.5.2"
+        },
+        "Part": "Single"
+    },
+    "Overall": {
+        "BoardThickness": 1.5723,
+        "LayerNumber": 2,
+        "Name": {
+            "ProjectId": "raspberry_pi_v003"
+        },
+        "Owner": "Daniel Smolentsev <DSmolentsev@omsi.edu>",
+        "Size": {
+            "X": 111.76,
+            "Y": 128.27
+        }
+    }
+}
