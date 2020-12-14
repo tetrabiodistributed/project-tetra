@@ -1,7 +1,7 @@
 {
     "Header": {
         "Comment": "All values are metric (mm)",
-        "CreationDate": "2020-12-08T18:49:58Z",
+        "CreationDate": "2020-12-14T04:31:30Z",
         "GenerationSoftware": {
             "Application": "EAGLE",
             "Vendor": "Autodesk",
@@ -10,12 +10,12 @@
         "Part": "Single"
     },
     "Overall": {
-        "BoardThickness": 1.5723,
+        "BoardThickness": 1.67,
         "LayerNumber": 2,
         "Name": {
             "ProjectId": "raspberry_pi_v004"
         },
-        "Owner": "Daniel Smolentsev <DSmolentsev@omsi.edu>",
+        "Owner": "Darragh Broadbent <darraghbroadbent@hotmail.co.uk>",
         "Size": {
             "X": 111.76,
             "Y": 128.27
