@@ -6256,7 +6256,11 @@ Scenario #3 - out in the field MAF sensors used
 - - 12VDC/5DC converter is active, jumper is made and RPI,Display, and peripherials powered by converter
 
 Scenario #4 - </text>
-<text x="-122.936" y="203.708" size="1.778" layer="91" align="top-left">version 004 12/5/2020
+<text x="-122.936" y="213.868" size="1.778" layer="91" align="top-left">version 005 14/12/2020 editor Darragh Broadbent
+- changed pull up resistor value between I2C multiplexer and slave devices to 3K from 10K
+- resolved clearance issues
+
+version 004 12/5/2020
 - add new 5V regulator
 
 version 003
