@@ -3,39 +3,39 @@
 <eagle version="9.6.2">
 <drawing>
 <settings>
-<setting alwaysvectorfont="yes"/>
+<setting alwaysvectorfont="no"/>
 <setting verticaltext="up"/>
 </settings>
 <grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="no" altdistance="0.01" altunitdist="inch" altunit="inch"/>
 <layers>
-<layer number="1" name="Top" color="4" fill="1" visible="yes" active="no"/>
-<layer number="2" name="Route2" color="1" fill="3" visible="yes" active="no"/>
-<layer number="3" name="Route3" color="4" fill="3" visible="yes" active="no"/>
-<layer number="4" name="Route4" color="1" fill="4" visible="yes" active="no"/>
-<layer number="5" name="Route5" color="4" fill="4" visible="yes" active="no"/>
-<layer number="6" name="Route6" color="1" fill="8" visible="yes" active="no"/>
-<layer number="7" name="Route7" color="4" fill="8" visible="yes" active="no"/>
-<layer number="8" name="Route8" color="1" fill="2" visible="yes" active="no"/>
-<layer number="9" name="Route9" color="4" fill="2" visible="yes" active="no"/>
-<layer number="10" name="Route10" color="1" fill="7" visible="yes" active="no"/>
-<layer number="11" name="Route11" color="4" fill="7" visible="yes" active="no"/>
-<layer number="12" name="Route12" color="1" fill="5" visible="yes" active="no"/>
-<layer number="13" name="Route13" color="4" fill="5" visible="yes" active="no"/>
-<layer number="14" name="Route14" color="1" fill="6" visible="yes" active="no"/>
-<layer number="15" name="Route15" color="4" fill="6" visible="yes" active="no"/>
-<layer number="16" name="Bottom" color="1" fill="1" visible="yes" active="no"/>
-<layer number="17" name="Pads" color="2" fill="1" visible="yes" active="no"/>
-<layer number="18" name="Vias" color="2" fill="1" visible="yes" active="no"/>
-<layer number="19" name="Unrouted" color="6" fill="1" visible="yes" active="no"/>
-<layer number="20" name="Dimension" color="24" fill="1" visible="yes" active="no"/>
-<layer number="21" name="tPlace" color="7" fill="1" visible="yes" active="no"/>
-<layer number="22" name="bPlace" color="7" fill="1" visible="yes" active="no"/>
-<layer number="23" name="tOrigins" color="15" fill="1" visible="yes" active="no"/>
-<layer number="24" name="bOrigins" color="15" fill="1" visible="yes" active="no"/>
-<layer number="25" name="tNames" color="7" fill="1" visible="yes" active="no"/>
-<layer number="26" name="bNames" color="7" fill="1" visible="yes" active="no"/>
-<layer number="27" name="tValues" color="7" fill="1" visible="yes" active="no"/>
-<layer number="28" name="bValues" color="7" fill="1" visible="yes" active="no"/>
+<layer number="1" name="Top" color="4" fill="1" visible="no" active="no"/>
+<layer number="2" name="Route2" color="1" fill="3" visible="no" active="no"/>
+<layer number="3" name="Route3" color="4" fill="3" visible="no" active="no"/>
+<layer number="4" name="Route4" color="1" fill="4" visible="no" active="no"/>
+<layer number="5" name="Route5" color="4" fill="4" visible="no" active="no"/>
+<layer number="6" name="Route6" color="1" fill="8" visible="no" active="no"/>
+<layer number="7" name="Route7" color="4" fill="8" visible="no" active="no"/>
+<layer number="8" name="Route8" color="1" fill="2" visible="no" active="no"/>
+<layer number="9" name="Route9" color="4" fill="2" visible="no" active="no"/>
+<layer number="10" name="Route10" color="1" fill="7" visible="no" active="no"/>
+<layer number="11" name="Route11" color="4" fill="7" visible="no" active="no"/>
+<layer number="12" name="Route12" color="1" fill="5" visible="no" active="no"/>
+<layer number="13" name="Route13" color="4" fill="5" visible="no" active="no"/>
+<layer number="14" name="Route14" color="1" fill="6" visible="no" active="no"/>
+<layer number="15" name="Route15" color="4" fill="6" visible="no" active="no"/>
+<layer number="16" name="Bottom" color="1" fill="1" visible="no" active="no"/>
+<layer number="17" name="Pads" color="2" fill="1" visible="no" active="no"/>
+<layer number="18" name="Vias" color="2" fill="1" visible="no" active="no"/>
+<layer number="19" name="Unrouted" color="6" fill="1" visible="no" active="no"/>
+<layer number="20" name="Dimension" color="24" fill="1" visible="no" active="no"/>
+<layer number="21" name="tPlace" color="7" fill="1" visible="no" active="no"/>
+<layer number="22" name="bPlace" color="7" fill="1" visible="no" active="no"/>
+<layer number="23" name="tOrigins" color="15" fill="1" visible="no" active="no"/>
+<layer number="24" name="bOrigins" color="15" fill="1" visible="no" active="no"/>
+<layer number="25" name="tNames" color="7" fill="1" visible="no" active="no"/>
+<layer number="26" name="bNames" color="7" fill="1" visible="no" active="no"/>
+<layer number="27" name="tValues" color="7" fill="1" visible="no" active="no"/>
+<layer number="28" name="bValues" color="7" fill="1" visible="no" active="no"/>
 <layer number="29" name="tStop" color="7" fill="3" visible="no" active="no"/>
 <layer number="30" name="bStop" color="7" fill="6" visible="no" active="no"/>
 <layer number="31" name="tCream" color="7" fill="4" visible="no" active="no"/>
@@ -44,8 +44,8 @@
 <layer number="34" name="bFinish" color="6" fill="6" visible="no" active="no"/>
 <layer number="35" name="tGlue" color="7" fill="4" visible="no" active="no"/>
 <layer number="36" name="bGlue" color="7" fill="5" visible="no" active="no"/>
-<layer number="37" name="tTest" color="7" fill="1" visible="yes" active="no"/>
-<layer number="38" name="bTest" color="7" fill="1" visible="yes" active="no"/>
+<layer number="37" name="tTest" color="7" fill="1" visible="no" active="no"/>
+<layer number="38" name="bTest" color="7" fill="1" visible="no" active="no"/>
 <layer number="39" name="tKeepout" color="4" fill="11" visible="no" active="no"/>
 <layer number="40" name="bKeepout" color="1" fill="11" visible="no" active="no"/>
 <layer number="41" name="tRestrict" color="4" fill="10" visible="no" active="no"/>
@@ -53,20 +53,20 @@
 <layer number="43" name="vRestrict" color="2" fill="10" visible="no" active="no"/>
 <layer number="44" name="Drills" color="7" fill="1" visible="no" active="no"/>
 <layer number="45" name="Holes" color="7" fill="1" visible="no" active="no"/>
-<layer number="46" name="Milling" color="3" fill="1" visible="yes" active="no"/>
-<layer number="47" name="Measures" color="7" fill="1" visible="yes" active="no"/>
-<layer number="48" name="Document" color="7" fill="1" visible="yes" active="no"/>
-<layer number="49" name="Reference" color="7" fill="1" visible="yes" active="no"/>
-<layer number="50" name="dxf" color="7" fill="1" visible="yes" active="no"/>
-<layer number="51" name="tDocu" color="7" fill="1" visible="yes" active="no"/>
-<layer number="52" name="bDocu" color="7" fill="1" visible="yes" active="no"/>
-<layer number="53" name="tGND_GNDA" color="7" fill="9" visible="yes" active="no"/>
-<layer number="54" name="bGND_GNDA" color="1" fill="9" visible="yes" active="no"/>
-<layer number="56" name="wert" color="7" fill="1" visible="yes" active="no"/>
-<layer number="57" name="tCAD" color="7" fill="1" visible="yes" active="no"/>
-<layer number="58" name="bCAD" color="11" fill="1" visible="yes" active="no"/>
-<layer number="59" name="tCarbon" color="7" fill="1" visible="yes" active="no"/>
-<layer number="60" name="bCarbon" color="7" fill="1" visible="yes" active="no"/>
+<layer number="46" name="Milling" color="3" fill="1" visible="no" active="no"/>
+<layer number="47" name="Measures" color="7" fill="1" visible="no" active="no"/>
+<layer number="48" name="Document" color="7" fill="1" visible="no" active="no"/>
+<layer number="49" name="Reference" color="7" fill="1" visible="no" active="no"/>
+<layer number="50" name="dxf" color="7" fill="1" visible="no" active="no"/>
+<layer number="51" name="tDocu" color="7" fill="1" visible="no" active="no"/>
+<layer number="52" name="bDocu" color="7" fill="1" visible="no" active="no"/>
+<layer number="53" name="tGND_GNDA" color="7" fill="9" visible="no" active="no"/>
+<layer number="54" name="bGND_GNDA" color="1" fill="9" visible="no" active="no"/>
+<layer number="56" name="wert" color="7" fill="1" visible="no" active="no"/>
+<layer number="57" name="tCAD" color="7" fill="1" visible="no" active="no"/>
+<layer number="58" name="bCAD" color="11" fill="1" visible="no" active="no"/>
+<layer number="59" name="tCarbon" color="7" fill="1" visible="no" active="no"/>
+<layer number="60" name="bCarbon" color="7" fill="1" visible="no" active="no"/>
 <layer number="88" name="SimResults" color="9" fill="1" visible="yes" active="yes"/>
 <layer number="89" name="SimProbes" color="9" fill="1" visible="yes" active="yes"/>
 <layer number="90" name="Modules" color="5" fill="1" visible="yes" active="yes"/>
@@ -5975,25 +5975,25 @@ by exp-lbrs.ulp</description>
 <part name="U6" library="microbuilder" deviceset="TCA9548A" device="" value=" TCA9548APWR"/>
 <part name="U$37" library="microbuilder" deviceset="GND" device=""/>
 <part name="C7" library="microbuilder" deviceset="CAP_CERAMIC" device="0805-NOOUTLINE" value="10uF"/>
-<part name="R7" library="SparkFun-Resistors" deviceset="0.3OHM" device="-0805-1/8W-1%" value="10K"/>
+<part name="R7" library="SparkFun-Resistors" deviceset="0.3OHM" device="-0805-1/8W-1%" value="3K"/>
 <part name="U$38" library="microbuilder" deviceset="3.3V" device=""/>
-<part name="R8" library="SparkFun-Resistors" deviceset="0.3OHM" device="-0805-1/8W-1%" value="10K"/>
+<part name="R8" library="SparkFun-Resistors" deviceset="0.3OHM" device="-0805-1/8W-1%" value="3K"/>
 <part name="U$39" library="microbuilder" deviceset="3.3V" device=""/>
-<part name="R9" library="SparkFun-Resistors" deviceset="0.3OHM" device="-0805-1/8W-1%" value="10K"/>
+<part name="R9" library="SparkFun-Resistors" deviceset="0.3OHM" device="-0805-1/8W-1%" value="3K"/>
 <part name="U$41" library="microbuilder" deviceset="3.3V" device=""/>
-<part name="R10" library="SparkFun-Resistors" deviceset="0.3OHM" device="-0805-1/8W-1%" value="10K"/>
+<part name="R10" library="SparkFun-Resistors" deviceset="0.3OHM" device="-0805-1/8W-1%" value="3K"/>
 <part name="U$42" library="microbuilder" deviceset="3.3V" device=""/>
-<part name="R13" library="SparkFun-Resistors" deviceset="0.3OHM" device="-0805-1/8W-1%" value="10K"/>
+<part name="R13" library="SparkFun-Resistors" deviceset="0.3OHM" device="-0805-1/8W-1%" value="3K"/>
 <part name="U$43" library="microbuilder" deviceset="3.3V" device=""/>
-<part name="R14" library="SparkFun-Resistors" deviceset="0.3OHM" device="-0805-1/8W-1%" value="10K"/>
+<part name="R14" library="SparkFun-Resistors" deviceset="0.3OHM" device="-0805-1/8W-1%" value="3K"/>
 <part name="U$44" library="microbuilder" deviceset="3.3V" device=""/>
-<part name="R15" library="SparkFun-Resistors" deviceset="0.3OHM" device="-0805-1/8W-1%" value="10K"/>
+<part name="R15" library="SparkFun-Resistors" deviceset="0.3OHM" device="-0805-1/8W-1%" value="3K"/>
 <part name="U$46" library="microbuilder" deviceset="3.3V" device=""/>
-<part name="R16" library="SparkFun-Resistors" deviceset="0.3OHM" device="-0805-1/8W-1%" value="10K"/>
+<part name="R16" library="SparkFun-Resistors" deviceset="0.3OHM" device="-0805-1/8W-1%" value="3K"/>
 <part name="U$47" library="microbuilder" deviceset="3.3V" device=""/>
-<part name="R17" library="SparkFun-Resistors" deviceset="0.3OHM" device="-0805-1/8W-1%" value="10K"/>
+<part name="R17" library="SparkFun-Resistors" deviceset="0.3OHM" device="-0805-1/8W-1%" value="3K"/>
 <part name="U$48" library="microbuilder" deviceset="3.3V" device=""/>
-<part name="R18" library="SparkFun-Resistors" deviceset="0.3OHM" device="-0805-1/8W-1%" value="10K"/>
+<part name="R18" library="SparkFun-Resistors" deviceset="0.3OHM" device="-0805-1/8W-1%" value="3K"/>
 <part name="U$49" library="microbuilder" deviceset="3.3V" device=""/>
 <part name="R19" library="SparkFun-Resistors" deviceset="0.3OHM" device="-0805-1/8W-1%" value="10K"/>
 <part name="GND15" library="SparkFun" deviceset="GND" device=""/>
@@ -6023,21 +6023,21 @@ by exp-lbrs.ulp</description>
 <part name="U7" library="microbuilder" deviceset="TCA9548A" device="" value=" TCA9548APWR"/>
 <part name="U$51" library="microbuilder" deviceset="GND" device=""/>
 <part name="C8" library="microbuilder" deviceset="CAP_CERAMIC" device="0805-NOOUTLINE" value="10u"/>
-<part name="R29" library="SparkFun-Resistors" deviceset="0.3OHM" device="-0805-1/8W-1%" value="10K"/>
+<part name="R29" library="SparkFun-Resistors" deviceset="0.3OHM" device="-0805-1/8W-1%" value="3K"/>
 <part name="U$52" library="microbuilder" deviceset="3.3V" device=""/>
-<part name="R30" library="SparkFun-Resistors" deviceset="0.3OHM" device="-0805-1/8W-1%" value="10K"/>
+<part name="R30" library="SparkFun-Resistors" deviceset="0.3OHM" device="-0805-1/8W-1%" value="3K"/>
 <part name="U$53" library="microbuilder" deviceset="3.3V" device=""/>
-<part name="R31" library="SparkFun-Resistors" deviceset="0.3OHM" device="-0805-1/8W-1%" value="10K"/>
+<part name="R31" library="SparkFun-Resistors" deviceset="0.3OHM" device="-0805-1/8W-1%" value="3K"/>
 <part name="U$54" library="microbuilder" deviceset="3.3V" device=""/>
-<part name="R32" library="SparkFun-Resistors" deviceset="0.3OHM" device="-0805-1/8W-1%" value="10K"/>
+<part name="R32" library="SparkFun-Resistors" deviceset="0.3OHM" device="-0805-1/8W-1%" value="3K"/>
 <part name="U$55" library="microbuilder" deviceset="3.3V" device=""/>
-<part name="R33" library="SparkFun-Resistors" deviceset="0.3OHM" device="-0805-1/8W-1%" value="10K"/>
+<part name="R33" library="SparkFun-Resistors" deviceset="0.3OHM" device="-0805-1/8W-1%" value="3K"/>
 <part name="U$56" library="microbuilder" deviceset="3.3V" device=""/>
-<part name="R34" library="SparkFun-Resistors" deviceset="0.3OHM" device="-0805-1/8W-1%" value="10K"/>
+<part name="R34" library="SparkFun-Resistors" deviceset="0.3OHM" device="-0805-1/8W-1%" value="3K"/>
 <part name="U$68" library="microbuilder" deviceset="3.3V" device=""/>
-<part name="R35" library="SparkFun-Resistors" deviceset="0.3OHM" device="-0805-1/8W-1%" value="10K"/>
+<part name="R35" library="SparkFun-Resistors" deviceset="0.3OHM" device="-0805-1/8W-1%" value="3K"/>
 <part name="U$69" library="microbuilder" deviceset="3.3V" device=""/>
-<part name="R36" library="SparkFun-Resistors" deviceset="0.3OHM" device="-0805-1/8W-1%" value="10K"/>
+<part name="R36" library="SparkFun-Resistors" deviceset="0.3OHM" device="-0805-1/8W-1%" value="3K"/>
 <part name="U$70" library="microbuilder" deviceset="3.3V" device=""/>
 <part name="R39" library="SparkFun-Resistors" deviceset="0.3OHM" device="-0805-1/8W-1%" value="10K"/>
 <part name="GND21" library="SparkFun" deviceset="GND" device=""/>
@@ -6256,7 +6256,11 @@ Scenario #3 - out in the field MAF sensors used
 - - 12VDC/5DC converter is active, jumper is made and RPI,Display, and peripherials powered by converter
 
 Scenario #4 - </text>
-<text x="-122.936" y="203.708" size="1.778" layer="91" align="top-left">version 004 12/5/2020
+<text x="-122.936" y="213.868" size="1.778" layer="91" align="top-left">version 005 14/12/2020 editor Darragh Broadbent
+- changed pull up resistor value between I2C multiplexer and slave devices to 3K from 10K
+- resolved clearance issues
+
+version 004 12/5/2020
 - add new 5V regulator
 
 version 003
