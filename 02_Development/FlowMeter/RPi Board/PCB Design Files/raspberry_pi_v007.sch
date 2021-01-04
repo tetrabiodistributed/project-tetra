@@ -6714,20 +6714,21 @@ LCSC Part # C19415
 Package SOT-23-3
 https://datasheet.lcsc.com/szlcsc/Texas-Instruments-TI-REF3040AIDBZR_C19415.pdf
 </text>
-<text x="190.5" y="0" size="1.778" layer="91" align="top-left">Q1 P-ch Mosfet
-MFR Part# AO3401A
-LCSC Part# C15127
-Package SOT-23-3
-https://datasheet.lcsc.com/szlcsc/Alpha-Omega-Semicon-AOS-AO3401A_C15127.pdf
-1-gate, 2-source, 3-drain
-
-Q2 Transistor
+<text x="190.5" y="0" size="1.778" layer="91" align="top-left">Q1 Transistor
 MFR Part# S8050
 LCSC Part# C2146
 Package SOT-23-3
 NPN 500MA 25V
 https://datasheet.lcsc.com/szlcsc/Changjiang-Electronics-Tech-CJ-S8050_C2146.pdf
 1-base, 2-emitter, 3-collector
+
+Q2 P-ch Mosfet
+MFR Part# AO3401A
+LCSC Part# C15127
+Package SOT-23-3
+https://datasheet.lcsc.com/szlcsc/Alpha-Omega-Semicon-AOS-AO3401A_C15127.pdf
+1-gate, 2-source, 3-drain
+
 </text>
 <text x="3.048" y="110.49" size="1.778" layer="91" align="top-left">Input Voltage 
 Sensor</text>
@@ -6747,7 +6748,11 @@ Scenario #3 - out in the field MAF sensors used
 - - 12VDC/5DC converter is active, jumper is made and RPI,Display, and peripherials powered by converter
 
 Scenario #4 - </text>
-<text x="-125.476" y="183.388" size="1.778" layer="91">version 007 01/01/2021 editor P CAMPBELL
+<text x="-125.476" y="183.388" size="1.778" layer="91">version 007b 03/01/2021 editor P CAMPBELL
+- Changed note on Q1 &amp; Q2
+DOCUMENTATION CHANGE ONLY
+
+version 007 01/01/2021 editor P CAMPBELL
 - Added missing part numbers, renumbered
 - Cleaned up ERC with approvals
 - Cleaned up Net Names

@@ -1089,12 +1089,13 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <class number="2" name="lowpower" width="0.3048" drill="0.4826">
 </class>
 </classes>
-<designrules name="jlcpcb-2layers - tetra git">
+<designrules name="jlcpcb-2layers *">
 <description language="en">&lt;b&gt;JLCPCB design rules (2 layers)&lt;/b&gt;
 &lt;ul&gt;
 &lt;li&gt;Board thickness: 1.6mm&lt;/li&gt;
 &lt;li&gt;Copper weight: 1oz (35um)&lt;/li&gt;
 &lt;li&gt;Note: annular ring aren't minimal&lt;/li&gt;
+&lt;li&gt;Mods to file by Tetra&lt;/li&gt;
 &lt;/ul&gt;</description>
 <param name="layerSetup" value="(1*16)"/>
 <param name="mtCopper" value="0.035mm 0.035mm 0.035mm 0.035mm 0.035mm 0.035mm 0.035mm 0.035mm 0.035mm 0.035mm 0.035mm 0.035mm 0.035mm 0.035mm 0.035mm 0.035mm"/>
