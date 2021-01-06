@@ -6396,6 +6396,127 @@ Warning: This is the KIT version of the AXIAL-0.3 package. This package has a sm
 </deviceset>
 </devicesets>
 </library>
+<library name="Fiducial">
+<description>Fiducial Marks
+&lt;br&gt;Alignment marks for fabrication and placement.
+&lt;p&gt;
+&lt;i&gt;05/24/17 - Changed circles to smd pads so locations show up in XY files. C. Nicks</description>
+<packages>
+<package name="FID_020">
+<description>Fiducial 20mil</description>
+<circle x="0" y="0" radius="0.508" width="0" layer="29"/>
+<circle x="0" y="0" radius="0.508" width="0" layer="30"/>
+<circle x="0" y="0" radius="0.635" width="0" layer="41"/>
+<circle x="0" y="0" radius="0.635" width="0" layer="42"/>
+<smd name="FIDT" x="0" y="0" dx="0.508" dy="0.508" layer="1" roundness="100" stop="no" thermals="no" cream="no"/>
+<smd name="FIDB" x="0" y="0" dx="0.508" dy="0.508" layer="16" roundness="100" stop="no" thermals="no" cream="no"/>
+</package>
+<package name="FID_040">
+<description>Fiducial 40mil</description>
+<circle x="0" y="0" radius="1.016" width="0" layer="29"/>
+<circle x="0" y="0" radius="1.016" width="0" layer="30"/>
+<circle x="0" y="0" radius="1.27" width="0" layer="41"/>
+<circle x="0" y="0" radius="1.27" width="0" layer="42"/>
+<smd name="FIDT" x="0" y="0" dx="1.016" dy="1.016" layer="1" roundness="100" stop="no" thermals="no" cream="no"/>
+<smd name="FIDB" x="0" y="0" dx="1.016" dy="1.016" layer="16" roundness="100" stop="no" thermals="no" cream="no"/>
+</package>
+<package name="FID_060">
+<description>Fiducial 60mil</description>
+<circle x="0" y="0" radius="1.27" width="0" layer="30"/>
+<circle x="0" y="0" radius="1.27" width="0" layer="29"/>
+<circle x="0" y="0" radius="1.524" width="0" layer="41"/>
+<circle x="0" y="0" radius="1.524" width="0" layer="42"/>
+<smd name="FIDT" x="0" y="0" dx="1.524" dy="1.524" layer="1" roundness="100" stop="no" thermals="no"/>
+<smd name="FIDB" x="0" y="0" dx="1.524" dy="1.524" layer="16" roundness="100" stop="no" thermals="no"/>
+</package>
+<package name="FID_020_P">
+<description>Fiducial 20mil with paste for alignment</description>
+<circle x="0" y="0" radius="0.508" width="0" layer="29"/>
+<circle x="0" y="0" radius="0.508" width="0" layer="30"/>
+<circle x="0" y="0" radius="0.635" width="0" layer="41"/>
+<circle x="0" y="0" radius="0.635" width="0" layer="42"/>
+<smd name="FIDT" x="0" y="0" dx="0.508" dy="0.508" layer="1" roundness="100" stop="no" thermals="no"/>
+<smd name="FIDB" x="0" y="0" dx="0.508" dy="0.508" layer="16" roundness="100" stop="no" thermals="no"/>
+</package>
+<package name="FID_040_P">
+<description>Fiducial 40mil with paste for alignment</description>
+<circle x="0" y="0" radius="1.016" width="0" layer="29"/>
+<circle x="0" y="0" radius="1.016" width="0" layer="30"/>
+<circle x="0" y="0" radius="1.27" width="0" layer="41"/>
+<circle x="0" y="0" radius="1.27" width="0" layer="42"/>
+<smd name="FIDT" x="0" y="0" dx="1.016" dy="1.016" layer="1" roundness="100" stop="no" thermals="no"/>
+<smd name="FIDB" x="0" y="0" dx="1.016" dy="1.016" layer="16" roundness="100" stop="no" thermals="no"/>
+</package>
+<package name="FID_060_P">
+<description>Fiducial 60mil with paste for alignment</description>
+<circle x="0" y="0" radius="1.27" width="0" layer="30"/>
+<circle x="0" y="0" radius="1.27" width="0" layer="29"/>
+<circle x="0" y="0" radius="1.524" width="0" layer="41"/>
+<circle x="0" y="0" radius="1.524" width="0" layer="42"/>
+<smd name="FIDT" x="0" y="0" dx="1.524" dy="1.524" layer="1" roundness="100" stop="no" thermals="no"/>
+<smd name="FIDB" x="0" y="0" dx="1.524" dy="1.524" layer="16" roundness="100" stop="no" thermals="no"/>
+</package>
+</packages>
+<symbols>
+<symbol name="FIDUCIAL">
+<description>Empty symbol so a blank device can be made. Sometimes when working with scripts and ULPs they error when there are board-only elements</description>
+<circle x="0" y="0" radius="0.254" width="0" layer="94"/>
+<text x="0" y="1.27" size="1.016" layer="95" font="vector" ratio="12">&gt;NAME</text>
+</symbol>
+</symbols>
+<devicesets>
+<deviceset name="FID" prefix="FD">
+<description>Fiducial marks. Top and Bottom copper with stop mask</description>
+<gates>
+<gate name="G$2" symbol="FIDUCIAL" x="0" y="0"/>
+</gates>
+<devices>
+<device name="_20MIL" package="FID_020">
+<technologies>
+<technology name="">
+<attribute name="BOM" value="" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="_40MIL" package="FID_040">
+<technologies>
+<technology name="">
+<attribute name="BOM" value="" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="_60MIL" package="FID_060">
+<technologies>
+<technology name="">
+<attribute name="BOM" value="" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="_20MIL_P" package="FID_020_P">
+<technologies>
+<technology name="">
+<attribute name="BOM" value="" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="_40MIL_P" package="FID_040_P">
+<technologies>
+<technology name="">
+<attribute name="BOM" value="" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="_60MIL_P" package="FID_060_P">
+<technologies>
+<technology name="">
+<attribute name="BOM" value="" constant="no"/>
+</technology>
+</technologies>
+</device>
+</devices>
+</deviceset>
+</devicesets>
+</library>
 </libraries>
 <attributes>
 </attributes>
@@ -6644,6 +6765,9 @@ Warning: This is the KIT version of the AXIAL-0.3 package. This package has a sm
 <part name="U$66" library="microbuilder" deviceset="GND" device=""/>
 <part name="U$67" library="microbuilder" deviceset="GND" device=""/>
 <part name="U$77" library="microbuilder" deviceset="GND" device=""/>
+<part name="FD1" library="Fiducial" deviceset="FID" device="_40MIL"/>
+<part name="FD2" library="Fiducial" deviceset="FID" device="_40MIL"/>
+<part name="FD3" library="Fiducial" deviceset="FID" device="_40MIL"/>
 </parts>
 <sheets>
 <sheet>
@@ -6748,15 +6872,13 @@ Scenario #3 - out in the field MAF sensors used
 - - 12VDC/5DC converter is active, jumper is made and RPI,Display, and peripherials powered by converter
 
 Scenario #4 - </text>
-<text x="-125.476" y="183.388" size="1.778" layer="91">version 007b 03/01/2021 editor P CAMPBELL
-- Changed note on Q1 &amp; Q2
-DOCUMENTATION CHANGE ONLY
-
-version 007 01/01/2021 editor P CAMPBELL
+<text x="-125.476" y="183.388" size="1.778" layer="91">version 007 06JAN2021 editor PC
 - Added missing part numbers, renumbered
 - Cleaned up ERC with approvals
 - Cleaned up Net Names
 - Layout cleanup (extensive)
+- Added fiducials (3)
+- Changed documentation note on Q1 &amp; Q2 (due to renumbering)
 
 version 006 31/12/2020 editor P CAMPBELL
 - Added I2C bus extenders on Sensirion
@@ -7604,6 +7726,15 @@ version 003
 </instance>
 <instance part="U$77" gate="G$1" x="55.88" y="-33.02" smashed="yes">
 <attribute name="VALUE" x="54.356" y="-35.56" size="1.27" layer="96"/>
+</instance>
+<instance part="FD1" gate="G$2" x="121.92" y="63.5" smashed="yes">
+<attribute name="NAME" x="121.92" y="64.77" size="1.016" layer="95" font="vector" ratio="12"/>
+</instance>
+<instance part="FD2" gate="G$2" x="124.46" y="63.5" smashed="yes">
+<attribute name="NAME" x="124.46" y="64.77" size="1.016" layer="95" font="vector" ratio="12"/>
+</instance>
+<instance part="FD3" gate="G$2" x="127" y="63.5" smashed="yes">
+<attribute name="NAME" x="127" y="64.77" size="1.016" layer="95" font="vector" ratio="12"/>
 </instance>
 </instances>
 <busses>
