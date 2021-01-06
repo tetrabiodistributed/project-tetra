@@ -3,7 +3,7 @@
 <eagle version="9.6.2">
 <drawing>
 <settings>
-<setting alwaysvectorfont="yes"/>
+<setting alwaysvectorfont="no"/>
 <setting verticaltext="up"/>
 </settings>
 <grid distance="5" unitdist="mil" unit="mil" style="lines" multiple="1" display="no" altdistance="5" altunitdist="mil" altunit="mil"/>
@@ -187,6 +187,7 @@
 <layer number="255" name="routoute" color="7" fill="1" visible="no" active="no"/>
 </layers>
 <board>
+<fusionsync huburn="a.YnVzaW5lc3M6Z21haWw5OTQ5MjA" projecturn="a.YnVzaW5lc3M6Z21haWw5OTQ5MjAjMjAyMDA2MjkzMTE2MTgwMjY" f3durn="urn:adsk.wipprod:dm.lineage:n7ygfDT5Q_6xmTGKm0WD3Q" pcbguid="70598896-5c6f-486a-96a9-e9def747af8b" lastpulledtime="" lastsyncedchangeguid="" latestrevisionid="87264732-b09f-494d-9217-16bf7e0719ef" lastsyncedrevisionid="87264732-b09f-494d-9217-16bf7e0719ef" lastboardhashguid="54335742-8332-6d8e-25c5-1e5f82ced9bd" lastpushedtime="2021-01-06T20:09:17Z" linktopcb3d="true"/>
 <plain>
 <text x="-2.54" y="-47.498" size="1.4224" layer="21" font="vector" ratio="15" rot="R180">3V</text>
 <text x="-2.5654" y="-45.0088" size="1.4224" layer="21" font="vector" ratio="15" rot="R180">GND</text>
@@ -3829,6 +3830,11 @@ which will not be processed correctly with this version.
 Since Version 8.2, EAGLE supports online libraries. The ids
 of those online libraries will not be understood (or retained)
 with this version.
+</note>
+<note version="8.3" severity="warning">
+Since Version 8.3, EAGLE supports Fusion synchronisation.
+This feature will not be available in this version and saving
+the document will break the link to the Fusion PCB feature.
 </note>
 <note version="8.3" severity="warning">
 Since Version 8.3, EAGLE supports URNs for individual library
