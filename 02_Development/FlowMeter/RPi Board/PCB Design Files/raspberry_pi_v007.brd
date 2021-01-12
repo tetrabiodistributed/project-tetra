@@ -6,9 +6,9 @@
 <setting alwaysvectorfont="no"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="5" unitdist="mil" unit="mil" style="lines" multiple="1" display="no" altdistance="5" altunitdist="mil" altunit="mil"/>
+<grid distance="5" unitdist="mil" unit="mil" style="lines" multiple="1" display="yes" altdistance="5" altunitdist="mil" altunit="mil"/>
 <layers>
-<layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes"/>
+<layer number="1" name="Top" color="4" fill="1" visible="no" active="yes"/>
 <layer number="2" name="Route2" color="1" fill="3" visible="no" active="no"/>
 <layer number="3" name="Route3" color="4" fill="3" visible="no" active="no"/>
 <layer number="4" name="Route4" color="1" fill="4" visible="no" active="no"/>
@@ -26,17 +26,17 @@
 <layer number="16" name="Bottom" color="1" fill="1" visible="no" active="yes"/>
 <layer number="17" name="Pads" color="2" fill="1" visible="yes" active="yes"/>
 <layer number="18" name="Vias" color="2" fill="1" visible="yes" active="yes"/>
-<layer number="19" name="Unrouted" color="6" fill="1" visible="yes" active="yes"/>
+<layer number="19" name="Unrouted" color="6" fill="1" visible="no" active="yes"/>
 <layer number="20" name="Dimension" color="24" fill="1" visible="yes" active="yes"/>
 <layer number="21" name="tPlace" color="7" fill="1" visible="yes" active="yes"/>
-<layer number="22" name="bPlace" color="7" fill="1" visible="no" active="yes"/>
+<layer number="22" name="bPlace" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="23" name="tOrigins" color="15" fill="1" visible="yes" active="yes"/>
-<layer number="24" name="bOrigins" color="15" fill="1" visible="no" active="yes"/>
+<layer number="24" name="bOrigins" color="15" fill="1" visible="yes" active="yes"/>
 <layer number="25" name="tNames" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="26" name="bNames" color="7" fill="1" visible="no" active="yes"/>
 <layer number="27" name="tValues" color="7" fill="1" visible="no" active="yes"/>
 <layer number="28" name="bValues" color="7" fill="1" visible="no" active="yes"/>
-<layer number="29" name="tStop" color="7" fill="3" visible="no" active="yes"/>
+<layer number="29" name="tStop" color="7" fill="3" visible="yes" active="yes"/>
 <layer number="30" name="bStop" color="7" fill="6" visible="no" active="yes"/>
 <layer number="31" name="tCream" color="7" fill="4" visible="no" active="yes"/>
 <layer number="32" name="bCream" color="7" fill="5" visible="no" active="yes"/>
@@ -46,9 +46,9 @@
 <layer number="36" name="bGlue" color="7" fill="5" visible="no" active="yes"/>
 <layer number="37" name="tTest" color="7" fill="1" visible="no" active="yes"/>
 <layer number="38" name="bTest" color="7" fill="1" visible="no" active="yes"/>
-<layer number="39" name="tKeepout" color="4" fill="11" visible="yes" active="yes"/>
+<layer number="39" name="tKeepout" color="4" fill="11" visible="no" active="yes"/>
 <layer number="40" name="bKeepout" color="1" fill="11" visible="no" active="yes"/>
-<layer number="41" name="tRestrict" color="4" fill="10" visible="yes" active="yes"/>
+<layer number="41" name="tRestrict" color="4" fill="10" visible="no" active="yes"/>
 <layer number="42" name="bRestrict" color="1" fill="10" visible="no" active="yes"/>
 <layer number="43" name="vRestrict" color="2" fill="10" visible="no" active="yes"/>
 <layer number="44" name="Drills" color="7" fill="1" visible="no" active="yes"/>
@@ -58,7 +58,7 @@
 <layer number="48" name="Document" color="7" fill="1" visible="no" active="yes"/>
 <layer number="49" name="Reference" color="7" fill="1" visible="no" active="yes"/>
 <layer number="50" name="dxf" color="7" fill="1" visible="no" active="no"/>
-<layer number="51" name="tDocu" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="51" name="tDocu" color="7" fill="1" visible="no" active="yes"/>
 <layer number="52" name="bDocu" color="7" fill="1" visible="no" active="yes"/>
 <layer number="53" name="tGND_GNDA" color="7" fill="9" visible="no" active="no"/>
 <layer number="54" name="bGND_GNDA" color="1" fill="9" visible="no" active="no"/>
@@ -187,7 +187,7 @@
 <layer number="255" name="routoute" color="7" fill="1" visible="no" active="no"/>
 </layers>
 <board>
-<fusionsync huburn="a.YnVzaW5lc3M6Z21haWw5OTQ5MjA" projecturn="a.YnVzaW5lc3M6Z21haWw5OTQ5MjAjMjAyMDA2MjkzMTE2MTgwMjY" f3durn="urn:adsk.wipprod:dm.lineage:n7ygfDT5Q_6xmTGKm0WD3Q" pcbguid="70598896-5c6f-486a-96a9-e9def747af8b" lastpulledtime="" lastsyncedchangeguid="" latestrevisionid="87264732-b09f-494d-9217-16bf7e0719ef" lastsyncedrevisionid="87264732-b09f-494d-9217-16bf7e0719ef" lastboardhashguid="54335742-8332-6d8e-25c5-1e5f82ced9bd" lastpushedtime="2021-01-06T20:09:17Z" linktopcb3d="true"/>
+<fusionsync huburn="a.YnVzaW5lc3M6Z21haWw5OTQ5MjA" projecturn="a.YnVzaW5lc3M6Z21haWw5OTQ5MjAjMjAyMDA2MjkzMTE2MTgwMjY" f3durn="urn:adsk.wipprod:dm.lineage:n7ygfDT5Q_6xmTGKm0WD3Q" pcbguid="" lastpulledtime="" lastsyncedchangeguid="" latestrevisionid="87264732-b09f-494d-9217-16bf7e0719ef" lastsyncedrevisionid="87264732-b09f-494d-9217-16bf7e0719ef" lastboardhashguid="54335742-8332-6d8e-25c5-1e5f82ced9bd" lastpushedtime="2021-01-06T20:09:17Z" linktopcb3d="true"/>
 <plain>
 <text x="-2.54" y="-47.498" size="1.4224" layer="21" font="vector" ratio="15" rot="R180">3V</text>
 <text x="-2.5654" y="-45.0088" size="1.4224" layer="21" font="vector" ratio="15" rot="R180">GND</text>
@@ -255,7 +255,7 @@
 PI Hat
 Project Tetra
 Thomas Hudson et al.
-06JAN2021
+11JAN2021
  v0.00.007</text>
 <text x="-29.7942" y="-23.1394" size="1.6764" layer="22" font="vector" ratio="15" rot="MR90" align="bottom-right">Sensirion Sensors #1-4</text>
 <text x="-25.0952" y="2.8956" size="3.175" layer="21" font="vector" ratio="15" rot="R270">1</text>
@@ -1064,6 +1064,23 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <wire x1="1.5" y1="-0.8" x2="-1.5" y2="-0.8" width="0.0508" layer="39"/>
 <wire x1="-1.5" y1="-0.8" x2="-1.5" y2="0.8" width="0.0508" layer="39"/>
 </package>
+<package name="1206" urn="urn:adsk.eagle:footprint:39619/1" library_version="1">
+<description>&lt;p&gt;&lt;b&gt;Generic 3216 (1206) package&lt;/b&gt;&lt;/p&gt;
+&lt;p&gt;0.2mm courtyard excess rounded to nearest 0.05mm.&lt;/p&gt;</description>
+<wire x1="-2.4" y1="1.1" x2="2.4" y2="1.1" width="0.0508" layer="39"/>
+<wire x1="2.4" y1="-1.1" x2="-2.4" y2="-1.1" width="0.0508" layer="39"/>
+<wire x1="-2.4" y1="-1.1" x2="-2.4" y2="1.1" width="0.0508" layer="39"/>
+<wire x1="2.4" y1="1.1" x2="2.4" y2="-1.1" width="0.0508" layer="39"/>
+<wire x1="-0.965" y1="0.787" x2="0.965" y2="0.787" width="0.1016" layer="51"/>
+<wire x1="-0.965" y1="-0.787" x2="0.965" y2="-0.787" width="0.1016" layer="51"/>
+<smd name="1" x="-1.4" y="0" dx="1.6" dy="1.8" layer="1"/>
+<smd name="2" x="1.4" y="0" dx="1.6" dy="1.8" layer="1"/>
+<text x="0" y="1.143" size="0.6096" layer="25" font="vector" ratio="20" align="bottom-center">&gt;NAME</text>
+<text x="0" y="-1.143" size="0.6096" layer="27" font="vector" ratio="20" align="top-center">&gt;VALUE</text>
+<rectangle x1="-1.7018" y1="-0.8509" x2="-0.9517" y2="0.8491" layer="51"/>
+<rectangle x1="0.9517" y1="-0.8491" x2="1.7018" y2="0.8509" layer="51"/>
+<rectangle x1="-0.1999" y1="-0.4001" x2="0.1999" y2="0.4001" layer="35"/>
+</package>
 </packages>
 <packages3d>
 <package3d name="0805" urn="urn:adsk.eagle:package:39651/1" type="box" library_version="1">
@@ -1071,6 +1088,13 @@ You are welcome to use this library for commercial purposes. For attribution, we
 0.2mm courtyard excess rounded to nearest 0.05mm.</description>
 <packageinstances>
 <packageinstance name="0805"/>
+</packageinstances>
+</package3d>
+<package3d name="1206" urn="urn:adsk.eagle:package:39654/1" type="box" library_version="1">
+<description>Generic 3216 (1206) package
+0.2mm courtyard excess rounded to nearest 0.05mm.</description>
+<packageinstances>
+<packageinstance name="1206"/>
 </packageinstances>
 </package3d>
 </packages3d>
@@ -1307,7 +1331,7 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <attribute name="NAME" x="42.672" y="-12.6365" size="1.016" layer="21" font="vector" ratio="15" rot="R180"/>
 <attribute name="VALUE" x="40.64" y="-10.795" size="1.016" layer="21" font="vector" ratio="15"/>
 </element>
-<element name="J11" library="SparkFun-Connectors" package="POWER_JACK_PTH" value="POWER_JACK" x="38.1" y="-59.69" smashed="yes">
+<element name="J11" library="SparkFun-Connectors" package="POWER_JACK_PTH" value="CUI PJ-202A" x="38.1" y="-59.69" smashed="yes">
 <attribute name="PROD_ID" value="CONN-08197" x="38.1" y="-59.69" size="1.778" layer="27" display="off"/>
 </element>
 <element name="C29" library="SparkFun-Capacitors" package="0805" value="100nF" x="64.77" y="-39.497" smashed="yes">
@@ -1651,10 +1675,10 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <attribute name="PROD_ID" value="RES-11622" x="3.556" y="-36.576" size="1.778" layer="27" display="off"/>
 <attribute name="VALUE" x="5.588" y="-36.068" size="1.016" layer="21" font="vector" ratio="15" align="top-center"/>
 </element>
-<element name="J7" library="SparkFun-Connectors" package="1X02" value="732-5315-ND" x="2.54" y="-31.75" smashed="yes">
+<element name="J7" library="SparkFun-Connectors" package="1X02" value="NP (732-5315-ND)" x="2.54" y="-31.75" smashed="yes">
 <attribute name="VALUE" x="1.27" y="-33.782" size="0.6096" layer="27" font="vector" ratio="20"/>
 </element>
-<element name="J9" library="SparkFun-Connectors" package="SCREWTERMINAL-5MM-2" value="732-5315-ND" x="-15.113" y="-52.07" smashed="yes">
+<element name="J9" library="SparkFun-Connectors" package="SCREWTERMINAL-5MM-2" value="Phoenix 1935776" x="-15.113" y="-52.07" smashed="yes">
 <attribute name="SF_SKU" value="PRT-08432" x="-15.113" y="-52.07" size="1.016" layer="27" ratio="15" display="off"/>
 <attribute name="VALUE" x="-16.383" y="-50.8" size="0.6096" layer="27" font="vector" ratio="20"/>
 </element>
@@ -1903,6 +1927,11 @@ You are welcome to use this library for commercial purposes. For attribution, we
 </element>
 <element name="FD3" library="Fiducial" package="FID_040" value="FID_40MIL" x="-14.097" y="55.118" smashed="yes">
 <attribute name="BOM" value="" x="-14.097" y="55.118" size="1.778" layer="27" display="off"/>
+</element>
+<element name="R59" library="SparkFun-Resistors" library_urn="urn:adsk.eagle:library:532" package="1206" package3d_urn="urn:adsk.eagle:package:39654/1" value="0R" x="3.429" y="-28.575" smashed="yes">
+<attribute name="NAME" x="0.889" y="-28.575" size="0.6096" layer="25" font="vector" ratio="20" rot="R90" align="bottom-center"/>
+<attribute name="PROD_ID" value=" " x="3.429" y="-28.575" size="1.778" layer="27" display="off"/>
+<attribute name="VALUE" x="3.429" y="-29.464" size="0.6096" layer="27" font="vector" ratio="20" align="top-center"/>
 </element>
 </elements>
 <signals>
@@ -2835,6 +2864,9 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <wire x1="5.842" y1="-21.717" x2="4.953" y2="-22.606" width="1.27" layer="1"/>
 <wire x1="4.953" y1="-22.606" x2="4.953" y2="-31.623" width="1.27" layer="1"/>
 <wire x1="4.953" y1="-31.623" x2="5.08" y2="-31.75" width="1.27" layer="1"/>
+<contactref element="R59" pad="2"/>
+<wire x1="4.829" y1="-28.575" x2="4.953" y2="-28.699" width="0.1524" layer="1"/>
+<wire x1="4.953" y1="-28.699" x2="4.953" y2="-31.623" width="0.1524" layer="1"/>
 </signal>
 <signal name="A0_PC">
 <contactref element="U2" pad="1"/>
@@ -3373,6 +3405,9 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <via x="26.543" y="7.747" extent="1-16" drill="0.35"/>
 <wire x1="39.624" y1="-6.096" x2="39.624" y2="-4.826" width="0.6096" layer="1"/>
 <wire x1="0" y1="-4.826" x2="0.762" y2="-4.064" width="0.6096" layer="1"/>
+<contactref element="R59" pad="1"/>
+<wire x1="2.029" y1="-28.575" x2="2.54" y2="-29.086" width="0.1524" layer="1"/>
+<wire x1="2.54" y1="-29.086" x2="2.54" y2="-31.75" width="0.1524" layer="1"/>
 </signal>
 <signal name="5VREG-SW">
 <contactref element="U4" pad="6"/>

@@ -6541,7 +6541,7 @@ Warning: This is the KIT version of the AXIAL-0.3 package. This package has a sm
 <part name="D1" library="SparkFun-LED" deviceset="LED-RED" device="1206" value="RED"/>
 <part name="R52" library="SparkFun-Passives" deviceset="RESISTOR" device="0805-RES" value="2K"/>
 <part name="R36" library="SparkFun-Passives" deviceset="RESISTOR" device="0805-RES" value="1K"/>
-<part name="J11" library="SparkFun-Connectors" deviceset="POWER_JACK" device=""/>
+<part name="J11" library="SparkFun-Connectors" deviceset="POWER_JACK" device="" value="CUI PJ-202A"/>
 <part name="GND25" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
 <part name="SUPPLY2" library="SparkFun-PowerSymbols" deviceset="12V" device=""/>
 <part name="SUPPLY7" library="SparkFun-PowerSymbols" deviceset="12V" device=""/>
@@ -6716,9 +6716,9 @@ Warning: This is the KIT version of the AXIAL-0.3 package. This package has a sm
 <part name="SUPPLY6" library="SparkFun-PowerSymbols" deviceset="5V" device=""/>
 <part name="U$63" library="microbuilder" deviceset="3.3V" device=""/>
 <part name="R48" library="SparkFun-Resistors" deviceset="0.3OHM" device="-0805-1/8W-1%" value="0"/>
-<part name="J7" library="SparkFun-Connectors" deviceset="CONN_02" device="" value="732-5315-ND"/>
+<part name="J7" library="SparkFun-Connectors" deviceset="CONN_02" device="" value="NP (732-5315-ND)"/>
 <part name="SUPPLY15" library="SparkFun-PowerSymbols" deviceset="5V" device=""/>
-<part name="J9" library="SparkFun-Connectors" deviceset="CONN_02" device="5MM" value="732-5315-ND"/>
+<part name="J9" library="SparkFun-Connectors" deviceset="CONN_02" device="5MM" value="Phoenix 1935776"/>
 <part name="U$8" library="microbuilder" deviceset="GND" device=""/>
 <part name="Q2" library="SparkFun-DiscreteSemi" deviceset="MOSFET_PCH" device="-IRLML2244" value="4.3A/20V/54mΩ"/>
 <part name="Q1" library="SparkFun-DiscreteSemi" deviceset="TRANS_NPN" device="-MMBTA42" value="500mA/300V"/>
@@ -6768,6 +6768,7 @@ Warning: This is the KIT version of the AXIAL-0.3 package. This package has a sm
 <part name="FD1" library="Fiducial" deviceset="FID" device="_40MIL"/>
 <part name="FD2" library="Fiducial" deviceset="FID" device="_40MIL"/>
 <part name="FD3" library="Fiducial" deviceset="FID" device="_40MIL"/>
+<part name="R59" library="SparkFun-Resistors" library_urn="urn:adsk.eagle:library:532" deviceset="RESISTOR" device="1206" package3d_urn="urn:adsk.eagle:package:39654/1" value="0R"/>
 </parts>
 <sheets>
 <sheet>
@@ -6856,7 +6857,7 @@ https://datasheet.lcsc.com/szlcsc/Alpha-Omega-Semicon-AOS-AO3401A_C15127.pdf
 </text>
 <text x="3.048" y="110.49" size="1.778" layer="91" align="top-left">Input Voltage 
 Sensor</text>
-<text x="279.4" y="165.1" size="1.778" layer="91" align="bottom-right">Jumper for 12VDC to supply 5VDC (remove 5V usb micro from RPI!)</text>
+<text x="279.4" y="177.8" size="1.778" layer="91" align="bottom-right">Jumper for 12VDC to supply 5VDC (remove 5V usb micro from RPI!)</text>
 <text x="264.16" y="134.62" size="1.778" layer="91" align="bottom-right">5V Power to LCD Display</text>
 <text x="452.12" y="-33.528" size="1.778" layer="91">Power Logic
 Scenario #1 - Testing with the RPI pluged into 5V micro usb
@@ -6872,13 +6873,14 @@ Scenario #3 - out in the field MAF sensors used
 - - 12VDC/5DC converter is active, jumper is made and RPI,Display, and peripherials powered by converter
 
 Scenario #4 - </text>
-<text x="-125.476" y="183.388" size="1.778" layer="91">version 007 06JAN2021 editor PC
+<text x="-125.476" y="183.388" size="1.778" layer="91">version 007 11JAN2021 editor PC
 - Added missing part numbers, renumbered
 - Cleaned up ERC with approvals
 - Cleaned up Net Names
 - Layout cleanup (extensive)
 - Added fiducials (3)
 - Changed documentation note on Q1 &amp; Q2 (due to renumbering)
+- Added 1206 0R jumper at J7
 
 version 006 31/12/2020 editor P CAMPBELL
 - Added I2C bus extenders on Sensirion
@@ -7534,12 +7536,12 @@ version 003
 <attribute name="NAME" x="264.16" y="54.864" size="1.778" layer="95" font="vector" align="bottom-center"/>
 <attribute name="VALUE" x="264.16" y="51.816" size="1.778" layer="96" font="vector" align="top-center"/>
 </instance>
-<instance part="J7" gate="G$1" x="205.74" y="154.94" smashed="yes">
-<attribute name="VALUE" x="203.2" y="150.114" size="1.778" layer="96" font="vector"/>
-<attribute name="NAME" x="203.2" y="160.528" size="1.778" layer="95" font="vector"/>
+<instance part="J7" gate="G$1" x="208.28" y="149.86" smashed="yes">
+<attribute name="VALUE" x="205.74" y="145.034" size="1.778" layer="96" font="vector"/>
+<attribute name="NAME" x="205.74" y="155.448" size="1.778" layer="95" font="vector"/>
 </instance>
-<instance part="SUPPLY15" gate="G$1" x="220.98" y="157.48" smashed="yes" rot="R270">
-<attribute name="VALUE" x="223.774" y="157.48" size="1.778" layer="96" rot="R270" align="bottom-center"/>
+<instance part="SUPPLY15" gate="G$1" x="220.98" y="170.18" smashed="yes">
+<attribute name="VALUE" x="220.98" y="172.974" size="1.778" layer="96" align="bottom-center"/>
 </instance>
 <instance part="J9" gate="G$1" x="208.28" y="132.08" smashed="yes">
 <attribute name="VALUE" x="205.74" y="127.254" size="1.778" layer="96" font="vector"/>
@@ -7735,6 +7737,10 @@ version 003
 </instance>
 <instance part="FD3" gate="G$2" x="127" y="63.5" smashed="yes">
 <attribute name="NAME" x="127" y="64.77" size="1.016" layer="95" font="vector" ratio="12"/>
+</instance>
+<instance part="R59" gate="G$1" x="231.14" y="160.02" smashed="yes" rot="R90">
+<attribute name="NAME" x="229.616" y="160.02" size="1.778" layer="95" font="vector" rot="R90" align="bottom-center"/>
+<attribute name="VALUE" x="232.664" y="160.02" size="1.778" layer="96" font="vector" rot="R90" align="top-center"/>
 </instance>
 </instances>
 <busses>
@@ -8655,8 +8661,14 @@ version 003
 </segment>
 <segment>
 <pinref part="J7" gate="G$1" pin="2"/>
-<wire x1="213.36" y1="157.48" x2="220.98" y2="157.48" width="0.1524" layer="91"/>
+<wire x1="215.9" y1="152.4" x2="220.98" y2="152.4" width="0.1524" layer="91"/>
+<wire x1="220.98" y1="152.4" x2="220.98" y2="167.64" width="0.1524" layer="91"/>
 <pinref part="SUPPLY15" gate="G$1" pin="5V"/>
+<pinref part="R59" gate="G$1" pin="2"/>
+<wire x1="220.98" y1="167.64" x2="220.98" y2="170.18" width="0.1524" layer="91"/>
+<wire x1="231.14" y1="165.1" x2="231.14" y2="167.64" width="0.1524" layer="91"/>
+<wire x1="231.14" y1="167.64" x2="220.98" y2="167.64" width="0.1524" layer="91"/>
+<junction x="220.98" y="167.64"/>
 </segment>
 <segment>
 <pinref part="D2" gate="G$1" pin="A"/>
@@ -9149,8 +9161,12 @@ version 003
 </segment>
 <segment>
 <pinref part="J7" gate="G$1" pin="1"/>
-<wire x1="213.36" y1="154.94" x2="220.98" y2="154.94" width="0.1524" layer="91"/>
-<label x="220.98" y="152.4" size="1.778" layer="95"/>
+<label x="246.38" y="149.86" size="1.778" layer="95"/>
+<wire x1="215.9" y1="149.86" x2="231.14" y2="149.86" width="0.1524" layer="91"/>
+<pinref part="R59" gate="G$1" pin="1"/>
+<wire x1="231.14" y1="149.86" x2="264.16" y2="149.86" width="0.1524" layer="91"/>
+<wire x1="231.14" y1="154.94" x2="231.14" y2="149.86" width="0.1524" layer="91"/>
+<junction x="231.14" y="149.86"/>
 </segment>
 <segment>
 <pinref part="D4" gate="G$1" pin="A"/>
