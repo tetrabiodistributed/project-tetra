@@ -1,0 +1,9 @@
+Designator,Value,Manufacturer,Manufacturer's Part #,Package,Vendor Part #,Digikey #,Price Each,Price Per Board,Cost/batch
+THRU HOLE COMPONENTS,,,,,,,,,
+,,,,,,,,,
+J1,4P Spring Loaded,Mill-Max,821-22-004-10-002101,,,ED8199-04-ND,$2.62 ,,
+J2,Screw Terminal Receiver,Phoenix Contact,1844236,,,277-2419-ND,$1.86 ,,
+J2,Screw Terminal Block,Phoenix Contact,1840382,,,277-2418-ND,$5.26 ,,
+,,,,,,,,,
+SMT Not on JLCPCB,,,,,,,,,
+U1,I2C Expander,,P82B715DR,,,296-24729-2-ND,$1.86 ,,
