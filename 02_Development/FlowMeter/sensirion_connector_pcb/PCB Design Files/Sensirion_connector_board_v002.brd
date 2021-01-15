@@ -6,7 +6,7 @@
 <setting alwaysvectorfont="no"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="31.25" unitdist="mm" unit="mm" style="lines" multiple="1" display="no" altdistance="5" altunitdist="mil" altunit="mil"/>
+<grid distance="0.005" unitdist="inch" unit="inch" style="lines" multiple="1" display="no" altdistance="5" altunitdist="mil" altunit="mil"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes"/>
 <layer number="2" name="Route2" color="16" fill="1" visible="no" active="no"/>
@@ -204,7 +204,7 @@
 B715</text>
 <text x="3.277" y="1.11" size="1.016" layer="21" font="vector" ratio="15">Sensirion 
 Connector PCB
-11JAN2021</text>
+15JAN2021</text>
 <text x="14.326" y="16.223" size="0.889" layer="22" font="vector" ratio="15" distance="20" rot="MR0">©2021 TETRA BIO
  DISTRIBUTED</text>
 <text x="8.23" y="5.174" size="1.016" layer="22" font="vector" ratio="15" rot="MR270">GND</text>
@@ -594,12 +594,12 @@ For attribution, please provide a link in any documentation or design files to t
 <element name="R3" library="SparkFun-Resistors" package="0805" value="470" x="3.404" y="9.365" smashed="yes">
 <attribute name="NAME" x="0.991" y="8.73" size="1.016" layer="21" font="vector" ratio="15" align="bottom-center"/>
 <attribute name="PROD_ID" value="RES-11622" x="4.674" y="9.365" size="1.016" layer="27" font="vector" ratio="15" display="off"/>
-<attribute name="VALUE" x="1.245" y="6.444" size="1.016" layer="21" font="vector" ratio="15" rot="R90" align="top-center"/>
+<attribute name="VALUE" x="0.991" y="6.952" size="1.016" layer="21" font="vector" ratio="15" rot="R90" align="top-center"/>
 </element>
 <element name="R4" library="SparkFun-Resistors" package="0805" value="470" x="15.723" y="9.365" smashed="yes" rot="R180">
 <attribute name="NAME" x="18.136" y="9.746" size="1.016" layer="21" font="vector" ratio="15" rot="R180" align="bottom-center"/>
 <attribute name="PROD_ID" value="RES-11622" x="14.453" y="9.365" size="1.016" layer="27" font="vector" ratio="15" rot="R180" display="off"/>
-<attribute name="VALUE" x="17.882" y="6.571" size="1.016" layer="21" font="vector" ratio="15" rot="R270" align="top-center"/>
+<attribute name="VALUE" x="18.39" y="7.206" size="1.016" layer="21" font="vector" ratio="15" rot="R270" align="top-center"/>
 </element>
 <element name="C1" library="SparkFun-Capacitors" package="0805" value="100n" x="15.85" y="13.683" smashed="yes">
 <attribute name="VALUE" x="16.231" y="14.572" size="1.016" layer="21" font="vector" ratio="15" rot="R180" align="top-center"/>
@@ -658,10 +658,12 @@ For attribution, please provide a link in any documentation or design files to t
 <vertex x="-0.66" y="-1.43"/>
 </polygon>
 <via x="13.183" y="3.777" extent="1-16" drill="0.55"/>
-<wire x1="13.183" y1="3.777" x2="13.183" y2="6.721" width="0.6096" layer="16"/>
-<wire x1="7.7428" y1="6.721" x2="13.183" y2="6.721" width="0.6096" layer="16"/>
 <via x="14.58" y="3.777" extent="1-16" drill="0.55"/>
-<wire x1="13.183" y1="3.777" x2="14.58" y2="3.777" width="0.6096" layer="16"/>
+<wire x1="13.183" y1="3.777" x2="14.58" y2="3.777" width="0.8128" layer="16"/>
+<wire x1="7.7428" y1="6.721" x2="7.7428" y2="6.3542" width="0.8128" layer="16"/>
+<wire x1="7.7428" y1="6.3542" x2="10.30185625" y2="3.79514375" width="0.8128" layer="16"/>
+<wire x1="13.16485625" y1="3.79514375" x2="13.183" y2="3.777" width="0.8128" layer="16"/>
+<wire x1="13.16485625" y1="3.79514375" x2="10.30185625" y2="3.79514375" width="0.8128" layer="16"/>
 </signal>
 <signal name="SCL0">
 <contactref element="J1" pad="2"/>
@@ -725,9 +727,9 @@ For attribution, please provide a link in any documentation or design files to t
 <contactref element="U1" pad="2"/>
 <wire x1="7.4426" y1="11.143" x2="6.6806" y2="11.905" width="0.2032" layer="1"/>
 <wire x1="6.4266" y1="11.905" x2="6.6806" y2="11.905" width="0.2032" layer="1"/>
-<wire x1="7.4426" y1="11.143" x2="7.4426" y2="10.3556" width="0.2032" layer="1"/>
-<wire x1="7.4426" y1="10.3556" x2="7.087" y2="10" width="0.2032" layer="1"/>
-<wire x1="7.087" y1="10" x2="5.69" y2="10" width="0.2032" layer="1"/>
+<wire x1="7.4426" y1="11.143" x2="7.4426" y2="10.2286" width="0.2032" layer="1"/>
+<wire x1="7.4426" y1="10.2286" x2="7.214" y2="10" width="0.2032" layer="1"/>
+<wire x1="7.214" y1="10" x2="5.69" y2="10" width="0.2032" layer="1"/>
 <wire x1="5.69" y1="10" x2="5.5376" y2="9.8476" width="0.2032" layer="1"/>
 <wire x1="5.5376" y1="9.8476" x2="5.5376" y2="8.8824" width="0.2032" layer="1"/>
 <wire x1="5.5376" y1="8.8824" x2="5.944" y2="8.476" width="0.2032" layer="1"/>
