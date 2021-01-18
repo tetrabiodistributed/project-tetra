@@ -188,14 +188,14 @@
 </layers>
 <board>
 <plain>
-<wire x1="0" y1="16.73" x2="0" y2="0.73" width="0.001" layer="20"/>
-<wire x1="0" y1="0.73" x2="2" y2="-1.27" width="0.001" layer="20" curve="90"/>
-<wire x1="2" y1="-1.27" x2="17" y2="-1.27" width="0.001" layer="20"/>
-<wire x1="17" y1="-1.27" x2="19" y2="0.73" width="0.001" layer="20" curve="90"/>
-<wire x1="19" y1="0.73" x2="19" y2="16.73" width="0.001" layer="20"/>
-<wire x1="19" y1="16.73" x2="17" y2="18.73" width="0.001" layer="20" curve="90"/>
-<wire x1="17" y1="18.73" x2="2" y2="18.73" width="0.001" layer="20"/>
-<wire x1="2" y1="18.73" x2="0" y2="16.73" width="0.001" layer="20" curve="90"/>
+<wire x1="-0.5" y1="16.73" x2="-0.5" y2="0.73" width="0.001" layer="20"/>
+<wire x1="-0.5" y1="0.73" x2="1.5" y2="-1.27" width="0.001" layer="20" curve="90"/>
+<wire x1="1.5" y1="-1.27" x2="17.5" y2="-1.27" width="0.001" layer="20"/>
+<wire x1="17.5" y1="-1.27" x2="19.5" y2="0.73" width="0.001" layer="20" curve="90"/>
+<wire x1="19.5" y1="0.73" x2="19.5" y2="16.73" width="0.001" layer="20"/>
+<wire x1="19.5" y1="16.73" x2="17.5" y2="18.73" width="0.001" layer="20" curve="90"/>
+<wire x1="17.5" y1="18.73" x2="1.5" y2="18.73" width="0.001" layer="20"/>
+<wire x1="1.5" y1="18.73" x2="-0.5" y2="16.73" width="0.001" layer="20" curve="90"/>
 <text x="12.294" y="17.239" size="1.016" layer="21" font="vector" ratio="15" rot="R180">GND</text>
 <text x="15.342" y="17.239" size="1.016" layer="21" font="vector" ratio="15" rot="R180">SDA</text>
 <text x="9.119" y="17.239" size="1.016" layer="21" font="vector" ratio="15" rot="R180">SCL</text>
@@ -204,7 +204,7 @@
 B715</text>
 <text x="3.277" y="1.11" size="1.016" layer="21" font="vector" ratio="15">Sensirion 
 Connector PCB
-17JAN2021</text>
+18JAN2021</text>
 <text x="14.326" y="16.223" size="0.889" layer="22" font="vector" ratio="15" distance="20" rot="MR0">©2021 TETRA BIO
  DISTRIBUTED</text>
 <text x="8.23" y="5.174" size="1.016" layer="22" font="vector" ratio="15" rot="MR270">GND</text>
