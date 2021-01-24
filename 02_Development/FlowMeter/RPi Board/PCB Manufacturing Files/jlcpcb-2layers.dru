@@ -1,4 +1,4 @@
-description[en] = <b>JLCPCB design rules (2 layers)</b>\n<ul>\n<li>Board thickness: 1.6mm</li>\n<li>Copper weight: 1oz (35um)</li>\n<li>Note: annular ring aren't minimal</li>\n</ul>
+description[en] = <b>JLCPCB design rules (2 layers)</b>\n<ul>\n<li>Board thickness: 1.6mm</li>\n<li>Copper weight: 1oz (35um)</li>\n<li>Note: annular ring aren't minimal</li>\n<li>Mods to file by Tetra</li>\n</ul>
 layerSetup = (1*16)
 mtCopper = 0.035mm 0.035mm 0.035mm 0.035mm 0.035mm 0.035mm 0.035mm 0.035mm 0.035mm 0.035mm 0.035mm 0.035mm 0.035mm 0.035mm 0.035mm 0.035mm
 mtIsolate = 1.6mm 0.15mm 0.2mm 0.15mm 0.2mm 0.15mm 0.2mm 0.15mm 0.2mm 0.15mm 0.2mm 0.15mm 0.2mm 0.15mm 0.2mm
