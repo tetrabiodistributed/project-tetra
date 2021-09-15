@@ -10,8 +10,9 @@
 | M-AS-PMS12/06   | Male Stud Push In Fittings 12mm 3/8" BSPT  	| https://www.airsupplies.co.uk/male-stud-11886                                                                         | 38     	  |
 | M-RS-265-5545   | 6mm Push fit to M5 elbow                      	| https://uk.rs-online.com/web/p/pneumatic-fittings/2655545                                                         | 4      	  |
 | M-TBC-BS111     | 70A Durometer Nitrile O-Ring BS111         	    | https://www.thebearingcompany.co.uk/products/bs111-10-77mm-x-2-62mm-70-shore-oring/                               | 4      	  |
-| M-AS-PRC08/06  	| Stem Reducer 8mm to 6mm                       	| https://www.airsupplies.co.uk/stem-o-d-mm-a-12-tube-o-d-mm-b-8                                                     | 4      	  |     
-| M-AS-PRC12/08   | Stem Reducer 12mm to 8mm                   	    | https://www.airsupplies.co.uk/stem-o-d-mm-a-12-tube-o-d-mm-b-8                                                     | 4      	  |
+| M-AS-PRC08/06  	| Stem Reducer 8mm to 6mm                       	| https://www.airsupplies.co.uk/stem-o-d-mm-a-12-tube-o-d-mm-b-8                                                     | 4      	 |     
+| M-AS-PRC12/08   | Stem Reducer 12mm to 8mm                   	    | https://www.airsupplies.co.uk/stem-o-d-mm-a-12-tube-o-d-mm-b-8                                                     | 4      	 |
+| M-AM-MS016-10   | Silicone one way valves                   	    | https://www.amazon.co.uk/Trimming-Shop-Breathing-Accessories-Protection/dp/B08F2JQKSX                             | 4      	  |          
 | P-TET-000138-0 	| 3D print non-return valve          	| https://github.com/tetrabiodistributed/project-tetra/blob/main/02_Development/Push_Fit_Design/P-TET-000138-0.stl 	| 9      	  |
 | P-TET-000127-1 	| 3D print push fit to tube adapter   | https://github.com/tetrabiodistributed/project-tetra/blob/main/02_Development/Push_Fit_Design/P-TET-000127-1.stl 	| 10     	  |
 | P-TET-000126-0 	| Push fit pressure manifold              | https://github.com/tetrabiodistributed/project-tetra/blob/main/02_Development/Push_Fit_Design/D-TET-001105-0%20Push%20Fit%20Manifold%20Drawing.pdf| 1     	  |
