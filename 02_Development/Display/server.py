@@ -15,14 +15,16 @@ class Calculator():
 
     def __init__(self):
 
-        self._calculators = \
-            tuple(PatientTubingDescriptorCalculator()
-                  for _ in range(constants.NUMBER_OF_PATIENTS))
+        self._calculators = (
+            tuple(PatientTubingDescriptorCalculator(time.time())
+                  for _ in range(constants.NUMBER_OF_PATIENTS)))
 
     def add_datum(self, datum):
         for i in range(len(self._calculators)):
-            self._calculators[i].add_flow_rate_datum(datum[i][0])
-            self._calculators[i].add_pressure_datum(datum[i][1])
+            self._calculators[i].add_pressure_datum(datum[i][0])
+            if len(datum[i]) > 1:
+                self._calculators[i].add_flow_rate_datum(datum[i][1],
+                                                         time.time())
 
     def get_datum(self):
         datum = {}
@@ -43,10 +45,7 @@ class Communicator():
 
 
 def main():
-    sensors = Sensors(constants.PRESSURE_SAMPLING_RATE,
-                      constants.PRESSURE_OVERSAMPLING,
-                      constants.TEMPERATURE_SAMPLING_RATE,
-                      constants.TEMPERATURE_OVERSAMPLING)
+    sensors = Sensors()
     sensor_data = sensors.poll()
     calculator = Calculator()
     communicator = Communicator()
